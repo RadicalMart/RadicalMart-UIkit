@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="4.2" type="package" method="upgrade">
+	<name>PKG_RADICALMART_UIKIT</name>
+	<packagename>radicalmart_uikit</packagename>
+	<author>Delo Design</author>
+	<creationDate>December 2022</creationDate>
+	<copyright>Copyright © 2021 Delo Design. All rights reserved.</copyright>
+	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>boss@delo-design.ru</authorEmail>
+	<authorUrl>https://delo-design.ru</authorUrl>
+	<version>0.0.1-dev</version>
+	<description>PKG_RADICALMART_UIKIT_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.pkg_radicalmart_uikit.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.pkg_radicalmart_uikit.sys.ini</language>
+	</languages>
+	<files>
+		<folder type="file" id="tpl_radicalmart_uikit" client="site">tpl_radicalmart_uikit</folder>
+	</files>
+	<updateservers>
+		<server type="extension" priority="1" name="RadicalMart - Uikit">
+			https://sovmart.ru/update?element=pkg_radicalmart_uikit
+		</server>
+	</updateservers>
+</extension>

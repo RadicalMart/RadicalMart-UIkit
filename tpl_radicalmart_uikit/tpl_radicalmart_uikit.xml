@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="4.2" type="file" method="upgrade">
+	<name>TPL_RADICALMART_UIKIT</name>
+	<author>Delo Design</author>
+	<creationDate>December 2022</creationDate>
+	<copyright>Copyright © 2021 Delo Design. All rights reserved.</copyright>
+	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>boss@delo-design.ru</authorEmail>
+	<authorUrl>https://delo-design.ru</authorUrl>
+	<version>0.0.1-dev</version>
+	<description>TPL_RADICALMART_UIKIT_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+	<fileset>
+		<files target="templates/system/radicalmart_uikit">
+			<folder>html</folder>
+			<folder>media</folder>
+		</files>
+	</fileset>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_radicalmart_uikit.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_radicalmart_uikit.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_radicalmart_uikit.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_radicalmart_uikit.sys.ini</language>
+	</languages>
+</extension>
