@@ -1,2 +1,2 @@
-# Radicalmart - UIkit
+# RadicalMart - UIkit
 Uikit overrides for Radicalmart
