@@ -12,6 +12,7 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\Component\RadicalMart\Administrator\Helper\ParamsHelper;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
 extract($displayData);

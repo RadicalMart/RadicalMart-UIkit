@@ -11,6 +11,7 @@
 
 \defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\Component\RadicalMart\Administrator\Helper\ParamsHelper;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
@@ -27,6 +28,14 @@ extract($displayData);
  */
 $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empty($product->price['hide'])
 	|| empty($product->in_stock));
+
+if (!$hidePrice)
+{
+	/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+	$assets = Factory::getApplication()->getDocument()->getWebAssetManager();
+	$assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
+	$assets->useScript('com_radicalmart.site.cart');
+}
 ?>
 <div class="product-block uk-transition-toggle" <?php if (empty($product->in_stock)) echo 'style="opacity:0.5"'; ?>>
 	<div class="uk-overflow-hidden">
