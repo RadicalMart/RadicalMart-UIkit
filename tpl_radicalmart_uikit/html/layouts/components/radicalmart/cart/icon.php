@@ -12,10 +12,30 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\Component\RadicalMart\Administrator\Helper\ParamsHelper;
 
 $app       = Factory::getApplication();
 $hideTotal = (($app->input->get('option') === 'com_radicalmart')
 	&& in_array($app->input->get('view'), ['checkout', 'cart']));
+
+if (!$hideTotal)
+{
+	// Load assets
+	/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+	$assets = Factory::getApplication()->getDocument()->getWebAssetManager();
+	$assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
+
+	$params = ParamsHelper::getComponentParams();
+	if ($params->get('radicalmart_js', 1))
+	{
+		$assets->useScript('com_radicalmart.site');
+	}
+
+	if ($params->get('trigger_js', 1))
+	{
+		$assets->useScript('com_radicalmart.site.trigger');
+	}
+}
 ?>
 <div class="radicalmart-container">
 	<a radicalmart-cart="display_module" class="uk-link-reset radicalmart-icon" uk-tooltip>
