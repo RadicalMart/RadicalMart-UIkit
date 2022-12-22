@@ -24,6 +24,7 @@ if (!$hideTotal)
 	/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
 	$assets = Factory::getApplication()->getDocument()->getWebAssetManager();
 	$assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
+	$assets->useScript('com_radicalmart.site.cart');
 
 	$params = ParamsHelper::getComponentParams();
 	if ($params->get('radicalmart_js', 1))
