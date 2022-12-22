@@ -19,7 +19,7 @@
 		<folder type="file" id="tpl_radicalmart_uikit" client="site">tpl_radicalmart_uikit</folder>
 	</files>
 	<updateservers>
-		<server type="extension" priority="1" name="RadicalMart - Uikit">
+		<server type="extension" priority="1" name="RadicalMart: Uikit">
 			https://sovmart.ru/update?element=pkg_radicalmart_uikit
 		</server>
 	</updateservers>
