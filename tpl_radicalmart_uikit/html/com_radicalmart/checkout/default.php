@@ -47,7 +47,8 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 
-$others = [];
+$hasConsents = false;
+$others      = [];
 foreach ($this->form->getFieldsets() as $key => $fieldset)
 {
 	foreach ($this->form->getFieldset($key) as $field)
@@ -77,7 +78,12 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 		$this->form->setFieldAttribute($name, 'class', $class, $group);
 	}
 
-	if (!in_array($key, ['contacts', 'shipping', 'payment', 'billing', 'standalone']))
+	if ($key === 'consents')
+	{
+		$hasConsents = true;
+	}
+
+	if (!in_array($key, ['contacts', 'shipping', 'payment', 'billing', 'consents', 'standalone']))
 	{
 		$others[$key] = $fieldset;
 	}
@@ -224,6 +230,18 @@ $i = 1;
 								</div>
 							</div>
 						<?php endforeach; ?>
+					<?php endif; ?>
+
+					<?php if ($hasConsents): ?>
+						<div id="checkout_consents" class="uk-margin">
+							<div class="uk-card uk-card-default uk-card-body uk-card-small">
+								<?php foreach ($this->form->getFieldset('consents') as $field): ?>
+									<div class="uk-margin">
+										<?php echo $field->input; ?>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
 					<?php endif; ?>
 				</div>
 				<div class="uk-width-1-4@m">
