@@ -34,6 +34,9 @@ if ($this->params->get('trigger_js', 1))
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
 		<?php echo $this->params->get('seo_product_h1', $this->product->title); ?>
 	</h1>
+	<?php if (!empty($this->events) && !empty($this->events['onContentAfterTitle'])): ?>
+		<div><?php echo $this->events['onContentAfterTitle']; ?></div>
+	<?php endif; ?>
 	<div class="uk-card uk-card-default">
 		<div class="uk-grid-divider uk-grid-small uk-child-width-expand@m" uk-grid>
 			<div class="uk-width-1-2@m">
@@ -95,6 +98,11 @@ if ($this->params->get('trigger_js', 1))
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
+
+		<?php if (!empty($this->events) && !empty($this->events['onContentBeforeDisplay'])): ?>
+			<div class="uk-margin"><?php echo $this->events['onContentBeforeDisplay']; ?></div>
+		<?php endif; ?>
+
 		<div id="ProductDescription" class="uk-padding">
 			<div class="uk-flex uk-flex-center">
 				<ul class="uk-subnav uk-subnav-pill js-product-switcher uk-flex-inline" uk-switcher="connect: .js-tabs">
@@ -148,4 +156,8 @@ if ($this->params->get('trigger_js', 1))
 			</div>
 		<?php endif; ?>
 	</div>
+
+	<?php if (!empty($this->events) && !empty($this->events['onContentAfterDisplay'])): ?>
+		<div class="uk-margin"><?php echo $this->events['onContentAfterDisplay']; ?></div>
+	<?php endif; ?>
 </div>
