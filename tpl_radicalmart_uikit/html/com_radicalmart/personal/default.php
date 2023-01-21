@@ -32,6 +32,15 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 
+$excludeFieldsets = ['hidden'];
+$sections         = [
+	'contacts' => [],
+	'others'   => [],
+];
+
+$shippingSections = [];
+$paymentSections  = [];
+
 foreach ($this->form->getFieldsets() as $key => $fieldset)
 {
 	foreach ($this->form->getFieldset($key) as $field)
@@ -60,6 +69,85 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 
 		$this->form->setFieldAttribute($name, 'class', $class, $group);
 	}
+
+	if (in_array($fieldset->name, $excludeFieldsets))
+	{
+		continue;
+	}
+
+	if (empty($this->form->getFieldset($fieldset->name)))
+	{
+		continue;
+	}
+
+	if ($fieldset->name !== 'others' && isset($sections[$fieldset->name]))
+	{
+		$sections[$fieldset->name][] = $fieldset;
+	}
+	elseif (strpos($fieldset->name, 'shipping_method_') !== false)
+	{
+		if (preg_match('#shipping_method_[1-9]*#i', $fieldset->name, $matches))
+		{
+			$section = $matches[0];
+			if (!empty($section))
+			{
+				if (!isset($shippingSections[$section]))
+				{
+					$shippingSections[$section] = [];
+				}
+
+				$shippingSections[$section][] = $fieldset;
+			}
+			else
+			{
+				$sections['others'][] = $fieldset;
+			}
+		}
+		else
+		{
+			$sections['others'][] = $fieldset;
+		}
+	}
+	elseif (strpos($fieldset->name, 'payment_method_') !== false)
+	{
+		if (preg_match('#payment_method_[1-9]*#i', $fieldset->name, $matches))
+		{
+			$section = $matches[0];
+			if (!empty($section))
+			{
+				if (!isset($paymentSections[$section]))
+				{
+					$paymentSections[$section] = [];
+				}
+
+				$paymentSections[$section][] = $fieldset;
+			}
+			else
+			{
+				$sections['others'][] = $fieldset;
+			}
+		}
+		else
+		{
+			$sections['others'][] = $fieldset;
+		}
+	}
+	elseif (strpos($fieldset->name, '_') !== false)
+	{
+		$section = explode('_', $fieldset->name, 2)[0];
+		if (!empty($section) && isset($sections[$section]))
+		{
+			$sections[$section][] = $fieldset;
+		}
+		else
+		{
+			$sections['others'][] = $fieldset;
+		}
+	}
+	else
+	{
+		$sections['others'][] = $fieldset;
+	}
 }
 ?>
 <div id="RadicalMart" class="personal radicalmart-container">
@@ -69,23 +157,101 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 		</div>
 		<div>
 			<form action="<?php echo $this->link; ?>" name="checkoutForm" id="personalForm" method="post"
-				  enctype="multipart/form-data" radicalmart-checkout="form"
-				  class=" uk-card uk-card-default uk-card-small uk-form form-validate">
+				  enctype="multipart/form-data"
+				  class="uk-card uk-card-default uk-card-small uk-form form-validate">
 				<div class="uk-card-header">
 					<h1 class="uk-h2">
 						<?php echo $this->params->get('seo_personal_h1', Text::_('COM_RADICALMART_PERSONAL')); ?>
 					</h1>
 				</div>
 				<div class="uk-card-body">
-					<?php foreach ($this->form->getFieldsets() as $key => $fieldset):
-						if ($key === 'hidden') continue; ?>
-						<fieldset id="personal_<?php echo $key; ?>" class="uk-fieldset uk-margin-medium">
-							<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
-							<div class="uk-child-width-1-2@s" uk-grid>
-								<?php echo $this->form->renderFieldset($key); ?>
+					<?php if (!empty($sections['contacts'])): ?>
+						<div class="personal-section-contacts uk-margin-large-bottom">
+							<h2 class="h3 mb-3">
+								<?php echo Text::_('COM_RADICALMART_CONTACTS'); ?>
+							</h2>
+							<div>
+								<?php foreach ($sections['contacts'] as $fieldset): ?>
+									<fieldset id="personal_<?php echo $fieldset->name; ?>"
+											  class="options-form form-horizontal">
+										<?php if (!empty($fieldset->label)): ?>
+											<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
+										<?php endif; ?>
+										<div class="uk-child-width-1-2@s" uk-grid>
+											<?php echo $this->form->renderFieldset($fieldset->name); ?>
+										</div>
+									</fieldset>
+								<?php endforeach; ?>
 							</div>
-						</fieldset>
+						</div>
+					<?php endif; ?>
+					<?php foreach ($shippingSections as $key => $section):
+						if (!isset($this->shippingMethods[$key]))
+						{
+							continue;
+						}
+						$method = $this->shippingMethods[$key];
+						$hide   = ($method->language !== '*' && $method->language !== $language) ? 'style="display:none"' : '';
+						?>
+						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide;?>>
+							<h2 class="h3 mb-3">
+								<?php echo Text::sprintf('COM_RADICALMART_PERSONAL_SHIPPING', $method->title); ?>
+							</h2>
+							<?php foreach ($section as $fieldset): ?>
+								<fieldset id="personal_<?php echo $fieldset->name; ?>"
+										  class="options-form form-horizontal">
+									<?php if (!empty($fieldset->label)): ?>
+										<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
+									<?php endif; ?>
+									<div class="uk-child-width-1-2@s" uk-grid>
+										<?php echo $this->form->renderFieldset($fieldset->name); ?>
+									</div>
+								</fieldset>
+							<?php endforeach; ?>
+						</div>
 					<?php endforeach; ?>
+					<?php foreach ($paymentSections as $key => $section):
+						if (!isset($this->paymentMethods[$key]))
+						{
+							continue;
+						}
+						$method = $this->paymentMethods[$key];
+						$hide   = ($method->language !== '*' && $method->language !== $language) ? 'style="display:none"' : '';
+						?>
+						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide;?>>
+							<h2 class="uk-h3  uk-margin-bottom">
+								<?php echo Text::sprintf('COM_RADICALMART_PERSONAL_PAYMENT', $method->title); ?>
+							</h2>
+							<?php foreach ($section as $fieldset): ?>
+								<fieldset id="personal_<?php echo $fieldset->name; ?>"
+										  class="options-form form-horizontal">
+									<?php if (!empty($fieldset->label)): ?>
+										<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
+									<?php endif; ?>
+									<div class="uk-child-width-1-2@s" uk-grid>
+										<?php echo $this->form->renderFieldset($fieldset->name); ?>
+									</div>
+								</fieldset>
+							<?php endforeach; ?>
+						</div>
+					<?php endforeach; ?>
+					<?php if (!empty($sections['others'])): ?>
+						<div class="personal-section-others uk-margin-bottom">
+							<div>
+								<?php foreach ($sections['others'] as $fieldset): ?>
+									<fieldset id="personal_<?php echo $fieldset->name; ?>"
+											  class="options-form form-horizontal">
+										<?php if (!empty($fieldset->label)): ?>
+											<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
+										<?php endif; ?>
+										<div class="uk-child-width-1-2@s" uk-grid>
+											<?php echo $this->form->renderFieldset($fieldset->name); ?>
+										</div>
+									</fieldset>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
 				</div>
 				<div class="uk-card-footer uk-text-center">
 					<button class="uk-button uk-button-primary"><?php echo Text::_('JSAVE'); ?></button>
