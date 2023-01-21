@@ -156,7 +156,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 			<?php echo LayoutHelper::render('components.radicalmart.account.sidebar'); ?>
 		</div>
 		<div>
-			<form action="<?php echo $this->link; ?>" name="checkoutForm" id="personalForm" method="post"
+			<form action="<?php echo $this->link; ?>" name="personalForm" id="personalForm" method="post"
 				  enctype="multipart/form-data"
 				  class="uk-card uk-card-default uk-card-small uk-form form-validate">
 				<div class="uk-card-header">
