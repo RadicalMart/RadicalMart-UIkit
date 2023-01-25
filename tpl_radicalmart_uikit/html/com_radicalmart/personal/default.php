@@ -149,6 +149,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 		$sections['others'][] = $fieldset;
 	}
 }
+$language = Factory::getApplication()->getLanguage();
 ?>
 <div id="RadicalMart" class="personal radicalmart-container">
 	<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
@@ -191,7 +192,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							continue;
 						}
 						$method = $this->shippingMethods[$key];
-						$hide   = ($method->language !== '*' && $method->language !== $language) ? 'style="display:none"' : '';
+						$hide   = ($method->language !== '*' && $method->language !== $language->getTag()) ? 'style="display:none"' : '';
 						?>
 						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide;?>>
 							<h2 class="h3 mb-3">
@@ -216,7 +217,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							continue;
 						}
 						$method = $this->paymentMethods[$key];
-						$hide   = ($method->language !== '*' && $method->language !== $language) ? 'style="display:none"' : '';
+						$hide   = ($method->language !== '*' && $method->language !== $language->getTag()) ? 'style="display:none"' : '';
 						?>
 						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide;?>>
 							<h2 class="uk-h3  uk-margin-bottom">
