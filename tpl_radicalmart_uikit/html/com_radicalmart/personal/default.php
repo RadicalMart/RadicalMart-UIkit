@@ -171,19 +171,17 @@ $language = Factory::getApplication()->getLanguage();
 							<h2 class="h3 mb-3">
 								<?php echo Text::_('COM_RADICALMART_CONTACTS'); ?>
 							</h2>
-							<div>
-								<?php foreach ($sections['contacts'] as $fieldset): ?>
-									<fieldset id="personal_<?php echo $fieldset->name; ?>"
-											  class="options-form form-horizontal">
-										<?php if (!empty($fieldset->label)): ?>
-											<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
-										<?php endif; ?>
-										<div class="uk-child-width-1-2@s" uk-grid>
-											<?php echo $this->form->renderFieldset($fieldset->name); ?>
-										</div>
-									</fieldset>
-								<?php endforeach; ?>
-							</div>
+							<?php foreach ($sections['contacts'] as $fieldset): ?>
+								<fieldset id="personal_<?php echo $fieldset->name; ?>"
+										  class="options-form form-horizontal uk-fieldset">
+									<?php if (!empty($fieldset->label)): ?>
+										<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
+									<?php endif; ?>
+									<div class="uk-child-width-1-2@s" uk-grid>
+										<?php echo $this->form->renderFieldset($fieldset->name); ?>
+									</div>
+								</fieldset>
+							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
 					<?php foreach ($shippingSections as $key => $section):
@@ -194,13 +192,13 @@ $language = Factory::getApplication()->getLanguage();
 						$method = $this->shippingMethods[$key];
 						$hide   = ($method->language !== '*' && $method->language !== $language->getTag()) ? 'style="display:none"' : '';
 						?>
-						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide;?>>
+						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide; ?>>
 							<h2 class="h3 mb-3">
 								<?php echo Text::sprintf('COM_RADICALMART_PERSONAL_SHIPPING', $method->title); ?>
 							</h2>
 							<?php foreach ($section as $fieldset): ?>
 								<fieldset id="personal_<?php echo $fieldset->name; ?>"
-										  class="options-form form-horizontal">
+										  class="options-form form-horizontal uk-fieldset">
 									<?php if (!empty($fieldset->label)): ?>
 										<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
 									<?php endif; ?>
@@ -219,13 +217,13 @@ $language = Factory::getApplication()->getLanguage();
 						$method = $this->paymentMethods[$key];
 						$hide   = ($method->language !== '*' && $method->language !== $language->getTag()) ? 'style="display:none"' : '';
 						?>
-						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide;?>>
+						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide; ?>>
 							<h2 class="uk-h3  uk-margin-bottom">
 								<?php echo Text::sprintf('COM_RADICALMART_PERSONAL_PAYMENT', $method->title); ?>
 							</h2>
 							<?php foreach ($section as $fieldset): ?>
 								<fieldset id="personal_<?php echo $fieldset->name; ?>"
-										  class="options-form form-horizontal">
+										  class="options-form form-horizontal uk-fieldset">
 									<?php if (!empty($fieldset->label)): ?>
 										<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
 									<?php endif; ?>
@@ -241,7 +239,7 @@ $language = Factory::getApplication()->getLanguage();
 							<div>
 								<?php foreach ($sections['others'] as $fieldset): ?>
 									<fieldset id="personal_<?php echo $fieldset->name; ?>"
-											  class="options-form form-horizontal">
+											  class="options-form form-horizontal uk-fieldset">
 										<?php if (!empty($fieldset->label)): ?>
 											<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
 										<?php endif; ?>

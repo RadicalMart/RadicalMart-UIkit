@@ -49,7 +49,7 @@ $assets->useScript('com_radicalmart.site.settings');
 			</div>
 			<div class="uk-margin-small">
 				<?php echo Text::_('COM_RADICALMART_JOINED') . ' '
-					. HTMLHelper::date($user->registerDate, Text::_('DATE_FORMAT_LC1')); ?>
+					. HTMLHelper::date($user->registerDate, Text::_('DATE_FORMAT_LC4')); ?>
 			</div>
 			<div>
 				<a href="<?php echo $menus['com_radicalmart.settings']['link']; ?>"
