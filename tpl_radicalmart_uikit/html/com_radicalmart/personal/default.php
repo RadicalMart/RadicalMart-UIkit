@@ -189,24 +189,35 @@ $language = Factory::getApplication()->getLanguage();
 						{
 							continue;
 						}
-						$method = $this->shippingMethods[$key];
-						$hide   = ($method->language !== '*' && $method->language !== $language->getTag()) ? 'style="display:none"' : '';
+						$method  = $this->shippingMethods[$key];
+						$hide    = ($method->disabled) ? 'style="display:none"' : '';
+						$content = (empty($method->layout)) ? false : LayoutHelper::render($method->layout, [
+							'item'      => $this->item,
+							'form'      => $this->form,
+							'shipping'  => $method,
+							'fieldsets' => $section,
+							'group'     => $key,
+						]);
 						?>
 						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide; ?>>
 							<h2 class="h3 mb-3">
 								<?php echo Text::sprintf('COM_RADICALMART_PERSONAL_SHIPPING', $method->title); ?>
 							</h2>
-							<?php foreach ($section as $fieldset): ?>
-								<fieldset id="personal_<?php echo $fieldset->name; ?>"
-										  class="options-form form-horizontal uk-fieldset">
-									<?php if (!empty($fieldset->label)): ?>
-										<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
-									<?php endif; ?>
-									<div class="uk-child-width-1-2@s" uk-grid>
-										<?php echo $this->form->renderFieldset($fieldset->name); ?>
-									</div>
-								</fieldset>
-							<?php endforeach; ?>
+							<?php if (!empty($content)): ?>
+								<?php echo $content; ?>
+							<?php else: ?>
+								<?php foreach ($section as $fieldset): ?>
+									<fieldset id="personal_<?php echo $fieldset->name; ?>"
+											  class="options-form form-horizontal uk-fieldset">
+										<?php if (!empty($fieldset->label)): ?>
+											<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
+										<?php endif; ?>
+										<div class="uk-child-width-1-2@s" uk-grid>
+											<?php echo $this->form->renderFieldset($fieldset->name); ?>
+										</div>
+									</fieldset>
+								<?php endforeach; ?>
+							<?php endif; ?>
 						</div>
 					<?php endforeach; ?>
 					<?php foreach ($paymentSections as $key => $section):
@@ -214,24 +225,34 @@ $language = Factory::getApplication()->getLanguage();
 						{
 							continue;
 						}
-						$method = $this->paymentMethods[$key];
-						$hide   = ($method->language !== '*' && $method->language !== $language->getTag()) ? 'style="display:none"' : '';
+						$method  = $this->paymentMethods[$key];
+						$hide    = ($method->disabled) ? 'style="display:none"' : '';
+						$content = (empty($method->layout)) ? false : LayoutHelper::render($method->layout, [
+							'item'      => $this->item,
+							'form'      => $this->form,
+							'payment'   => $method,
+							'fieldsets' => $section,
+							'group'     => $key,
+						]);
 						?>
 						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide; ?>>
 							<h2 class="uk-h3  uk-margin-bottom">
 								<?php echo Text::sprintf('COM_RADICALMART_PERSONAL_PAYMENT', $method->title); ?>
-							</h2>
-							<?php foreach ($section as $fieldset): ?>
-								<fieldset id="personal_<?php echo $fieldset->name; ?>"
-										  class="options-form form-horizontal uk-fieldset">
-									<?php if (!empty($fieldset->label)): ?>
-										<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
-									<?php endif; ?>
-									<div class="uk-child-width-1-2@s" uk-grid>
-										<?php echo $this->form->renderFieldset($fieldset->name); ?>
-									</div>
-								</fieldset>
-							<?php endforeach; ?>
+							</h2> <?php if (!empty($content)): ?>
+								<?php echo $content; ?>
+							<?php else: ?>
+								<?php foreach ($section as $fieldset): ?>
+									<fieldset id="personal_<?php echo $fieldset->name; ?>"
+											  class="options-form form-horizontal uk-fieldset">
+										<?php if (!empty($fieldset->label)): ?>
+											<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
+										<?php endif; ?>
+										<div class="uk-child-width-1-2@s" uk-grid>
+											<?php echo $this->form->renderFieldset($fieldset->name); ?>
+										</div>
+									</fieldset>
+								<?php endforeach; ?>
+							<?php endif; ?>
 						</div>
 					<?php endforeach; ?>
 					<?php if (!empty($sections['others'])): ?>
