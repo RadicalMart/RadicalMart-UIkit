@@ -196,7 +196,7 @@ $language = Factory::getApplication()->getLanguage();
 							'form'      => $this->form,
 							'shipping'  => $method,
 							'fieldsets' => $section,
-							'group'     => $key,
+							'group'     => 'shipping.' . $key,
 						]);
 						?>
 						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide; ?>>
@@ -232,7 +232,7 @@ $language = Factory::getApplication()->getLanguage();
 							'form'      => $this->form,
 							'payment'   => $method,
 							'fieldsets' => $section,
-							'group'     => $key,
+							'group'     => 'payment.' . $key,
 						]);
 						?>
 						<div class="personal-section-<?php echo $key; ?> uk-margin-large-bottom" <?php echo $hide; ?>>
