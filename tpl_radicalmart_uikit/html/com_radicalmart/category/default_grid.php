@@ -28,6 +28,9 @@ use Joomla\CMS\Layout\LayoutHelper;
 						<?php echo LayoutHelper::render($layout, ['product' => $item, 'mode' => $this->mode]); ?>
 					</div>
 				<?php endforeach; ?>
+				<?php if (count($row) !== 3): ?>
+					<div class="uk-width-expand uk-visible@s"></div>
+				<?php endif; ?>
 			</div>
 		</div>
 	<?php endforeach; ?>
