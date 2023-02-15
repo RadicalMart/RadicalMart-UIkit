@@ -37,7 +37,7 @@ extract($displayData);
 		[
 			'alt'     => (!empty($item->alt)) ? $item->alt : $product->title,
 			'loading' => 'lazy',
-			'style'   => 'max-width: 100%; max-height:100%; width:100%;'
+			'style'   => 'max-width: 100%; max-height:100%;'
 		],
 		[
 			'product_id' => $product->id,
