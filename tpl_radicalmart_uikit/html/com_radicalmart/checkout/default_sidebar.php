@@ -82,11 +82,12 @@ use Joomla\CMS\Language\Text;
 		<div class="uk-text-muted">
 			<?php echo Text::_('COM_RADICALMART_SUBTOTAL'); ?>
 		</div>
-		<div radicalmart-checkout-display="total.base_string">
+		<div radicalmart-checkout-display="total.base_string" class="uk-text-nowrap">
 			<?php echo $this->item->total['base_string']; ?>
 		</div>
 	</div>
-	<div class="uk-grid-small uk-child-width-expand" uk-grid>
+	<div class="uk-grid-small uk-child-width-expand checkout-discount-display" uk-grid
+		<?php if (empty($this->item->total['discount'])) echo 'style="display:none"'; ?>>
 		<div class="uk-text-muted">
 			<?php echo Text::_('COM_RADICALMART_PRICE_DISCOUNT'); ?>
 		</div>

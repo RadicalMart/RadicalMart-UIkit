@@ -74,6 +74,19 @@ document.addEventListener('onRadicalMartCartAfterUpdateDisplayData', function (e
 	});
 });
 
+document.addEventListener('onRadicalMartCheckoutAfterUpdateDisplayData', function (event) {
+	if (event.detail) {
+		document.querySelectorAll('.checkout-discount-display').forEach(function (element) {
+			if (event.detail.total.discount) {
+				element.style.display = '';
+			} else {
+				element.style.display = 'none';
+			}
+		});
+	}
+});
+
+
 document.addEventListener('onRadicalMartCartRenderLayout', function (event) {
 	if (event.detail.name === 'notification_add') {
 		UIkit.modal(document.querySelector('#radicalmartCartNotificationAdd')).show();

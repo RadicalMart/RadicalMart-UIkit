@@ -107,14 +107,16 @@ use Joomla\CMS\Language\Text;
 		</div>
 		<div><?php echo $this->order->total['base_string']; ?></div>
 	</div>
-	<div class="uk-grid-small" uk-grid>
-		<div class="uk-width-expand uk-text-muted">
-			<?php echo Text::_('COM_RADICALMART_PRICE_DISCOUNT'); ?>
+	<?php if (!empty($this->order->total['discount'])): ?>
+		<div class="uk-grid-small" uk-grid>
+			<div class="uk-width-expand uk-text-muted">
+				<?php echo Text::_('COM_RADICALMART_PRICE_DISCOUNT'); ?>
+			</div>
+			<div>
+				−<span><?php echo $this->order->total['discount_string']; ?></span>
+			</div>
 		</div>
-		<div>
-			−<span><?php echo $this->order->total['discount_string']; ?></span>
-		</div>
-	</div>
+	<?php endif; ?>
 	<?php if ($this->order->payment && !empty($this->order->payment->order->price['fee_string'])): ?>
 		<div class="uk-grid-small" uk-grid>
 			<div class="uk-width-expand uk-text-muted">
