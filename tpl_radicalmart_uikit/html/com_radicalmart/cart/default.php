@@ -161,7 +161,7 @@ if (!empty($this->productsErrors))
 												  uk-icon="icon: minus"
 												  radicalmart-cart="quantity_minus"></span>
 											<input radicalmart-cart="quantity" type="text" name="quantity" data-set="1"
-												   class="uk-input uk-form-width-xsmall uk-text-center"
+												   class="uk-input uk-form-width-small uk-text-center"
 												   step="<?php echo $product->quantity['step']; ?>"
 												   min="<?php echo $product->quantity['min']; ?>"
 												<?php if (!empty($product->quantity['max']))

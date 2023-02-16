@@ -62,7 +62,7 @@ if ($this->params->get('hide_prices', 0) || !empty($this->product->price['hide']
 							  uk-icon="icon: minus"
 							  radicalmart-cart="quantity_minus"></span>
 						<input radicalmart-cart="quantity" type="text" name="quantity"
-							   class="uk-input uk-form-width-xsmall uk-text-center"
+							   class="uk-input uk-form-width-small uk-text-center"
 							   step="<?php echo $this->product->quantity['step']; ?>"
 							   min="<?php echo $this->product->quantity['min']; ?>"
 							<?php if (!empty($this->product->quantity['max']))

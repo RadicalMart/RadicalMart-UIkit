@@ -175,7 +175,7 @@ if (!$hidePrice)
 							<?php if (!$hidePrice && $mode === 'shop'): ?>
 								<div radicalmart-cart="product" data-id="<?php echo $product->id; ?>">
 									<input radicalmart-cart="quantity" type="hidden" name="quantity"
-										   class="uk-input uk-form-width-xsmall uk-text-center"
+										   class="uk-input uk-form-width-small uk-text-center"
 										   step="<?php echo $product->quantity['step']; ?>"
 										   min="<?php echo $product->quantity['min']; ?>"
 										<?php if (!empty($product->quantity['max']))
@@ -220,7 +220,7 @@ if (!$hidePrice)
 				<?php if (!$hidePrice && $mode === 'shop' && (int) $product->state === 1): ?>
 					<div radicalmart-cart="product" data-id="<?php echo $product->id; ?>">
 						<input radicalmart-cart="quantity" type="hidden" name="quantity"
-							   class="uk-input uk-form-width-xsmall uk-text-center"
+							   class="uk-input uk-form-width-small uk-text-center"
 							   step="<?php echo $product->quantity['step']; ?>"
 							   min="<?php echo $product->quantity['min']; ?>"
 							<?php if (!empty($product->quantity['max']))
