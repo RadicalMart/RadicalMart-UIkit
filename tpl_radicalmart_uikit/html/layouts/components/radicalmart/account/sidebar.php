@@ -28,7 +28,7 @@ $assets = Factory::getApplication()->getDocument()->getWebAssetManager();
 $assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
 $assets->useScript('com_radicalmart.site.settings');
 ?>
-<div class="uk-card uk-card-default" uk-sticky="offset: 90; bottom: true; media: @m;">
+<div class="uk-card uk-card-default">
 	<div class="uk-card-header">
 		<div class="uk-width-small uk-margin-auto uk-visible-toggle uk-position-relative uk-border-circle uk-overflow-hidden uk-light"
 			 radicalmart-settings="avatar">

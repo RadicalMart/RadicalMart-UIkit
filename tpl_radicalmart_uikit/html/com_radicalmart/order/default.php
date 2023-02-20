@@ -181,7 +181,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 			<?php endforeach; ?>
 		</div>
 		<div class="uk-width-1-4@m">
-			<div class="uk-card uk-card-default uk-card-small" uk-sticky="offset: 30; bottom: true; media: @m;">
+			<div class="uk-card uk-card-default uk-card-small">
 				<?php echo $this->loadTemplate('sidebar'); ?>
 			</div>
 		</div>
