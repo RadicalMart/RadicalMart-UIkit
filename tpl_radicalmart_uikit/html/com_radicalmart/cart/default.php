@@ -54,7 +54,7 @@ if (!empty($this->productsErrors))
 		<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 			<div>
 				<div class="uk-card uk-card-default">
-					<table class="uk-table uk-table-divider uk-table-responsive">
+					<table class="uk-table uk-table-divider uk-table-responsive uk-table-middle">
 						<thead class="uk-visible@m">
 						<tr>
 							<th class="uk-text-center">
@@ -99,7 +99,7 @@ if (!empty($this->productsErrors))
 							<tr radicalmart-cart="product" data-id="<?php echo $product->id; ?>"
 								data-cart-product="1" <?php echo $class; ?>>
 								<td>
-									<div class="uk-grid-small uk-child-width-expand" uk-grid <?php echo $style; ?>>
+									<div class="uk-grid-small uk-child-width-expand uk-flex-middle" uk-grid <?php echo $style; ?>>
 										<div class="uk-width-1-4">
 											<a href="<?php echo $product->link; ?>"
 											   class="uk-height-max-small uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
@@ -212,7 +212,7 @@ if (!empty($this->productsErrors))
 								<?php echo $this->cart->total['base_string']; ?>
 							</div>
 						</div>
-						<div class="uk-grid-small" uk-grid>
+						<div class="uk-grid-small cart-discount-display" uk-grid style="display: none">
 							<div class="uk-width-expand uk-text-muted">
 								<?php echo Text::_('COM_RADICALMART_PRICE_DISCOUNT'); ?>
 							</div>
