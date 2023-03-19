@@ -32,7 +32,7 @@ if (empty($this->cart) || !empty($this->cart->productsErrors))
 }
 
 // Load assets
-/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = $this->document->getWebAssetManager();
 $assets->useScript('com_radicalmart.site.checkout')
 	->useScript('keepalive');

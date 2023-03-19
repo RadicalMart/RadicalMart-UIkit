@@ -23,7 +23,7 @@ $user   = Factory::getApplication()->getIdentity();
 $avatar = UserHelper::getAvatar($user->id);
 $menus  = UserHelper::getMenu();
 
-/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = Factory::getApplication()->getDocument()->getWebAssetManager();
 $assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
 $assets->useScript('com_radicalmart.site.settings');

@@ -15,7 +15,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
 // Load assets
-/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = $this->document->getWebAssetManager();
 if ($this->params->get('radicalmart_js', 1))
 {
@@ -120,6 +120,20 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 												<a href="<?php echo $product->link; ?>"
 												   class="uk-link-reset"><?php echo $product->title; ?></a>
 											</div>
+											<?php if (!empty($product->extra_display)): ?>
+												<div class="uk-flex uk-flex-wrap">
+													<?php foreach ($product->extra_display as $extra):
+														if (empty($extra) || empty($extra['html']))
+														{
+															continue;
+														}
+														?>
+														<div class="uk-margin-small-right uk-margin-small-bottom">
+															<?php echo $extra['html']; ?>
+														</div>
+													<?php endforeach; ?>
+												</div>
+											<?php endif; ?>
 										</div>
 									</div>
 								</td>

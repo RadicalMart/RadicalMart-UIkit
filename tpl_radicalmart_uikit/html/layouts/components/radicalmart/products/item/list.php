@@ -31,7 +31,7 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 
 if (!$hidePrice)
 {
-	/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+	/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 	$assets = Factory::getApplication()->getDocument()->getWebAssetManager();
 	$assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
 	$assets->useScript('com_radicalmart.site.cart');
@@ -184,10 +184,10 @@ if (!$hidePrice)
 										}
 										?>
 										   value="<?php echo $product->quantity['min']; ?>"/>
-									<span radicalmart-cart="add"
-										  class="uk-icon-button uk-link uk-background-primary uk-light" uk-icon="cart"
-										  uk-tooltip=""
-										  title="<?php echo Text::_('COM_RADICALMART_CART_ADD'); ?>"></span>
+									<button radicalmart-cart="add" type="button"
+											class="uk-icon-button uk-link uk-background-primary uk-light" uk-icon="cart"
+											uk-tooltip=""
+											title="<?php echo Text::_('COM_RADICALMART_CART_ADD'); ?>"></button>
 								</div>
 							<?php elseif ($hidePrice || $mode === 'catalog'): ?>
 								<a href="<?php echo $product->link; ?>"
@@ -229,9 +229,9 @@ if (!$hidePrice)
 							}
 							?>
 							   value="<?php echo $product->quantity['min']; ?>"/>
-						<span radicalmart-cart="add" class="uk-button uk-button-primary">
+						<button radicalmart-cart="add" type="button" class="uk-button uk-button-primary">
 							<?php echo Text::_('COM_RADICALMART_CART_ADD'); ?>
-						</span>
+						</button>
 					</div>
 				<?php elseif ($hidePrice || $mode === 'catalog'): ?>
 					<a href="<?php echo $product->link; ?>"

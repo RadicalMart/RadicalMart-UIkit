@@ -36,7 +36,7 @@ $onSubmit = '';
 if ($params->get('ajax', 0))
 {
 	// Load asses
-	/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+	/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 	$assets = Factory::getApplication()->getDocument()->getWebAssetManager();
 	$assets->useScript('mod_radicalmart_filter.ajax');
 

@@ -86,7 +86,7 @@ use Joomla\CMS\Language\Text;
 			<?php echo $this->item->total['base_string']; ?>
 		</div>
 	</div>
-	<div class="uk-grid-small uk-child-width-expand checkout-discount-display" uk-grid
+	<div class="uk-grid-small uk-child-width-expand" uk-grid  radicalmart-checkout="discount-block"
 		<?php if (empty($this->item->total['discount'])) echo 'style="display:none"'; ?>>
 		<div class="uk-text-muted">
 			<?php echo Text::_('COM_RADICALMART_PRICE_DISCOUNT'); ?>
@@ -120,9 +120,19 @@ use Joomla\CMS\Language\Text;
 			<?php echo $this->item->total['final_string']; ?>
 		</div>
 	</div>
+	<div radicalmart-checkout="check-error" class="uk-alert uk-alert-danger uk-text-center uk-margin-small-top"
+		 style="display: none">
+		<div><?php echo Text::_('COM_RADICALMART_ERROR_CHECKOUT_CHANGE'); ?></div>
+		<div class="uk-margin-small-top">
+			<button type="button" onclick="RadicalMartCheckout().reloadForm(this)"
+					class="uk-button uk-button-small uk-button-secondary">
+				<?php echo Text::_('COM_RADICALMART_REFRESH_PAGE'); ?>
+			</button>
+		</div>
+	</div>
 	<div class="uk-margin-small-top">
-		<a id="submitButton" onclick="RadicalMartCheckout().createOrder()"
-		   class="uk-button uk-button-primary uk-margin-small uk-width-1-1">
-			<?php echo Text::_('COM_RADICALMART_CHECKOUT'); ?></a>
+		<button type="button" radicalmart-checkout="submit-button" onclick="RadicalMartCheckout().createOrder()"
+				class="uk-button uk-button-primary uk-margin-small uk-width-1-1" disabled>
+			<?php echo Text::_('COM_RADICALMART_CHECKOUT'); ?></button>
 	</div>
 </div>

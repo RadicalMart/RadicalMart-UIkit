@@ -14,7 +14,7 @@
 use Joomla\CMS\Language\Text;
 
 // Load assets
-/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = $this->document->getWebAssetManager();
 if ($this->mode === 'shop')
 {

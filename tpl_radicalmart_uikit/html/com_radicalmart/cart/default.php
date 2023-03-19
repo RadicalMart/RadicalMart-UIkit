@@ -16,7 +16,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
 // Load assets
-/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = $this->document->getWebAssetManager();
 $assets->useScript('com_radicalmart.site.cart');
 
@@ -49,7 +49,8 @@ if (!empty($this->productsErrors))
 		<div class="uk-text-muted uk-text-center"><?php echo Text::_('COM_RADICALMART_CART_EMPTY_DESC'); ?></div>
 	<?php else: ?>
 		<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
-			<?php echo $this->params->get('seo_cart_h1', $this->menu->title); ?>
+			<?php echo $this->params->get('seo_cart_h1',
+				($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_CART')); ?>
 		</h1>
 		<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 			<div>
@@ -97,9 +98,10 @@ if (!empty($this->productsErrors))
 							}
 							?>
 							<tr radicalmart-cart="product" data-id="<?php echo $product->id; ?>"
-								data-cart-product="1" <?php echo $class; ?>>
+								data-key="<?php echo $p; ?>" data-cart-product="1" <?php echo $class; ?>>
 								<td>
-									<div class="uk-grid-small uk-child-width-expand uk-flex-middle" uk-grid <?php echo $style; ?>>
+									<div class="uk-grid-small uk-child-width-expand uk-flex-middle"
+										 uk-grid <?php echo $style; ?>>
 										<div class="uk-width-1-4">
 											<a href="<?php echo $product->link; ?>"
 											   class="uk-height-max-small uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
@@ -131,12 +133,25 @@ if (!empty($this->productsErrors))
 												<a href="<?php echo $product->link; ?>"
 												   class="uk-link-reset"><?php echo $product->title; ?></a>
 											</div>
+											<?php if (!empty($product->extra_display)): ?>
+												<div class="uk-flex uk-flex-wrap">
+													<?php foreach ($product->extra_display as $extra):
+														if (empty($extra) || empty($extra['html']))
+														{
+															continue;
+														}
+														?>
+														<div class="uk-margin-small-right uk-margin-small-bottom">
+															<?php echo $extra['html']; ?>
+														</div>
+													<?php endforeach; ?>
+												</div>
+											<?php endif; ?>
 										</div>
 									</div>
 									<?php if (!empty($message)): ?>
-										<div class="uk-text-danger">
+										<div class="uk-text-danger error-message">
 											<?php echo $message; ?>
-
 										</div>
 									<?php endif; ?>
 								</td>
@@ -212,7 +227,8 @@ if (!empty($this->productsErrors))
 								<?php echo $this->cart->total['base_string']; ?>
 							</div>
 						</div>
-						<div class="uk-grid-small cart-discount-display" uk-grid style="display: none">
+						<div class="uk-grid-small" radicalmart-cart="discount-block" uk-grid
+							<?php if (empty($this->cart->total['discount'])) echo 'style="display:none"'; ?>>
 							<div class="uk-width-expand uk-text-muted">
 								<?php echo Text::_('COM_RADICALMART_PRICE_DISCOUNT'); ?>
 							</div>

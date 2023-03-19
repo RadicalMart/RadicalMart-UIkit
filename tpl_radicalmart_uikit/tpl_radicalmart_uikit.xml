@@ -2,12 +2,12 @@
 <extension version="4.2" type="file" method="upgrade">
 	<name>TPL_RADICALMART_UIKIT</name>
 	<author>Delo Design</author>
-	<creationDate>December 2022</creationDate>
+	<creationDate>March 2023</creationDate>
 	<copyright>Copyright © 2021 Delo Design. All rights reserved.</copyright>
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>boss@delo-design.ru</authorEmail>
 	<authorUrl>https://delo-design.ru</authorUrl>
-	<version>1.0.1-dev</version>
+	<version>1.0.5-dev</version>
 	<description>TPL_RADICALMART_UIKIT_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<fileset>

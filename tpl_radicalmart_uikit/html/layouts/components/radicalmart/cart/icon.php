@@ -21,7 +21,7 @@ $hideTotal = (($app->input->get('option') === 'com_radicalmart')
 if (!$hideTotal)
 {
 	// Load assets
-	/** @var Joomla\CMS\WebAsset\WebAssetManager $assets */
+	/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 	$assets = Factory::getApplication()->getDocument()->getWebAssetManager();
 	$assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
 	$assets->useScript('com_radicalmart.site.cart');

@@ -76,9 +76,9 @@ if ($this->params->get('hide_prices', 0) || !empty($this->product->price['hide']
 							  radicalmart-cart="quantity_plus"></span>
 					</div>
 					<div>
-						<span radicalmart-cart="add" class="uk-button uk-button-primary">
+						<button radicalmart-cart="add" type="button" class="uk-button uk-button-primary">
 							<?php echo Text::_('COM_RADICALMART_CART_ADD'); ?>
-						</span>
+						</button>
 					</div>
 				</div>
 			</div>
