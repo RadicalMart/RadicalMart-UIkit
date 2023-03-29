@@ -64,7 +64,7 @@ return new class () implements ServiceProviderInterface {
 			/**
 			 * Constructor.
 			 *
-			 * @param   AdministratorApplication  $app  The aplications obbject.
+			 * @param   AdministratorApplication  $app  The application object.
 			 *
 			 * @since 1.0.0
 			 */

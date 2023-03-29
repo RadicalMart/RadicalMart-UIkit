@@ -48,27 +48,9 @@ return new class () implements ServiceProviderInterface {
 			protected DatabaseDriver $db;
 
 			/**
-			 * Minimum Joomla version required to install the extension.
-			 *
-			 * @return  string
-			 *
-			 * @since  1.0.0
-			 */
-			protected string $minimumJoomla = '4.2';
-
-			/**
-			 * Minimum PHP version required to install the extension.
-			 *
-			 * @return  string
-			 *
-			 * @since  1.0.0
-			 */
-			protected string $minimumPhp = '7.4';
-
-			/**
 			 * Constructor.
 			 *
-			 * @param   AdministratorApplication  $app  The aplications obbject.
+			 * @param   AdministratorApplication  $app  The application object.
 			 *
 			 * @since 1.0.0
 			 */
