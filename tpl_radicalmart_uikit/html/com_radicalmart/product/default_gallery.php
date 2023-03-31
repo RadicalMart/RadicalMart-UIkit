@@ -14,6 +14,18 @@
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
+/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
+$assets = $this->document->getWebAssetManager();
+$assets->addInlineScript("
+	document.addEventListener('DOMContentLoaded', function () {
+		let productLightbox = document.querySelector('#RadicalMart.product .product-gallery .uk-slideshow-items');
+		if (productLightbox) {
+			UIkit.lightbox(productLightbox, {
+				container: '#RadicalMart.product'
+			});
+		}
+	});
+");
 ?>
 <div class="product-gallery uk-position-relative" uk-slideshow="animation: fade; autoplay: true; ratio: 3:2">
 	<ul class="uk-slideshow-items">
