@@ -8,7 +8,7 @@
  * @link        https://delo-design.ru/
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
 	let config = {
 		cart: {
 			addButtonsLock: true,
