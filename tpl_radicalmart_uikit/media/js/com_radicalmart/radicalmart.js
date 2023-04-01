@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('onRadicalMartCartAfterUpdateDisplayData', function (event) {
+	let hasProducts = (event.detail && event.detail.total.quantity && event.detail.total.quantity > 0);
 	if (window.RadicalMartDisplay.cart.badgeHide) {
-		let hasProducts = (event.detail && event.detail.total.quantity && event.detail.total.quantity > 0);
 		document.querySelectorAll('.radicalmart-icon .quantity').forEach(function (badge) {
 			if (hasProducts) {
 				badge.style.display = '';
