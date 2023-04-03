@@ -12,7 +12,6 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\Component\RadicalMart\Administrator\Helper\PriceHelper;
 use Joomla\Registry\Registry;
 

@@ -9,8 +9,6 @@
  * @link        https://delo-design.ru/
  */
 
-use Joomla\CMS\HTML\HTMLHelper;
-
 \defined('_JEXEC') or die;
 
 if (!$this->variability || !$this->variabilityForm) return;

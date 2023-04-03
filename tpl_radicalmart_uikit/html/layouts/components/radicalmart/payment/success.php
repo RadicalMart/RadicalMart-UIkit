@@ -11,9 +11,7 @@
 
 \defined('_JEXEC') or die;
 
-use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Router\Route;
 
 extract($displayData);
 

@@ -14,10 +14,7 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Router\Route;
-use Joomla\CMS\Session\Session;
 use Joomla\Component\RadicalMart\Administrator\Helper\UserHelper;
-use Joomla\Component\RadicalMart\Site\Helper\RouteHelper;
 
 $user   = Factory::getApplication()->getIdentity();
 $avatar = UserHelper::getAvatar($user->id);
