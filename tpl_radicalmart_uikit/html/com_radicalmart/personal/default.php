@@ -151,7 +151,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 }
 $language = Factory::getApplication()->getLanguage();
 ?>
-<div id="RadicalMart" class="personal radicalmart-container">
+<div id="RadicalMart" class="personal">
 	<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 		<div class="uk-width-1-4@m">
 			<?php echo LayoutHelper::render('components.radicalmart.account.sidebar'); ?>

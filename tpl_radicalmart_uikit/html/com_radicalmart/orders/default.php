@@ -28,7 +28,7 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 ?>
-<div id="RadicalMart" class="orders radicalmart-container">
+<div id="RadicalMart" class="orders">
 	<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 		<div class="uk-width-1-4@m">
 			<?php echo LayoutHelper::render('components.radicalmart.account.sidebar'); ?>

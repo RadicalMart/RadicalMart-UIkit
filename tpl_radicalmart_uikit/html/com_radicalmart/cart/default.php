@@ -41,7 +41,7 @@ if (!empty($this->productsErrors))
 }
 ?>
 
-<div id="RadicalMart" class="cart radicalmart-container">
+<div id="RadicalMart" class="cart">
 	<?php if (empty($this->cart) || empty($this->cart->products)): ?>
 		<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
 			<?php echo Text::_('COM_RADICALMART_CART_EMPTY'); ?>

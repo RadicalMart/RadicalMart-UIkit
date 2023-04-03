@@ -58,7 +58,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 	}
 }
 ?>
-<div id="RadicalMart" class="order radicalmart-container">
+<div id="RadicalMart" class="order">
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
 		<?php echo $this->params->get('seo_order_h1', $this->order->title); ?>
 	</h1>

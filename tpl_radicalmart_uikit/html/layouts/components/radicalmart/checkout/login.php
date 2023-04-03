@@ -35,7 +35,7 @@ if (!$user)
 	$message .= '_REGISTRATION';
 }
 ?>
-<div radicalmart-checkout-layout="login" class="radicalmart-container">
+<div radicalmart-checkout-layout="login">
 	<div id="radicalmartCheckoutLogin" class="uk-flex-top" uk-modal="container:false">
 		<div class="uk-modal-dialog uk-margin-auto-vertical">
 			<div class="uk-modal-header">

@@ -22,7 +22,7 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 ?>
-<div id="RadicalMart" class="radicalmart-container categories">
+<div id="RadicalMart" class="categories">
 	<h1>
 		<?php echo $this->params->get('seo_categories_h1', $this->category->title); ?>
 	</h1>

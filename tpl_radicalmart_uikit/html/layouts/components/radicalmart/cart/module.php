@@ -24,7 +24,7 @@ extract($displayData);
  *
  */
 ?>
-<div class="radicalmart-container" radicalmart-cart-layout="module">
+<div radicalmart-cart-layout="module">
 	<div id="radicalmartCartModule" uk-offcanvas="flip: true; overlay: true">
 		<div class="uk-offcanvas-bar uk-padding-remove">
 			<div class="uk-flex uk-flex-column uk-height-1-1">

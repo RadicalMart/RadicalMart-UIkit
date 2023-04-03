@@ -25,7 +25,7 @@ extract($displayData);
  *
  */
 ?>
-<div radicalmart-cart-layout="notification_add" class="radicalmart-container">
+<div radicalmart-cart-layout="notification_add">
 	<div id="radicalmartCartNotificationAdd" class="uk-flex-top" uk-modal="container:false">
 		<div class="uk-modal-dialog uk-margin-auto-vertical">
 			<div class="uk-modal-body uk-text-center">

@@ -38,7 +38,7 @@ if (!$hideTotal)
 	}
 }
 ?>
-<div class="radicalmart-container">
+<div>
 	<a radicalmart-cart="display_module" class="uk-link-reset radicalmart-icon" uk-tooltip>
 		<span uk-icon="cart" class="uk-icon"></span>
 		<?php if (!$hideTotal): ?>

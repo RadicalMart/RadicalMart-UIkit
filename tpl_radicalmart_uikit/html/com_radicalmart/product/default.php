@@ -30,7 +30,7 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 ?>
-<div id="RadicalMart" class="product radicalmart-container">
+<div id="RadicalMart" class="product">
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
 		<?php echo $this->params->get('seo_product_h1', $this->product->title); ?>
 	</h1>

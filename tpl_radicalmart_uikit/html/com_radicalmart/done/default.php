@@ -34,7 +34,7 @@ if ($this->paid)
 	return;
 }
 ?>
-<div id="RadicalMart" class="done radicalmart-container uk-text-center">
+<div id="RadicalMart" class="done uk-text-center">
 	<div class="uk-text-center uk-container uk-container-small">
 		<div uk-icon="icon:check; ratio:5" class="uk-text-success"></div>
 		<h1 class="uk-h2 uk-margin-small-top">

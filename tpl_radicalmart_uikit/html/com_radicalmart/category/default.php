@@ -33,7 +33,7 @@ $showAddition = ((!$this->pagination || (int) $this->pagination->pagesCurrent ==
 $filter       = (!empty($this->children));
 
 ?>
-<div id="RadicalMart" class="radicalmart-container category">
+<div id="RadicalMart" class="category">
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center" radicalmart-ajax="title">
 		<?php echo $this->params->get('seo_category_h1', $this->category->title); ?>
 	</h1>

@@ -90,7 +90,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 }
 $i = 1;
 ?>
-<div id="RadicalMart" class="checkout radicalmart-container">
+<div id="RadicalMart" class="checkout">
 	<?php if (empty($this->item) || empty($this->item->products)): ?>
 		<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
 			<?php echo Text::_('COM_RADICALMART_CART_EMPTY'); ?>
