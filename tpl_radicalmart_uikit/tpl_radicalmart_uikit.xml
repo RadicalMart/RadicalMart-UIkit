@@ -7,7 +7,7 @@
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>boss@delo-design.ru</authorEmail>
 	<authorUrl>https://delo-design.ru</authorUrl>
-	<version>1.0.5-dev</version>
+	<version>1.0.6-dev</version>
 	<description>TPL_RADICALMART_UIKIT_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<fileset>
