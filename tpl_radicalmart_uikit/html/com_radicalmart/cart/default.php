@@ -174,7 +174,7 @@ if (!empty($this->productsErrors))
 										<div class="uk-flex uk-flex-center uk-flex-middle">
 											<span class="uk-link uk-margin-small-right uk-text-danger"
 												  uk-icon="icon: minus; ratio:1.8"
-												  radicalmart-cart="quantity_minus"></span>
+												  radicalmart-cart="quantity_minus" style="width: 20px"></span>
 											<input radicalmart-cart="quantity" type="text" name="quantity" data-set="1"
 												   class="uk-input uk-form-width-small uk-text-center"
 												   step="<?php echo $product->quantity['step']; ?>"
@@ -184,7 +184,7 @@ if (!empty($this->productsErrors))
 													echo 'max="' . $product->quantity['max'] . '"';
 												} ?>
 												   value="<?php echo $product->order['quantity']; ?>"/>
-											<span class="uk-link uk-margin-small-left uk-text-success"
+											<span class="uk-link uk-margin-small-left uk-text-success" style="width: 20px"
 												  uk-icon="icon: plus; ratio:1.8"
 												  radicalmart-cart="quantity_plus"></span>
 										</div>
@@ -197,7 +197,10 @@ if (!empty($this->productsErrors))
 												<s radicalmart-cart-display="products.<?php echo $p; ?>.order.sum_base_string">
 													<?php echo $product->order['sum_base_string']; ?>
 												</s>
-												<?php echo ' ( - ' . $product->order['discount_string'] . ')'; ?>
+												( - <span
+														radicalmart-cart-display="products.<?php echo $p; ?>.order.sum_discount_string">
+													<?php echo $product->order['sum_discount_string']; ?>
+												</span>)
 											</div>
 										<?php endif; ?>
 										<div class="uk-text-nowrap uk-text-bold"

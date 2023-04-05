@@ -155,7 +155,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 									<?php if ($product->order['discount_enable']): ?>
 										<div class="uk-text-small uk-text-muted uk-text-nowrap">
 											<s><?php echo $product->order['sum_base_string']; ?></s>
-											<?php echo ' ( - ' . $product->order['discount_string'] . ')'; ?>
+											<?php echo ' ( - ' . $product->order['sum_discount_string'] . ')'; ?>
 										</div>
 									<?php endif; ?>
 									<div class="uk-text-nowrap uk-text-bold">
