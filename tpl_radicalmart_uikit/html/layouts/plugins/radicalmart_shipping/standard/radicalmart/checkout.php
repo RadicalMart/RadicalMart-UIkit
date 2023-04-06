@@ -1,35 +1,38 @@
 <?php
 /*
- * @package     RadicalMart Package
- * @subpackage  plg_radicalmart_shipping_standard
+ * @package     RadicalMart Uikit Package
+ * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      Delo Design - delo-design.ru
- * @copyright   Copyright (c) 2021 Delo Design. All rights reserved.
+ * @copyright   Copyright (c) 2023 Delo Design. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://delo-design.ru/
  */
 
 defined('_JEXEC') or die;
 
-extract($displayData);
-
 use Joomla\CMS\Form\Form;
+use Joomla\Component\RadicalMart\Administrator\Helper\LayoutsHelper;
+
+/* @deprecated  RadicalMart Shipping - Standard v? */
+if (LayoutsHelper::isSiteLayoutOverride('plugins.radicalmart_shipping.standard.checkout'))
+{
+	echo LayoutsHelper::renderSiteLayout('plugins.radicalmart_shipping.standard.checkout', $displayData);
+
+	return;
+}
+
+extract($displayData);
 
 /**
  * Layout variables
  * -----------------
  *
- * @var  Form    $form   Form object.
- * @var  object  $item   Checkout object.
- * @var  object  $shipping Checkout shipping method object.
- * @var  boolean $new    Button target.
+ * @var  Form   $form     Form object.
+ * @var  object $item     Checkout object.
+ * @var  object $shipping Checkout shipping method object.
  *
  */
-
-if (empty($shipping))
-{
-	return false;
-}
 ?>
 <div class="uk-grid-small" uk-grid="">
 	<?php if ($shipping->params->get('field_country', 1)): ?>
@@ -63,4 +66,3 @@ if (empty($shipping))
 		<div class="uk-width-1-1"><?php echo $form->renderField('comment', 'shipping'); ?></div>
 	<?php endif; ?>
 </div>
-
