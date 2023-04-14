@@ -50,9 +50,10 @@ extract($displayData);
 					<div class="uk-flex uk-flex-column uk-overflow-auto" style="flex-grow: 1">
 						<div class="uk-padding-small">
 							<ul class="uk-list uk-list-divider">
-								<?php foreach ($cart->products as $product): ?>
+								<?php foreach ($cart->products as $p => $product): ?>
 									<li radicalmart-cart="product" class="uk-text-small"
 										data-id="<?php echo $product->id; ?>"
+										data-key="<?php echo $p; ?>"
 										data-cart-product="1">
 										<div class="uk-grid-small uk-child-width-expand" uk-grid>
 											<div class="uk-width-1-4">
