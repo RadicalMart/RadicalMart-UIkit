@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		cart: {
 			addButtonsLock: true,
 			discountHide: true,
+			productsDiscountHide: true,
 			badgeHide: true,
 			badgeTooltip: true,
 			moduleHide: true,
@@ -60,6 +61,19 @@ document.addEventListener('onRadicalMartCartAfterUpdateDisplayData', function (e
 		});
 	}
 
+	if (window.RadicalMartDisplay.cart.productsDiscountHide) {
+		if (hasProducts) {
+			Object.keys(event.detail.products).forEach(function (key) {
+				let product = event.detail.products[key];
+				document.querySelectorAll('[radicalmart-cart="product-discount-block"][data-key="' + key + '"] , ' +
+					'[data-radicalmart-cart="product-discount-block"][data-key="' + key + '"]')
+					.forEach(function (block) {
+						block.style.display = (product.order.discount_enable && product.order.discount > 0) ? '' : 'none';
+					});
+			});
+		}
+	}
+
 	let cartPage = document.querySelector('#RadicalMart.cart');
 	if (cartPage) {
 		if (window.RadicalMartDisplay.cart.pageErrors) {
@@ -84,7 +98,7 @@ document.addEventListener('onRadicalMartCartAfterUpdateDisplayData', function (e
 		}
 
 		if (window.RadicalMartDisplay.cart.discountHide) {
-			document.querySelectorAll('[radicalmart-cart="discount-block"], [radicalmart-cart="discount-block"]')
+			document.querySelectorAll('[radicalmart-cart="discount-block"], [data-radicalmart-cart="discount-block"]')
 				.forEach(function (block) {
 					block.style.display = (event.detail.total.discount > 0) ? '' : 'none';
 				});
