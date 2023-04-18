@@ -20,12 +20,15 @@ use Joomla\Component\RadicalMart\Site\Helper\RouteHelper;
 
 // Check products errors
 $app = Factory::getApplication();
-if (empty($this->cart) || !empty($this->cart->productsErrors))
+if (empty($this->cart) || !empty($this->productsErrors))
 {
 	foreach ($this->productsErrors as $error)
 	{
 		$message = $error['product_title'] . ': ' . $error['error_message'];
-		if (!empty($error['error_description'])) $message .= ' ' . $error['error_description'];
+		if (!empty($error['error_description']))
+		{
+			$message .= ' ' . $error['error_description'];
+		}
 		$app->enqueueMessage($message, 'error');
 	}
 	$app->redirect(Route::_(RouteHelper::getCartRoute(), false));

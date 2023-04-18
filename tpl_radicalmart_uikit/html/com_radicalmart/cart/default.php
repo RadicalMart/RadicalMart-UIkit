@@ -35,7 +35,10 @@ if (!empty($this->productsErrors))
 	foreach ($this->productsErrors as $error)
 	{
 		$message = $error['product_title'] . ': ' . $error['error_message'];
-		if (!empty($error['error_description'])) $message .= ' ' . $error['error_description'];
+		if (!empty($error['error_description']))
+		{
+			$message .= ' ' . $error['error_description'];
+		}
 		Factory::getApplication()->enqueueMessage($message, 'error');
 	}
 }
