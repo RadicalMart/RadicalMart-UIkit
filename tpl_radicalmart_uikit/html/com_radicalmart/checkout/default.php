@@ -106,7 +106,10 @@ $i = 1;
 		<div radicalmart-checkout="loading"
 			 class="uk-position-fixed uk-position-cover uk-overlay-default uk-flex uk-position-z-index uk-flex-center uk-flex-middle"
 			 style="display: none">
-			<div uk-spinner="ratio: 3"></div>
+			<div class="uk-text-center">
+				<div uk-spinner="ratio: 3"></div>
+				<div class="uk-text-center" radicalmart-checkout="create-order-progress"></div>
+			</div>
 		</div>
 		<form action="<?php echo $this->link; ?>" name="checkoutForm" id="checkoutForm" method="post"
 			  enctype="multipart/form-data" radicalmart-checkout="form" class="uk-form form-validate">

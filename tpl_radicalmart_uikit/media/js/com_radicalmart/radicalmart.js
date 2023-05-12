@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			paymentLoadingShow: true,
 			loginShow: true,
 			errorsShow: true,
+			createOrderProgress: true,
 		}
 	};
 
@@ -260,6 +261,40 @@ document.addEventListener('onRadicalMartCheckoutBeforeReloadForm', function (eve
 			let loading = document.querySelector('#checkout_payment_loading');
 			if (loading) {
 				loading.style.display = '';
+			}
+		}
+	}
+});
+
+document.addEventListener('onRadicalMartCheckoutBeforeCreateOrder', function (event) {
+	if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
+		document.querySelectorAll('[radicalmart-checkout="submit-button"], [data-radicalmart-checkout="submit-button"]')
+			.forEach(function (button) {
+				button.setAttribute('disabled', '');
+				button.classList.add('disabled');
+			});
+	}
+
+	if (window.RadicalMartDisplay.checkout.createOrderProgress) {
+		let progress = document.querySelector('[radicalmart-checkout="create-order-progress"]');
+		if (progress) {
+			progress.innerHTML = '';
+		}
+	}
+});
+
+
+document.addEventListener('onRadicalMartCheckoutCreateOrderProgress', function (event) {
+	if (window.RadicalMartDisplay.checkout.createOrderProgress) {
+		if (event.detail) {
+			let progress = document.querySelector('[radicalmart-checkout="create-order-progress"]');
+			if (progress) {
+				progress.innerHTML += '<div>' + event.detail.message + '</div>';
+				if (event.detail.type === 'create-order-redirect') {
+					progress.innerHTML += '<a href="' + event.detail.redirect + '">' +
+						Joomla.Text._('COM_RADICALMART_CHECKOUT_CREATE_ORDER_PROGRESS_CREATE_ORDER_REQUEST_REDIRECT_LINK')
+						+ '</a>';
+				}
 			}
 		}
 	}
