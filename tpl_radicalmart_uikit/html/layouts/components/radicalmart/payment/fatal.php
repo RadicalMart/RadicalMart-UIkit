@@ -34,9 +34,13 @@ $backtraces = [];
 if (!empty($page_exception))
 {
 	$message = $page_exception->getMessage();
+	if (!empty($message))
+	{
+		$message = nl2br($message);
+	}
 	if (!empty($page_exception->getCode()))
 	{
-		$message .= ' (' . $page_exception->getCode() . ')';
+		$message = '(' . $page_exception->getCode() . ') ' . $message;
 	}
 
 	if ((int) Factory::getApplication()->getConfig()->get('debug', 0) === 1)
@@ -62,7 +66,7 @@ if (!empty($page_exception))
 	<div class="uk-h3 uk-margin-small"><?php echo $page_message; ?></div>
 	<?php if (!empty($message)): ?>
 		<div class="uk-text-danger uk-margin-small-bottom">
-			<code><?php echo $message; ?></code>
+			<?php echo $message; ?>
 		</div>
 	<?php endif; ?>
 	<div class="uk-margin">
