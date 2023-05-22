@@ -14,6 +14,9 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
+use Joomla\Component\RadicalMart\Site\Helper\RouteHelper;
 
 extract($displayData);
 
@@ -59,6 +62,19 @@ if (!empty($page_exception))
 			$e = $e->getPrevious();
 		}
 	}
+}
+
+$button_href = Uri::root();
+$button_text = 'COM_RADICALMART_PAYMENT_FATAL_PAGE_HOME_BUTTON';
+if (!empty($order))
+{
+	$button_href = $order->link;
+	$button_text = 'COM_RADICALMART_PAYMENT_FATAL_PAGE_ORDER_BUTTON';
+}
+elseif (!Factory::getApplication()->getIdentity()->guest)
+{
+	$button_href = Route::_(RouteHelper::getOrdersRoute(), false);
+	$button_text = 'COM_RADICALMART_PAYMENT_FATAL_PAGE_ORDERS_BUTTON';
 }
 ?>
 <div class="uk-text-center uk-container uk-container-small">
