@@ -101,7 +101,8 @@ $i = 1;
 		<div class="uk-text-muted uk-text-center"><?php echo Text::_('COM_RADICALMART_CART_EMPTY_DESC'); ?></div>
 	<?php else: ?>
 		<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
-			<?php echo $this->params->get('seo_checkout_h1', $this->menu->title); ?>
+			<?php echo $this->params->get('seo_checkout_h1',
+				($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_CHECKOUT')); ?>
 		</h1>
 		<div radicalmart-checkout="loading"
 			 class="uk-position-fixed uk-position-cover uk-overlay-default uk-flex uk-position-z-index uk-flex-center uk-flex-middle"

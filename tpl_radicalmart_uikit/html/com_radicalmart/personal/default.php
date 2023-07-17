@@ -162,7 +162,8 @@ $language = Factory::getApplication()->getLanguage();
 				  class="uk-card uk-card-default uk-card-small uk-form form-validate">
 				<div class="uk-card-header">
 					<h1 class="uk-h2">
-						<?php echo $this->params->get('seo_personal_h1', Text::_('COM_RADICALMART_PERSONAL')); ?>
+						<?php echo $this->params->get('seo_personal_h1',
+							($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_PERSONAL')); ?>
 					</h1>
 				</div>
 				<div class="uk-card-body">

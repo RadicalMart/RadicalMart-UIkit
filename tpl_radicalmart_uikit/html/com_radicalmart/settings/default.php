@@ -69,7 +69,8 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 			<div class="uk-card uk-card-default uk-card-small">
 				<div class="uk-card-header">
 					<h1 class="uk-h2">
-						<?php echo $this->params->get('seo_settings_h1', Text::_('COM_RADICALMART_SETTINGS')); ?>
+						<?php echo $this->params->get('seo_settings_h1',
+							($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_SETTINGS')); ?>
 					</h1>
 				</div>
 				<div class="uk-card-body">

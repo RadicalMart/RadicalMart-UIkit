@@ -37,7 +37,8 @@ if ($this->params->get('trigger_js', 1))
 			<div class="uk-card uk-card-default uk-card-small">
 				<div class="uk-card-header">
 					<h1 class="uk-h2">
-						<?php echo $this->params->get('seo_orders_h1', Text::_('COM_RADICALMART_ORDERS')); ?>
+						<?php echo $this->params->get('seo_orders_h1',
+							($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_ORDERS')); ?>
 					</h1>
 				</div>
 				<?php if (empty($this->items)): ?>
