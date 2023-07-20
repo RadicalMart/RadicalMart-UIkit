@@ -116,6 +116,18 @@ $i = 1;
 			  enctype="multipart/form-data" radicalmart-checkout="form" class="uk-form form-validate">
 			<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 				<div>
+					<?php if (!empty($this->modules['radicalmart-checkout-before-form'])): ?>
+						<div class="uk-margin">
+							<?php foreach ($this->modules['radicalmart-checkout-before-form'] as $module): ?>
+								<div class="uk-margin">
+									<?php if ($module->showtitle): ?>
+										<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+									<?php endif; ?>
+									<div><?php echo $module->render; ?></div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 					<?php if ($contactsFields = $this->form->renderFieldset('contacts')): ?>
 						<div id="checkout_contacts" class="uk-margin">
 							<h2>
@@ -250,11 +262,35 @@ $i = 1;
 							</div>
 						</div>
 					<?php endif; ?>
+					<?php if (!empty($this->modules['radicalmart-checkout-after-form'])): ?>
+						<div class="uk-margin">
+							<?php foreach ($this->modules['radicalmart-checkout-after-form'] as $module): ?>
+								<div class="uk-margin">
+									<?php if ($module->showtitle): ?>
+										<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+									<?php endif; ?>
+									<div><?php echo $module->render; ?></div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 				</div>
 				<div class="uk-width-1-4@m">
 					<div class="uk-card uk-card-default uk-card-small">
 						<?php echo $this->loadTemplate('sidebar'); ?>
 					</div>
+					<?php if (!empty($this->modules['radicalmart-checkout-sidebar'])): ?>
+						<div class="uk-margin">
+							<?php foreach ($this->modules['radicalmart-checkout-sidebar'] as $module): ?>
+								<div class="uk-margin">
+									<?php if ($module->showtitle): ?>
+										<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+									<?php endif; ?>
+									<div><?php echo $module->render; ?></div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 			<input type="hidden" name="task" value="checkout.display"/>

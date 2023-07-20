@@ -64,6 +64,18 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 	<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 		<div class="uk-width-1-4@m">
 			<?php echo LayoutHelper::render('components.radicalmart.account.sidebar'); ?>
+			<?php if (!empty($this->modules['radicalmart-account-sidebar'])): ?>
+				<div class="mt-3">
+					<?php foreach ($this->modules['radicalmart-account-sidebar'] as $module): ?>
+						<div class="mb-3">
+							<?php if ($module->showtitle): ?>
+								<div class="h3"><?php echo Text::_($module->title); ?></div>
+							<?php endif; ?>
+							<div><?php echo $module->render; ?></div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 		</div>
 		<div>
 			<div class="uk-card uk-card-default uk-card-small">

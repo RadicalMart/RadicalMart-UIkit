@@ -57,6 +57,18 @@ if (!empty($this->productsErrors))
 		</h1>
 		<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 			<div>
+				<?php if (!empty($this->modules['radicalmart-cart-before-products'])): ?>
+					<div class="uk-margin">
+						<?php foreach ($this->modules['radicalmart-cart-before-products'] as $module): ?>
+							<div class="uk-margin">
+								<?php if ($module->showtitle): ?>
+									<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+								<?php endif; ?>
+								<div><?php echo $module->render; ?></div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 				<div class="uk-card uk-card-default">
 					<table class="uk-table uk-table-divider uk-table-responsive uk-table-middle">
 						<thead class="uk-visible@m">
@@ -227,6 +239,18 @@ if (!empty($this->productsErrors))
 						</tbody>
 					</table>
 				</div>
+				<?php if (!empty($this->modules['radicalmart-cart-after-products'])): ?>
+					<div class="uk-margin">
+						<?php foreach ($this->modules['radicalmart-cart-after-products'] as $module): ?>
+							<div class="uk-margin">
+								<?php if ($module->showtitle): ?>
+									<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+								<?php endif; ?>
+								<div><?php echo $module->render; ?></div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 			<div class="uk-width-1-4@m">
 				<div class="uk-card uk-card-default uk-card-small">
@@ -271,6 +295,18 @@ if (!empty($this->productsErrors))
 						</div>
 					</div>
 				</div>
+				<?php if (!empty($this->modules['radicalmart-cart-sidebar'])): ?>
+					<div class="uk-margin">
+						<?php foreach ($this->modules['radicalmart-cart-sidebar'] as $module): ?>
+							<div class="uk-margin">
+								<?php if ($module->showtitle): ?>
+									<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+								<?php endif; ?>
+								<div><?php echo $module->render; ?></div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	<?php endif; ?>

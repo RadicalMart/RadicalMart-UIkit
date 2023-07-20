@@ -37,9 +37,33 @@ $filter       = (!empty($this->children));
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center" radicalmart-ajax="title">
 		<?php echo $this->params->get('seo_category_h1', $this->category->title); ?>
 	</h1>
+	<?php if (!empty($this->modules['radicalmart-category-before-introtext'])): ?>
+		<div class="uk-margin">
+			<?php foreach ($this->modules['radicalmart-category-before-introtext'] as $module): ?>
+				<div class="uk-margin">
+					<?php if ($module->showtitle): ?>
+						<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+					<?php endif; ?>
+					<div><?php echo $module->render; ?></div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 	<?php if (!empty($this->category->introtext)): ?>
 		<div class="info uk-text-center">
 			<?php echo $this->category->introtext; ?>
+		</div>
+	<?php endif; ?>
+	<?php if (!empty($this->modules['radicalmart-category-after-introtext'])): ?>
+		<div class="uk-margin">
+			<?php foreach ($this->modules['radicalmart-category-after-introtext'] as $module): ?>
+				<div class="uk-margin">
+					<?php if ($module->showtitle): ?>
+						<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+					<?php endif; ?>
+					<div><?php echo $module->render; ?></div>
+				</div>
+			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
 	<?php if (!empty($this->children)): ?>
@@ -67,6 +91,18 @@ $filter       = (!empty($this->children));
 			</div>
 		<?php endif; ?>
 		<div>
+			<?php if (!empty($this->modules['radicalmart-category-before-products'])): ?>
+				<div class="uk-margin">
+					<?php foreach ($this->modules['radicalmart-category-before-products'] as $module): ?>
+						<div class="uk-margin">
+							<?php if ($module->showtitle): ?>
+								<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+							<?php endif; ?>
+							<div><?php echo $module->render; ?></div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 			<div radicalmart-ajax="loading"
 				 class="uk-position-fixed uk-position-cover uk-position-z-index uk-overlay-default uk-flex uk-flex-middle uk-flex-center"
 				 style="display: none">
@@ -115,6 +151,18 @@ $filter       = (!empty($this->children));
 					<?php endif; ?>
 				</div>
 			</div>
+			<?php if (!empty($this->modules['radicalmart-category-after-products'])): ?>
+				<div class="uk-margin">
+					<?php foreach ($this->modules['radicalmart-category-after-products'] as $module): ?>
+						<div class="uk-margin">
+							<?php if ($module->showtitle): ?>
+								<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+							<?php endif; ?>
+							<div><?php echo $module->render; ?></div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 			<div radicalmart-ajax="pagination">
 				<?php if ($this->items && $this->pagination): ?>
 					<div class="list-pagination uk-margin-medium">
@@ -125,9 +173,33 @@ $filter       = (!empty($this->children));
 		</div>
 	</div>
 	<div radicalmart-ajax="more">
+		<?php if (!empty($this->modules['radicalmart-category-before-fulltext'])): ?>
+			<div class="uk-margin">
+				<?php foreach ($this->modules['radicalmart-category-before-fulltext'] as $module): ?>
+					<div class="uk-margin">
+						<?php if ($module->showtitle): ?>
+							<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+						<?php endif; ?>
+						<div><?php echo $module->render; ?></div>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
 		<?php if ($showAddition && !empty($this->category->fulltext)): ?>
 			<div class="fulltext uk-margin-medium">
 				<?php echo $this->category->fulltext; ?>
+			</div>
+		<?php endif; ?>
+		<?php if (!empty($this->modules['radicalmart-category-after-fulltext'])): ?>
+			<div class="uk-margin">
+				<?php foreach ($this->modules['radicalmart-category-after-fulltext'] as $module): ?>
+					<div class="uk-margin">
+						<?php if ($module->showtitle): ?>
+							<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+						<?php endif; ?>
+						<div><?php echo $module->render; ?></div>
+					</div>
+				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
 	</div>
