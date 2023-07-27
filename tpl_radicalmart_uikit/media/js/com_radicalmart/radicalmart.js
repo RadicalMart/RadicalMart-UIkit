@@ -109,11 +109,15 @@ document.addEventListener('onRadicalMartCartAfterUpdateDisplayData', function (e
 
 document.addEventListener('onRadicalMartCartBeforeAddProduct', function (event) {
 	if (window.RadicalMartDisplay.cart.addButtonsLock) {
-		document.querySelectorAll('[radicalmart-cart="add"], [data-radicalmart-cart="add"]')
-			.forEach(function (button) {
-				button.setAttribute('disabled', '');
-				button.classList.add('uk-disabled');
-			});
+		let productSelector = '[data-id="' + event.detail.product_id + '"]';
+		document.querySelectorAll('[radicalmart-cart="product"]' + productSelector
+			+ ',[data-radicalmart-cart="product"]' + productSelector).forEach(function (productBlock) {
+			productBlock.querySelectorAll('[radicalmart-cart="add"], [data-radicalmart-cart="add"]')
+				.forEach(function (button) {
+					button.setAttribute('disabled', '');
+					button.classList.add('uk-disabled');
+				});
+		});
 	}
 });
 
