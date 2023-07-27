@@ -192,8 +192,8 @@ if (!empty($this->productsErrors))
 									<?php if ($in_stock): ?>
 										<div class="uk-flex uk-flex-center uk-flex-middle">
 											<span class="uk-link uk-margin-small-right uk-text-danger"
-												  uk-icon="icon: minus; ratio:1.8"
-												  radicalmart-cart="quantity_minus" style="width: 20px"></span>
+												  uk-icon="icon: minus; ratio:2"
+												  radicalmart-cart="quantity_minus"></span>
 											<input radicalmart-cart="quantity" type="text" name="quantity" data-set="1"
 												   class="uk-input uk-form-width-small uk-text-center"
 												   step="<?php echo $product->quantity['step']; ?>"
@@ -204,8 +204,7 @@ if (!empty($this->productsErrors))
 												} ?>
 												   value="<?php echo $product->order['quantity']; ?>"/>
 											<span class="uk-link uk-margin-small-left uk-text-success"
-												  style="width: 20px"
-												  uk-icon="icon: plus; ratio:1.8"
+												  uk-icon="icon: plus; ratio:2"
 												  radicalmart-cart="quantity_plus"></span>
 										</div>
 									<?php endif; ?>
@@ -232,7 +231,7 @@ if (!empty($this->productsErrors))
 								</td>
 								<td class="uk-text-center">
 									<span class="uk-link uk-text-danger" radicalmart-cart="remove"
-										  uk-icon="icon:close; ratio:2"></span>
+										  uk-icon="icon:close; ratio:1" style="width: 20px"></span>
 								</td>
 							</tr>
 						<?php endforeach; ?>
