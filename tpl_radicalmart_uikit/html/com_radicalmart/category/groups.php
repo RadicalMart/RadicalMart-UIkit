@@ -115,7 +115,6 @@ if (!empty($this->items))
 			</div>
 		<?php else: ?>
 			<?php foreach ($groups as $group): ?>
-
 				<div class="products-list uk-card uk-card-default uk-margin">
 					<?php if (!$group->current): ?>
 						<div class="uk-card-header">
@@ -145,7 +144,7 @@ if (!empty($this->items))
 										</div>
 									<?php endif; ?>
 								</td>
-								<td style="width: 10%">
+								<td style="width: 10%" class="uk-text-nowrap">
 									<?php if (!$hidePrice): ?>
 										<?php if ($product->price['discount_enable']): ?>
 											<div class="uk-text-small uk-text-muted">

@@ -133,6 +133,11 @@ $filter       = (!empty($this->children));
 										  uk-icon="list" uk-tooltip onclick="setProductsListTemplate('list')"
 										  title="<?php echo Text::_('COM_RADICALMART_PRODUCTS_LIST_LAYOUT_LIST'); ?>"></span>
 								</li>
+								<li class="<?php echo ($this->productsListTemplate === 'table') ? 'uk-active' : ''; ?>">
+									<span class="uk-link"
+										  uk-icon="table" uk-tooltip onclick="setProductsListTemplate('table')"
+										  title="<?php echo Text::_('COM_RADICALMART_PRODUCTS_LIST_LAYOUT_TABLE'); ?>"></span>
+								</li>
 							</ul>
 						</div>
 					</div>
