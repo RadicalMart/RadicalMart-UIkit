@@ -72,7 +72,7 @@ use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 		<ul class="uk-thumbnav">
 			<?php foreach ($this->product->manufacturers as $manufacturer): ?>
 				<li>
-					<a href="<?php echo $manufacturer->link; ?>" uk-tooltip\
+					<a href="<?php echo $manufacturer->link; ?>" uk-tooltip
 					   title="<?php echo Text::sprintf('COM_RADICALMART_PRODUCT_MANUFACTURER_LINK', $manufacturer->title); ?>">
 						<?php if ($src = $manufacturer->media->get('icon'))
 						{
