@@ -177,14 +177,21 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 					<div class="uk-card uk-card-default uk-card-body uk-card-small">
 						<table class="uk-table uk-table-small uk-table-justify uk-table-responsive uk-table-divider uk-margin-small-top uk-margin-remove-bottom">
 							<tbody>
-							<?php foreach ($fields as $field): ?>
+							<?php foreach ($fields as $field):
+								$label = Text::_($this->form->getFieldAttribute($field->fieldname, 'label',
+									'', $field->group));
+								$field = $this->form->getInput($field->fieldname, $field->group);
+								if (empty($label) && empty($field))
+								{
+									continue;
+								}
+								?>
 								<tr>
 									<th class="uk-width-medium">
-										<?php echo Text::_($this->form->getFieldAttribute($field->fieldname, 'label',
-											'', $field->group)); ?>
+										<?php echo $label; ?>
 									</th>
 									<td>
-										<?php echo $this->form->getInput($field->fieldname, $field->group); ?>
+										<?php echo $field; ?>
 									</td>
 								</tr>
 							<?php endforeach; ?>
