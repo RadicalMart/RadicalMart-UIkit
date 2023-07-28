@@ -75,7 +75,7 @@ if (!is_array($value)) $value = (new Registry($value))->toArray();
 	</ul>
 	<div class="uk-text-right">
 		<span class="uk-link uk-text-small uk-text-danger uk-text-lowercase"
-			  onclick="this.closest('.radicalmart-fields-standard-filter_checkboxes').querySelectorAll('input')
+			  onclick="this.closest('.radicalmart-input-filter-in_stock').querySelectorAll('input')
 			  .forEach(function (input) {input.checked = false; input.dispatchEvent(new Event('change'));});">
 			<?php echo Text::_('COM_RADICALMART_CLEAN'); ?>
 		</span>
