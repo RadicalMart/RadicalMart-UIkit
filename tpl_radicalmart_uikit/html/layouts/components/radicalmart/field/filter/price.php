@@ -87,4 +87,11 @@ $pattern             = '[0-9.' . $decimal_separator . $thousands_separator . ']+
 				<?php if (!empty($onchange)) echo 'onChange="' . $onchange . '"'; ?>>
 		</div>
 	<?php endforeach; ?>
+	<div class="uk-text-right">
+		<span class="uk-link uk-text-small uk-text-danger uk-text-lowercase"
+		   onclick="this.closest('.radicalmart-input-filter-price').querySelectorAll('input')
+			  .forEach(function (input) {input.value = ''; input.setAttribute('value', ''); input.dispatchEvent(new Event('change'));});">
+			<?php echo Text::_('COM_RADICALMART_CLEAN'); ?>
+		</span>
+	</div>
 </div>
