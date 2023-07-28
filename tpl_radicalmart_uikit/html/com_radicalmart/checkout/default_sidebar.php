@@ -17,9 +17,13 @@ use Joomla\CMS\Language\Text;
 <div class="uk-card-body">
 	<div class="uk-h4"><?php echo Text::_('COM_RADICALMART_CHECKOUT_ITEMS'); ?></div>
 	<?php foreach ($this->item->products as $p => $product): ?>
-		<div class="uk-grid-small" uk-grid>
-			<div class="uk-width-expand uk-text-muted">
-				<div class="uk-text-small"><?php echo $product->title; ?></div>
+		<div class="uk-margin-small">
+			<div class="uk-text-muted">
+				<div class="uk-text-small">
+					<a href="<?php echo $product->link; ?>" class="uk-link-muted">
+						<?php echo $product->title; ?>
+					</a>
+				</div>
 				<div class="uk-text-meta">
 					<span radicalmart-checkout-display="products.<?php echo $p; ?>.order.quantity">
 						<?php echo $product->order['quantity']; ?>
@@ -30,7 +34,8 @@ use Joomla\CMS\Language\Text;
 					</span>
 				</div>
 			</div>
-			<div class="uk-text-right" radicalmart-checkout-display="products.<?php echo $p; ?>.order.sum_final_string">
+			<div class="uk-text-right"
+				 radicalmart-checkout-display="products.<?php echo $p; ?>.order.sum_final_string">
 				<?php echo $product->order['sum_final_string']; ?>
 			</div>
 		</div>
@@ -86,7 +91,7 @@ use Joomla\CMS\Language\Text;
 			<?php echo $this->item->total['base_string']; ?>
 		</div>
 	</div>
-	<div class="uk-grid-small uk-child-width-expand" uk-grid  radicalmart-checkout="discount-block"
+	<div class="uk-grid-small uk-child-width-expand" uk-grid radicalmart-checkout="discount-block"
 		<?php if (empty($this->item->total['discount'])) echo 'style="display:none"'; ?>>
 		<div class="uk-text-muted">
 			<?php echo Text::_('COM_RADICALMART_PRICE_DISCOUNT'); ?>
