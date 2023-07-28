@@ -69,7 +69,8 @@ $filter       = (!empty($this->children));
 	<?php if (!empty($this->children)): ?>
 		<div class="children uk-text-center">
 			<?php foreach ($this->children as $child): ?>
-				<a href="<?php echo $child->link; ?>" class="uk-button uk-button-small uk-button-default">
+				<a href="<?php echo $child->link; ?>"
+				   class="uk-button uk-button-small uk-button-default uk-margin-small-right uk-margin-small-bottom">
 					<?php echo $child->title; ?>
 				</a>
 			<?php endforeach; ?>
