@@ -26,7 +26,7 @@ $assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
 $assets->useScript('com_radicalmart.site.settings');
 ?>
 <div class="uk-card uk-card-default">
-	<div class="uk-card-header">
+	<div class="uk-card-header uk-padding-small">
 		<div class="uk-width-small uk-margin-auto uk-visible-toggle uk-position-relative uk-border-circle uk-overflow-hidden uk-light"
 			 radicalmart-settings="avatar">
 			<div class="uk-height-small uk-cover-container">
