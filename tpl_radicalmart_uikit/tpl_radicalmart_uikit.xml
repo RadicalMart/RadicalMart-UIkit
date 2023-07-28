@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="4.2" type="file" method="upgrade">
-	<name>TPL_RADICALMART_UIKIT</name>
+	<name>RadicalMart - UIkit</name>
 	<author>Delo Design</author>
 	<creationDate>April 2023</creationDate>
 	<copyright>Copyright © 2021 Delo Design. All rights reserved.</copyright>
@@ -8,7 +8,7 @@
 	<authorEmail>boss@delo-design.ru</authorEmail>
 	<authorUrl>https://delo-design.ru</authorUrl>
 	<version>1.1.1-dev</version>
-	<description>TPL_RADICALMART_UIKIT_DESCRIPTION</description>
+	<description>UIkit overrides for RadicalMart</description>
 	<scriptfile>script.php</scriptfile>
 	<fileset>
 		<files target="templates/system/radicalmart_uikit">
