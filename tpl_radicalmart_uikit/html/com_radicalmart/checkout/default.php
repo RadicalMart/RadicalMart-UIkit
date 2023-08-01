@@ -112,7 +112,7 @@ $i = 1;
 				<div class="uk-text-center" radicalmart-checkout="create-order-progress"></div>
 			</div>
 		</div>
-		<form action="<?php echo $this->link; ?>" name="checkoutForm" id="checkoutForm" method="post"
+		<form action="<?php echo $this->action; ?>" name="checkoutForm" id="checkoutForm" method="post"
 			  enctype="multipart/form-data" radicalmart-checkout="form" class="uk-form form-validate">
 			<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 				<div>
