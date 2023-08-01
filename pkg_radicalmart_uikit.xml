@@ -3,12 +3,12 @@
 	<name>PKG_RADICALMART_UIKIT</name>
 	<packagename>radicalmart_uikit</packagename>
 	<author>Delo Design</author>
-	<creationDate>April 2023</creationDate>
+	<creationDate>August 2023</creationDate>
 	<copyright>Copyright © 2021 Delo Design. All rights reserved.</copyright>
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>boss@delo-design.ru</authorEmail>
 	<authorUrl>https://delo-design.ru</authorUrl>
-	<version>1.1.1-dev</version>
+	<version>1.2.0</version>
 	<description>PKG_RADICALMART_UIKIT_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<languages folder="language">

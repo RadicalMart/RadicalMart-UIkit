@@ -2,7 +2,7 @@
 /*
  * @package     RadicalMart Uikit Package
  * @subpackage  tpl_radicalmart_uikit
- * @version     __DEPLOY_VERSION__
+ * @version     1.2.0
  * @author      Delo Design - delo-design.ru
  * @copyright   Copyright (c) 2023 Delo Design. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
@@ -13,7 +13,6 @@
 
 use Joomla\CMS\Language\Text;
 use Joomla\Component\RadicalMart\Administrator\Helper\ParamsHelper;
-use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 use Joomla\Utilities\ArrayHelper;
 
 // Load assets

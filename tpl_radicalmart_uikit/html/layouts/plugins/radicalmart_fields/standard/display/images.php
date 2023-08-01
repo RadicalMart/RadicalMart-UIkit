@@ -2,17 +2,17 @@
 /*
  * @package     RadicalMart Uikit Package
  * @subpackage  tpl_radicalmart_uikit
- * @version     __DEPLOY_VERSION__
+ * @version     1.2.0
  * @author      Delo Design - delo-design.ru
  * @copyright   Copyright (c) 2023 Delo Design. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://delo-design.ru/
  */
 
-use Joomla\CMS\HTML\HTMLHelper;
-
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
 extract($displayData);
 
@@ -31,7 +31,7 @@ extract($displayData);
 			<div uk-tooltip="<?php echo $value['text']; ?>">
 				<?php if ($src = $value['image'])
 				{
-					$src = RadicalMartHelperMedia::findThumb($src);
+					$src = MediaHelper::findThumb($src);
 					echo HTMLHelper::image($src, htmlspecialchars($value['text']));
 				}
 				else echo '<span class="uk-label">' . $value['text'] . '</span>'; ?>
