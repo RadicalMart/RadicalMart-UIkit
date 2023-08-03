@@ -142,101 +142,104 @@ return new class () implements ServiceProviderInterface {
 			 */
 			public function postflight(string $type, InstallerAdapter $adapter): bool
 			{
-				$this->app->getLanguage()->load('tpl_radicalmart_uikit', JPATH_SITE);
-
-				// Get template
-				$template  = null;
-				$templates = $this->app->bootComponent('templates')->getMVCFactory()
-					->createModel('Style', 'Administrator')->getSiteTemplates();
-
-				foreach ($templates as $item)
+				if ($type !== 'uninstall')
 				{
-					if ((int) $item->home)
-					{
-						$template = (!empty($item->parent)) ? $item->parent : $item->template;
+					$this->app->getLanguage()->load('tpl_radicalmart_uikit', JPATH_SITE);
 
-						break;
+					// Get template
+					$template  = null;
+					$templates = $this->app->bootComponent('templates')->getMVCFactory()
+						->createModel('Style', 'Administrator')->getSiteTemplates();
+
+					foreach ($templates as $item)
+					{
+						if ((int) $item->home)
+						{
+							$template = (!empty($item->parent)) ? $item->parent : $item->template;
+
+							break;
+						}
 					}
-				}
 
-				$root_src   = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit');
-				$root_dest  = Path::clean(JPATH_ROOT . '/templates/' . $template);
-				$media_src  = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit/media');
-				$media_dest = Path::clean(JPATH_ROOT . '/media/templates/site/' . $template);
-				$sources    = Folder::files($root_src, '.', true, true);
+					$root_src   = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit');
+					$root_dest  = Path::clean(JPATH_ROOT . '/templates/' . $template);
+					$media_src  = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit/media');
+					$media_dest = Path::clean(JPATH_ROOT . '/media/templates/site/' . $template);
+					$sources    = Folder::files($root_src, '.', true, true);
 
-				$overrideFiles = [];
-				$copyFiles     = [];
-				foreach ($sources as $src)
-				{
-					$files = [];
-					if (strpos($src, $media_src) !== false)
+					$overrideFiles = [];
+					$copyFiles     = [];
+					foreach ($sources as $src)
 					{
-						$dest    = Path::clean(str_replace($media_src, $media_dest, $src));
-						$files[] = [
-							'src'  => Path::clean($src),
-							'dest' => $dest,
-							'type' => 'file',
-						];
+						$files = [];
+						if (strpos($src, $media_src) !== false)
+						{
+							$dest    = Path::clean(str_replace($media_src, $media_dest, $src));
+							$files[] = [
+								'src'  => Path::clean($src),
+								'dest' => $dest,
+								'type' => 'file',
+							];
 
-						$dest    = Path::clean(str_replace($media_src, $root_dest, $src));
-						$files[] = [
-							'src'  => Path::clean($src),
-							'dest' => $dest,
-							'type' => 'file',
-						];
+							$dest    = Path::clean(str_replace($media_src, $root_dest, $src));
+							$files[] = [
+								'src'  => Path::clean($src),
+								'dest' => $dest,
+								'type' => 'file',
+							];
+						}
+						else
+						{
+							$dest    = Path::clean(str_replace($root_src, $root_dest, $src));
+							$files[] = [
+								'src'  => Path::clean($src),
+								'dest' => $dest,
+								'type' => 'file',
+							];
+						}
+
+						foreach ($files as $file)
+						{
+							if (basename($file['dest']) !== $file['dest'])
+							{
+								$newdir = dirname($file['dest']);
+								if (!Folder::create($newdir))
+								{
+									Log::add(Text::sprintf('JLIB_INSTALLER_ERROR_CREATE_DIRECTORY', $newdir), Log::WARNING, 'jerror');
+
+									return false;
+								}
+							}
+
+							if (File::exists($file['dest']))
+							{
+								$overrideFiles[] = '<code>' .
+									str_replace(JPATH_ROOT . '/', '/', $file['dest']) . '</code>';
+							}
+
+							$copyFiles[] = $file;
+						}
+					}
+
+					$result = $adapter->getParent()->copyFiles($copyFiles, true);
+					if ($result)
+					{
+						$this->app->enqueueMessage(Text::sprintf('TPL_RADICALMART_UIKIT_INSTALL_COPY_FILES_TO',
+							'/templates/' . $template));
+						if (!empty($overrideFiles))
+						{
+							asort($overrideFiles);
+							$this->app->enqueueMessage(Text::sprintf('TPL_RADICALMART_UIKIT_INSTALL_OVERRIDE_FILES',
+								implode('<br>', $overrideFiles)), 'warning');
+						}
 					}
 					else
 					{
-						$dest    = Path::clean(str_replace($root_src, $root_dest, $src));
-						$files[] = [
-							'src'  => Path::clean($src),
-							'dest' => $dest,
-							'type' => 'file',
-						];
+						$this->app->enqueueMessage(Text::_('TPL_RADICALMART_UIKIT_INSTALL_ERROR_COPY_FILES'));
 					}
 
-					foreach ($files as $file)
-					{
-						if (basename($file['dest']) !== $file['dest'])
-						{
-							$newdir = dirname($file['dest']);
-							if (!Folder::create($newdir))
-							{
-								Log::add(Text::sprintf('JLIB_INSTALLER_ERROR_CREATE_DIRECTORY', $newdir), Log::WARNING, 'jerror');
-
-								return false;
-							}
-						}
-
-						if (File::exists($file['dest']))
-						{
-							$overrideFiles[] = '<code>' .
-								str_replace(JPATH_ROOT . '/','/', $file['dest']) . '</code>';
-						}
-
-						$copyFiles[] = $file;
-					}
+					return $result;
 				}
-
-				$result = $adapter->getParent()->copyFiles($copyFiles, true);
-				if ($result)
-				{
-					$this->app->enqueueMessage(Text::sprintf('TPL_RADICALMART_UIKIT_INSTALL_COPY_FILES_TO',
-						'/templates/' . $template));
-					if (!empty($overrideFiles))
-					{
-						asort($overrideFiles);
-						$this->app->enqueueMessage(Text::sprintf('TPL_RADICALMART_UIKIT_INSTALL_OVERRIDE_FILES',
-							implode('<br>', $overrideFiles)), 'warning');
-					}
-				}
-				else
-				{
-					$this->app->enqueueMessage(Text::_('TPL_RADICALMART_UIKIT_INSTALL_ERROR_COPY_FILES'));
-				}
-
-				return $result;
 			}
 		});
 	}
