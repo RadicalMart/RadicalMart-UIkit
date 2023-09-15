@@ -181,7 +181,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 								$label = Text::_($this->form->getFieldAttribute($field->fieldname, 'label',
 									'', $field->group));
 								$input = $this->form->getInput($field->fieldname, $field->group);
-								if (empty($input))
+								if (empty($label) && empty($input))
 								{
 									continue;
 								}
