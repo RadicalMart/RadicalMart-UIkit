@@ -180,8 +180,8 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							<?php foreach ($fields as $field):
 								$label = Text::_($this->form->getFieldAttribute($field->fieldname, 'label',
 									'', $field->group));
-								$field = $this->form->getInput($field->fieldname, $field->group);
-								if (empty($label) && empty($field))
+								$input = $this->form->getInput($field->fieldname, $field->group);
+								if (empty($input))
 								{
 									continue;
 								}
@@ -191,7 +191,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 										<?php echo $label; ?>
 									</th>
 									<td>
-										<?php echo $field; ?>
+										<?php echo $input; ?>
 									</td>
 								</tr>
 							<?php endforeach; ?>
