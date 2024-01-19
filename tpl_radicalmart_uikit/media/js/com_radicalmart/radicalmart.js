@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			loginShow: true,
 			errorsShow: true,
 			createOrderProgress: true,
+		},
+		login: {
+			buttonsLock: true,
+			fromShow: true,
+			errorsShow: true,
 		}
 	};
 
@@ -323,6 +328,54 @@ document.addEventListener('onRadicalMartCheckoutError', function (event) {
 	if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
 		document.querySelectorAll('[radicalmart-checkout="submit-button"], [data-radicalmart-checkout="submit-button"]')
 			.forEach(function (button) {
+				button.removeAttribute('disabled');
+				button.classList.remove('uk-disabled');
+			});
+	}
+});
+
+document.addEventListener('onRadicalMartLoginBeforeDisplayForm', function (event) {
+	if (window.RadicalMartDisplay.login.buttonsLock) {
+		document.querySelectorAll('[radicalmart-login="display_form"], [data-radicalmart-login="display_form"]')
+			.forEach(function (button) {
+				button.setAttribute('disabled', '');
+				button.classList.add('uk-disabled');
+			});
+	}
+});
+
+document.addEventListener('onRadicalMartLoginAfterDisplayForm', function (event) {
+	if (window.RadicalMartDisplay.login.buttonsLock) {
+		document.querySelectorAll('[radicalmart-login="display_form"], [data-radicalmart-login="display_form"]')
+			.forEach((button) => {
+				button.removeAttribute('disabled');
+				button.classList.remove('uk-disabled');
+			});
+	}
+});
+
+document.addEventListener('onRadicalMartLoginRenderLayout', function (event) {
+	if (event.detail.name === 'form') {
+		if (window.RadicalMartDisplay.login.fromShow) {
+			let modal = document.querySelector('#radicalmartLoginForm');
+			if (modal) {
+				UIkit.modal(modal).show();
+			}
+		}
+	}
+});
+
+document.addEventListener('onRadicalMartLoginError', (event) => {
+	if (event.detail && event.detail !== 'Request aborted') {
+		if (window.RadicalMartDisplay.login.errorsShow) {
+			Joomla.renderMessages({
+				error: [event.detail]
+			});
+		}
+	}
+	if (window.RadicalMartDisplay.login.buttonsLock) {
+		document.querySelectorAll('[radicalmart-login="display_form"], [data-radicalmart-login="display_form"]')
+			.forEach((button) => {
 				button.removeAttribute('disabled');
 				button.classList.remove('uk-disabled');
 			});

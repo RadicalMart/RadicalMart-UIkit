@@ -39,7 +39,7 @@ if (!$user)
 	<div id="radicalmartCheckoutLogin" class="uk-flex-top" uk-modal="container:false">
 		<div class="uk-modal-dialog uk-margin-auto-vertical">
 			<div class="uk-modal-header">
-				<div class="uk-modal-title uk-text-center ">
+				<div class="uk-modal-title uk-text-center">
 					<span class="radicalmart-checkout-login-toggle"><?php echo Text::_($message); ?></span>
 					<?php if (!$user): ?>
 						<span class="radicalmart-checkout-login-toggle" hidden>
