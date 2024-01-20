@@ -2,10 +2,10 @@
  * @package     RadicalMart Uikit Package
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
- * @author      Delo Design - delo-design.ru
- * @copyright   Copyright (c) 2023 Delo Design. All rights reserved.
+ * @author      RadicalMart Team - radicalmart.ru
+ * @copyright   Copyright (c) 2024 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
- * @link        https://delo-design.ru/
+ * @link        https://radicalmart.ru/
  */
 
 document.addEventListener('DOMContentLoaded', function () {

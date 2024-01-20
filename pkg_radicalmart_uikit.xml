@@ -2,12 +2,12 @@
 <extension version="4.2" type="package" method="upgrade">
 	<name>PKG_RADICALMART_UIKIT</name>
 	<packagename>radicalmart_uikit</packagename>
-	<author>Delo Design</author>
+	<author>RadicalMart Team</author>
 	<creationDate>August 2023</creationDate>
-	<copyright>Copyright © 2021 Delo Design. All rights reserved.</copyright>
+	<copyright>Copyright © 2021 RadicalMart Team. All rights reserved.</copyright>
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
-	<authorEmail>boss@delo-design.ru</authorEmail>
-	<authorUrl>https://delo-design.ru</authorUrl>
+	<authorEmail>info@radicalmart.ru</authorEmail>
+	<authorUrl>https://radicalmart.ru</authorUrl>
 	<version>1.2.1-dev</version>
 	<description>PKG_RADICALMART_UIKIT_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
