@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			submitButtonsLock: true,
 			discountHide: true,
 			checkErrorsShow: true,
+			checkErrorsProductsShow: true,
 			globalLoadingShow: true,
 			shippingLoadingShow: true,
 			paymentLoadingShow: true,
@@ -104,7 +105,8 @@ document.addEventListener('onRadicalMartCartAfterUpdateDisplayData', function (e
 		}
 
 		if (window.RadicalMartDisplay.cart.discountHide) {
-			document.querySelectorAll('[radicalmart-cart="discount-block"], [data-radicalmart-cart="discount-block"]')
+			document.querySelectorAll('[radicalmart-cart="discount-block"],' +
+				'[data-radicalmart-cart="discount-block"]')
 				.forEach(function (block) {
 					block.style.display = (event.detail.total.discount > 0) ? '' : 'none';
 				});
@@ -117,7 +119,7 @@ document.addEventListener('onRadicalMartCartBeforeAddProduct', function (event) 
 		let productSelector = '[data-id="' + event.detail.product_id + '"]';
 		document.querySelectorAll('[radicalmart-cart="product"]' + productSelector
 			+ ',[data-radicalmart-cart="product"]' + productSelector).forEach(function (productBlock) {
-			productBlock.querySelectorAll('[radicalmart-cart="add"], [data-radicalmart-cart="add"]')
+			productBlock.querySelectorAll('[radicalmart-cart="add"],[data-radicalmart-cart="add"]')
 				.forEach(function (button) {
 					button.setAttribute('disabled', '');
 					button.classList.add('uk-disabled');
@@ -138,7 +140,8 @@ document.addEventListener('onRadicalMartCartAfterAddProduct', function (event) {
 	}
 
 	if (window.RadicalMartDisplay.cart.addButtonsLock) {
-		document.querySelectorAll('[radicalmart-cart="add"], [data-radicalmart-cart="add"]')
+		document.querySelectorAll('[radicalmart-cart="add"],' +
+			'[data-radicalmart-cart="add"]')
 			.forEach(function (button) {
 				button.removeAttribute('disabled');
 				button.classList.remove('uk-disabled');
@@ -199,7 +202,8 @@ document.addEventListener('onRadicalMartCartError', function (event) {
 	}
 
 	if (window.RadicalMartDisplay.cart.addButtonsLock) {
-		document.querySelectorAll('[radicalmart-cart="add"], [data-radicalmart-cart="add"]')
+		document.querySelectorAll('[radicalmart-cart="add"],' +
+			'[data-radicalmart-cart="add"]')
 			.forEach(function (button) {
 				button.removeAttribute('disabled');
 				button.classList.remove('uk-disabled');
@@ -210,7 +214,8 @@ document.addEventListener('onRadicalMartCartError', function (event) {
 
 document.addEventListener('onRadicalMartCheckoutBeforeUpdateDisplayData', function (event) {
 	if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
-		document.querySelectorAll('[radicalmart-checkout="submit-button"], [data-radicalmart-checkout="submit-button"]')
+		document.querySelectorAll('[radicalmart-checkout="submit-button"],' +
+			'[data-radicalmart-checkout="submit-button"]')
 			.forEach(function (button) {
 				button.setAttribute('disabled', '');
 				button.classList.add('uk-disabled');
@@ -220,7 +225,8 @@ document.addEventListener('onRadicalMartCheckoutBeforeUpdateDisplayData', functi
 
 document.addEventListener('onRadicalMartCheckoutAfterUpdateDisplayData', function (event) {
 	if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
-		document.querySelectorAll('[radicalmart-checkout="submit-button"], [data-radicalmart-checkout="submit-button"]')
+		document.querySelectorAll('[radicalmart-checkout="submit-button"],' +
+			'[data-radicalmart-checkout="submit-button"]')
 			.forEach(function (button) {
 				button.removeAttribute('disabled');
 				button.classList.remove('uk-disabled');
@@ -228,7 +234,8 @@ document.addEventListener('onRadicalMartCheckoutAfterUpdateDisplayData', functio
 	}
 
 	if (window.RadicalMartDisplay.checkout.discountHide) {
-		document.querySelectorAll('[radicalmart-checkout="discount-block"], [data-radicalmart-checkout="discount-block"]')
+		document.querySelectorAll('[radicalmart-checkout="discount-block"],' +
+			'[data-radicalmart-checkout="discount-block"]')
 			.forEach(function (block) {
 				block.style.display = (event.detail && event.detail.total && event.detail.total.discount > 0) ? '' : 'none';
 			});
@@ -239,15 +246,32 @@ document.addEventListener('onRadicalMartCheckoutAfterUpdateDisplayData', functio
 document.addEventListener('onRadicalMartCheckoutAfterCheckData', function (event) {
 	if (event.detail) {
 		if (window.RadicalMartDisplay.checkout.checkErrorsShow) {
-			document.querySelectorAll('[radicalmart-checkout="check-error"], [data-radicalmart-checkout="check-error"]')
+			document.querySelectorAll('[radicalmart-checkout="check-error"],' +
+				'[data-radicalmart-checkout="check-error"]')
 				.forEach(function (block) {
 					block.style.display = (event.detail.success) ? 'none' : '';
 				});
 		}
 
+		if (event.detail.current.productsErrors && window.RadicalMartDisplay.checkout.checkErrorsProductsShow) {
+			let productsErrors = [];
+			Object.values(event.detail.current.productsErrors).forEach(function (error) {
+				productsErrors.push(error.product_title + ': ' + error.error_message);
+			});
+			let productsErrorsString = productsErrors.join('<br>');
+
+			document.querySelectorAll('[radicalmart-checkout="check-error-products"],' +
+				'[data-radicalmart-checkout="check-error-products"]')
+				.forEach(function (block) {
+					block.innerHTML = productsErrorsString;
+					block.style.display = '';
+				});
+		}
+
 		if (!event.detail.success) {
 			if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
-				document.querySelectorAll('[radicalmart-checkout="submit-button"], [data-radicalmart-checkout="submit-button"]')
+				document.querySelectorAll('[radicalmart-checkout="submit-button"],' +
+					'[data-radicalmart-checkout="submit-button"]')
 					.forEach(function (button) {
 						button.setAttribute('disabled', '');
 						button.classList.add('uk-disabled');
@@ -277,7 +301,8 @@ document.addEventListener('onRadicalMartCheckoutBeforeReloadForm', function (eve
 
 document.addEventListener('onRadicalMartCheckoutBeforeCreateOrder', function (event) {
 	if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
-		document.querySelectorAll('[radicalmart-checkout="submit-button"], [data-radicalmart-checkout="submit-button"]')
+		document.querySelectorAll('[radicalmart-checkout="submit-button"],' +
+			'[data-radicalmart-checkout="submit-button"]')
 			.forEach(function (button) {
 				button.setAttribute('disabled', '');
 				button.classList.add('disabled');
@@ -326,7 +351,8 @@ document.addEventListener('onRadicalMartCheckoutError', function (event) {
 	}
 
 	if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
-		document.querySelectorAll('[radicalmart-checkout="submit-button"], [data-radicalmart-checkout="submit-button"]')
+		document.querySelectorAll('[radicalmart-checkout="submit-button"],' +
+			'[data-radicalmart-checkout="submit-button"]')
 			.forEach(function (button) {
 				button.removeAttribute('disabled');
 				button.classList.remove('uk-disabled');

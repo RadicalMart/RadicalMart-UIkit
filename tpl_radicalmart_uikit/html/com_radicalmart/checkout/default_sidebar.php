@@ -128,6 +128,8 @@ use Joomla\CMS\Language\Text;
 	<div radicalmart-checkout="check-error" class="uk-alert uk-alert-danger uk-text-center uk-margin-small-top"
 		 style="display: none">
 		<div><?php echo Text::_('COM_RADICALMART_ERROR_CHECKOUT_CHANGE'); ?></div>
+		<div radicalmart-checkout="check-error-products" class="uk-margin-small-top uk-text-left uk-text-small"
+			 style="display: none"></div>
 		<div class="uk-margin-small-top">
 			<button type="button" onclick="RadicalMartCheckout().reloadForm(this)"
 					class="uk-button uk-button-small uk-button-secondary">

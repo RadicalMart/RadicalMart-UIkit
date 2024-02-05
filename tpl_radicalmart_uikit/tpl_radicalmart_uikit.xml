@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="4.2" type="file" method="upgrade">
+<extension type="file" method="upgrade">
 	<name>RadicalMart - UIkit</name>
 	<author>RadicalMart Team</author>
 	<creationDate>August 2023</creationDate>
-	<copyright>Copyright © 2021 RadicalMart Team. All rights reserved.</copyright>
+	<copyright>Copyright © 2024 RadicalMart Team. All rights reserved.</copyright>
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>info@radicalmart.ru</authorEmail>
 	<authorUrl>https://radicalmart.ru</authorUrl>
