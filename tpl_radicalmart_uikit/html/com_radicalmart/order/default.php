@@ -170,7 +170,10 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 			</div>
 			<?php foreach ($this->form->getFieldsets() as $key => $fieldset):
 				$fields = $this->form->getFieldset($key);
-				if (empty($fields)) continue;
+				if (empty($fields))
+				{
+					continue;
+				}
 				?>
 				<div id="order_<?php echo $key; ?>" class="uk-margin">
 					<h2><?php echo Text::_($fieldset->label); ?></h2>

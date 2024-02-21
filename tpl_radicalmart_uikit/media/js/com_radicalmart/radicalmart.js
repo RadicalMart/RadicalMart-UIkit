@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	let config = {
 		cart: {
 			addButtonsLock: true,
+			displayModuleButtonsLock: true,
 			discountHide: true,
 			productsDiscountHide: true,
 			badgeHide: true,
@@ -195,6 +196,26 @@ document.addEventListener('onRadicalMartCartRenderLayout', function (event) {
 	}
 });
 
+document.addEventListener('onRadicalMartCartBeforeDisplayModule', function (event) {
+	if (window.RadicalMartDisplay.cart.displayModuleButtonsLock) {
+		document.querySelectorAll('[radicalmart-cart="display_module"], [data-radicalmart-cart="display_module"]')
+			.forEach(function (button) {
+				button.setAttribute('disabled', '');
+				button.classList.add('uk-disabled');
+			});
+	}
+});
+
+document.addEventListener('onRadicalMartCartDisplayModule', (event) => {
+	if (window.RadicalMartDisplay.cart.displayModuleButtonsLock) {
+		document.querySelectorAll('[radicalmart-cart="display_module"], [data-radicalmart-cart="display_module"]')
+			.forEach(function (button) {
+				button.removeAttribute('disabled');
+				button.classList.remove('uk-disabled');
+			});
+	}
+});
+
 document.addEventListener('onRadicalMartCartError', function (event) {
 	if (event.detail !== 'Request aborted') {
 		if (window.RadicalMartDisplay.cart.errorsShow) {
@@ -203,8 +224,14 @@ document.addEventListener('onRadicalMartCartError', function (event) {
 	}
 
 	if (window.RadicalMartDisplay.cart.addButtonsLock) {
-		document.querySelectorAll('[radicalmart-cart="add"],' +
-			'[data-radicalmart-cart="add"]')
+		document.querySelectorAll('[radicalmart-cart="add"], [data-radicalmart-cart="add"]')
+			.forEach(function (button) {
+				button.removeAttribute('disabled');
+				button.classList.remove('uk-disabled');
+			});
+	}
+	if (window.RadicalMartDisplay.cart.displayModuleButtonsLock) {
+		document.querySelectorAll('[radicalmart-cart="display_module"], [data-radicalmart-cart="display_module"]')
 			.forEach(function (button) {
 				button.removeAttribute('disabled');
 				button.classList.remove('uk-disabled');
