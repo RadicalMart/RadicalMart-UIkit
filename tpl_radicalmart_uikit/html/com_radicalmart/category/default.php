@@ -169,12 +169,14 @@ $filter       = (!empty($this->children));
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
-			<div radicalmart-ajax="pagination">
-				<?php if ($this->items && $this->pagination): ?>
-					<div class="list-pagination uk-margin-medium">
-						<?php echo $this->pagination->getPaginationLinks(); ?>
-					</div>
-				<?php endif; ?>
+			<div class="uk-margin">
+				<div radicalmart-ajax="pagination">
+					<?php if ($this->items && $this->pagination): ?>
+						<div class="list-pagination uk-margin-medium">
+							<?php echo $this->pagination->getPaginationLinks(); ?>
+						</div>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 	</div>

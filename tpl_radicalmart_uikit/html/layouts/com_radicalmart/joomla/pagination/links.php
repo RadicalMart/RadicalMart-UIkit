@@ -61,22 +61,26 @@ $pages = $list['pages'];
 			<?php if ($firstDots): ?>
 				<li class="uk-disabled"><span>...</span></li>
 			<?php endif; ?>
-			<?php foreach ($pages['pages'] as $number => $page):
-				if (!in_array($number, $numbers)) continue; ?>
+			<?php foreach ($pages['pages'] as $number => $page): ?>
+				<?php
+				if (!in_array($number, $numbers))
+				{
+					continue;
+				} ?>
 				<?php if (!$page['data']->active): ?>
-				<li>
-					<a href="<?php echo rtrim(str_replace('start=0', '', $page['data']->link), '?'); ?>"
-					   title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $number); ?>" uk-tooltip>
-						<?php echo $page['data']->text; ?>
-					</a>
-				</li>
-			<?php else: ?>
-				<li class="uk-active">
-					<span title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $number); ?>" uk-tooltip>
-						<?php echo $page['data']->text; ?>
-					</span>
-				</li>
-			<?php endif; ?>
+					<li>
+						<a href="<?php echo rtrim(str_replace('start=0', '', $page['data']->link), '?'); ?>"
+						   title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $number); ?>" uk-tooltip>
+							<?php echo $page['data']->text; ?>
+						</a>
+					</li>
+				<?php else: ?>
+					<li class="uk-active">
+						<span title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $number); ?>" uk-tooltip>
+							<?php echo $page['data']->text; ?>
+						</span>
+					</li>
+				<?php endif; ?>
 			<?php endforeach; ?>
 			<?php if ($lastDots): ?>
 				<li class="uk-disabled"><span>...</span></li>
