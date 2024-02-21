@@ -82,7 +82,7 @@ $pattern             = '[0-9.' . $decimal_separator . $thousands_separator . ']+
 				<?php echo Text::_('COM_RADICALMART_PRICE_FILTER_' . $v); ?>
 			</label>
 			<input id="<?php echo $id . '_' . $v; ?>" name="<?php echo $name . '[' . $v . ']'; ?>"
-				   class="uk-input" type="text" pattern="<?php echo $pattern; ?>" value="<?php echo $value[$v]; ?>"
+				   class="uk-input uk-input-medium" type="text" pattern="<?php echo $pattern; ?>" value="<?php echo $value[$v]; ?>"
 				   placeholder="<?php echo $hints[$v]; ?>"
 				<?php if (!empty($onchange)) echo 'onChange="' . $onchange . '"'; ?>>
 		</div>
