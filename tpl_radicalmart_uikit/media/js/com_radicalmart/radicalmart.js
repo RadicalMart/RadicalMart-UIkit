@@ -75,7 +75,8 @@ document.addEventListener('onRadicalMartCartAfterUpdateDisplayData', function (e
 				document.querySelectorAll('[radicalmart-cart="product-discount-block"][data-key="' + key + '"] , ' +
 					'[data-radicalmart-cart="product-discount-block"][data-key="' + key + '"]')
 					.forEach(function (block) {
-						block.style.display = (product.order.discount_enable && product.order.discount > 0) ? '' : 'none';
+						block.style.display = (product.order.discount_enable
+							&& product.order.discount.toString().length > 0) ? '' : 'none';
 					});
 			});
 		}
