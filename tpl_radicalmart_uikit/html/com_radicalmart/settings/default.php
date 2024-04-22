@@ -86,8 +86,13 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 					</h1>
 				</div>
 				<div class="uk-card-body">
-					<?php foreach ($this->form->getFieldsets() as $key => $fieldset): ?>
-						<form id="personal_<?php echo $key; ?>" radicalmart-settings="container"
+					<?php foreach ($this->form->getFieldsets() as $key => $fieldset):
+						if (empty($this->form->getFieldset($key)))
+						{
+							continue;
+						}
+						?>
+						<form id="settings_<?php echo $key; ?>" radicalmart-settings="container"
 							  class="uk-fieldset uk-margin-medium" onsubmit="return;">
 							<legend class="uk-h4 uk-margin-small"><?php echo Text::_($fieldset->label); ?></legend>
 							<div radicalmart-settings="error" class="uk-alert uk-alert-danger uk-margin-small-top"
