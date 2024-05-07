@@ -117,8 +117,9 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 												</div>
 											<?php endif; ?>
 											<div>
-												<a href="<?php echo $product->link; ?>"
-												   class="uk-link-reset"><?php echo $product->title; ?></a>
+												<a href="<?php echo $product->link; ?>" class="uk-link-reset">
+													<?php echo $product->title; ?>
+												</a>
 											</div>
 											<?php if (!empty($product->extra_display)): ?>
 												<div class="uk-flex uk-flex-wrap">
