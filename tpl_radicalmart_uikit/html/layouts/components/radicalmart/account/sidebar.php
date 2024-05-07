@@ -65,7 +65,10 @@ $assets->useScript('com_radicalmart.site.settings');
 	<div class="uk-card-body">
 		<ul class="uk-nav uk-nav-default">
 			<?php foreach ($menus as $key => $item):
-				if ($key === 'com_radicalmart.settings' || $key === 'com_users.logout') continue; ?>
+				if ($key === 'com_radicalmart.settings' || $key === 'com_users.logout')
+				{
+					continue;
+				} ?>
 				<li class="<?php if ($item['current']) echo 'uk-active'; ?>">
 					<a href="<?php echo $item['link']; ?>"><?php echo Text::_($item['text']); ?></a>
 				</li>
