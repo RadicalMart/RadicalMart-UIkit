@@ -34,7 +34,7 @@ use Joomla\CMS\Language\Text;
 		</div>
 		<div class="uk-text-right">
 			<div class="uk-text-meta">
-				<?php echo HTMLHelper::date($this->order->created, Text::_('DATE_FORMAT_LC2')); ?>
+				<?php echo HTMLHelper::date($this->order->created, Text::_('DATE_FORMAT_LC5')); ?>
 			</div>
 		</div>
 	</div>
