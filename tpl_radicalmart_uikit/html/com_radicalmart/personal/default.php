@@ -11,7 +11,6 @@
 
 \defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
@@ -149,7 +148,6 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 		$sections['others'][] = $fieldset;
 	}
 }
-$language = Factory::getApplication()->getLanguage();
 ?>
 <div id="RadicalMart" class="personal">
 	<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
