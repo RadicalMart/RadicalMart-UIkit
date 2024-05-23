@@ -49,11 +49,19 @@ extract($displayData);
  *
  * Field specific variables
  * @var  array|false $currency       Currency data array.
+ * @var  array       $hints          Fields hints.
  */
 
 $vs = ['from', 'to'];
-if (!is_array($value)) $value = (new Registry($value))->toArray();
-$hints = [];
+if (!is_array($value))
+{
+	$value = (new Registry($value))->toArray();
+}
+
+if (empty($hints))
+{
+	$hints = [];
+}
 foreach ($vs as $v)
 {
 	$val = (!empty($value[$v])) ? $value[$v] : 0;
@@ -67,8 +75,11 @@ foreach ($vs as $v)
 	}
 	$value[$v] = $val;
 
-	$hints[$v] = PriceHelper::toString(Text::_('COM_RADICALMART_PRICE_FILTER_' . $v . '_HINT'),
-		$currency['code'], false);
+	if (empty($hints[$v]))
+	{
+		$hints[$v] = PriceHelper::toString(Text::_('COM_RADICALMART_PRICE_FILTER_' . $v . '_HINT'),
+			$currency['code'], false);
+	}
 }
 
 $decimal_separator   = (isset($currency['decimal_separator'])) ? $currency['decimal_separator'] : '.';
@@ -82,14 +93,15 @@ $pattern             = '[0-9.' . $decimal_separator . $thousands_separator . ']+
 				<?php echo Text::_('COM_RADICALMART_PRICE_FILTER_' . $v); ?>
 			</label>
 			<input id="<?php echo $id . '_' . $v; ?>" name="<?php echo $name . '[' . $v . ']'; ?>"
-				   class="uk-input uk-input-medium" type="text" pattern="<?php echo $pattern; ?>" value="<?php echo $value[$v]; ?>"
+				   class="uk-input uk-input-medium" type="text" pattern="<?php echo $pattern; ?>"
+				   value="<?php echo $value[$v]; ?>"
 				   placeholder="<?php echo $hints[$v]; ?>"
 				<?php if (!empty($onchange)) echo 'onChange="' . $onchange . '"'; ?>>
 		</div>
 	<?php endforeach; ?>
 	<div class="uk-text-right">
 		<span class="uk-link uk-text-small uk-text-danger uk-text-lowercase"
-		   onclick="this.closest('.radicalmart-input-filter-price').querySelectorAll('input')
+			  onclick="this.closest('.radicalmart-input-filter-price').querySelectorAll('input')
 			  .forEach(function (input) {input.value = ''; input.setAttribute('value', ''); input.dispatchEvent(new Event('change'));});">
 			<?php echo Text::_('COM_RADICALMART_CLEAN'); ?>
 		</span>
