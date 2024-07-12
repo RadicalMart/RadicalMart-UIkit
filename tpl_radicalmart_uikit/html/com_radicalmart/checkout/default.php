@@ -135,6 +135,12 @@ $i = 1;
 									$i++; ?>. </span>
 								<?php echo Text::_('COM_RADICALMART_CONTACTS'); ?>
 							</h2>
+					<?php
+						$user = JFactory::getUser();
+							if ($user->guest) {
+							    echo Text::_('COM_RADICALMART_CHECKOUT_GUEST_LOGIN');
+						}
+					?>							
 							<div class="uk-card uk-card-default uk-card-body uk-card-small">
 								<div class="uk-child-width-1-2@s" uk-grid>
 									<?php echo $contactsFields; ?>
