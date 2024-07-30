@@ -40,7 +40,9 @@ $app->getLanguage()->load('com_radicalmart', JPATH_ROOT);
 /** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = $app->getDocument()->getWebAssetManager();
 $assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
-$assets->useScript('com_radicalmart.site.login');
+$assets->useScript('com_radicalmart.site.login')
+	->useScript('showon')
+	->useScript('field.passwordview');
 
 if (ParamsHelper::getComponentParams()->get('radicalmart_js', 1))
 {

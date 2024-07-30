@@ -116,6 +116,11 @@ foreach ([$login, $registration] as &$form)
 						<?php echo Text::_('COM_RADICALMART_LOGIN_FORM_SUBMIT_LOGIN'); ?>
 					</span>
 				</div>
+				<script>
+					if (typeof Joomla.Showon !== 'undefined') {
+						Joomla.Showon.initialise(document.querySelector('#radicalmartLoginForm [radicalmart-login="form_login"]'));
+					}
+				</script>
 			</form>
 
 			<?php if ($registration): ?>
@@ -127,7 +132,6 @@ foreach ([$login, $registration] as &$form)
 						echo $registration->renderFieldset($fieldset->name);
 					} ?>
 					<?php echo HTMLHelper::_('form.token'); ?>
-					<input type="hidden" name="task" value="checkout.login"/>
 					<div>
 						<span class="btn btn-primary"
 							  onclick="window.RadicalMartLogin().registration()">
