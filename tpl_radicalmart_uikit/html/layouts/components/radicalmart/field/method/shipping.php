@@ -56,11 +56,13 @@ if (empty($methods))
 ?>
 <div class="uk-grid-small uk-child-width-1-3@s" uk-grid>
 	<?php foreach ($methods as $m => $method):
-		$checked = ((int) $value === (int) $method['id']) ? 'checked' : '';
-		?>
+		$disabled = (!empty($method['disabled'])) ? 'disabled' : '';
+		$checked = (empty($method['disabled']) && (int) $value === (int) $method['id']) ? 'checked' : ''; ?>
 		<div>
 			<label for="<?php echo $id . '_' . $m; ?>"
-				   class="uk-tile uk-padding-small uk-text-center uk-display-block uk-tile-<?php echo ($checked) ? 'secondary' : 'muted'; ?>">
+				   class="uk-tile uk-padding-small uk-text-center uk-display-block uk-tile-<?php echo ($checked) ? 'secondary' : 'muted'; ?>"
+				<?php echo $disabled; ?>
+				<?php if (!empty($disabled)) echo 'style="opacity: 0.5;"'; ?>>
 				<?php if (!empty($method['media']['icon'])): ?>
 					<div class="uk-text-center">
 						<?php echo HTMLHelper::image($method['media']['icon'], htmlspecialchars($method['title'])); ?>
@@ -70,7 +72,7 @@ if (empty($methods))
 					<input id="<?php echo $id . '_' . $m; ?>" class="uk-radio uk-hidden" type="radio"
 						   name="<?php echo $name; ?>"
 						   value="<?php echo $method['id']; ?>" <?php if (!empty($onchange)) echo ' onchange="' . $onchange . '"'; ?>
-						<?php echo $checked; ?>>
+						<?php echo $checked . $disabled; ?>>
 				</div>
 				<div class="uk-margin-remove">
 					<?php echo $method['title']; ?>
