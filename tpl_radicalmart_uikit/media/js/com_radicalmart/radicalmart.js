@@ -1,7 +1,7 @@
 /*
  * @package     RadicalMart Uikit Package
  * @subpackage  tpl_radicalmart_uikit
- * @version     2.2.0
+ * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
  * @copyright   Copyright (c) 2024 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
