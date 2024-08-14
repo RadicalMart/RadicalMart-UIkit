@@ -104,14 +104,13 @@ extract($displayData);
 													</div>
 												<?php endif; ?>
 											</div>
-												<div class="uk-flex uk-flex-wrap uk-flex-between">
-													<div class="uk-text-muted uk-margin-right">
-														<?php echo $product->order['quantity'] . ' x '
-															. $product->order['final_string']; ?>
-													</div>
-													<div class="uk-text-bold">
-														<?php echo $product->order['sum_final_string']; ?>
-													</div>
+											<div class="uk-flex uk-flex-wrap uk-flex-between">
+												<div class="uk-text-muted uk-margin-right">
+													<?php echo $product->order['quantity'] . ' x '
+														. $product->order['final_string']; ?>
+												</div>
+												<div class="uk-text-bold">
+													<?php echo $product->order['sum_final_string']; ?>
 												</div>
 											</div>
 										</div>
