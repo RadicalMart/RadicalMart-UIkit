@@ -128,11 +128,11 @@ if ($this->params->get('trigger_js', 1))
 					<?php endforeach; ?>
 				<?php endif; ?>
 			</div>
-            <?php if ($this->items && $this->pagination): ?>
-                <div class="list-pagination uk-margin-medium">
-                    <?php echo $this->pagination->getPaginationLinks(); ?>
-                </div>
-            <?php endif; ?>
+			<?php if ($this->items && $this->pagination): ?>
+				<div class="list-pagination uk-margin-medium">
+					<?php echo $this->pagination->getPaginationLinks(); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
