@@ -40,6 +40,10 @@ foreach ([$login, $registration] as &$form)
 			$type  = strtolower($field->type);
 			$class = $form->getFieldAttribute($name, 'class', '', $group);
 			$input = $field->input;
+			if ($type === 'subform')
+			{
+				continue;
+			}
 			if ($type === 'text' || $type === 'email')
 			{
 				$class .= ' uk-input';

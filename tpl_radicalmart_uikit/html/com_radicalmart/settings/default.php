@@ -39,6 +39,10 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 		$type  = strtolower($field->type);
 		$class = $this->form->getFieldAttribute($name, 'class', '', $group);
 		$input = $field->input;
+		if ($type === 'subform')
+		{
+			continue;
+		}
 		if ($type === 'text' || $type === 'email')
 		{
 			$class .= ' uk-input';
