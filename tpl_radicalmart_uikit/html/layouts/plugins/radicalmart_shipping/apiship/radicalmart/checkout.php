@@ -55,18 +55,12 @@ $assets->useScript('plg_radicalmart_shipping_apiship.site.checkout');
 	</div>
 	<?php if ($delivery_type === 2): ?>
 		<div class="uk-margin">
-			<div class="uk-margin-small-bottom uk-h4">
-				<?php echo Text::_($form->getFieldAttribute('point', 'label', '', 'shipping')); ?>
-			</div>
 			<div>
 				<?php echo $form->getInput('point', 'shipping'); ?>
 			</div>
 		</div>
 	<?php else: ?>
 		<div class="uk-margin">
-			<div class="uk-margin-small-bottom uk-h4">
-				<?php echo Text::_($form->getFieldAttribute('address', 'label', '', 'shipping')); ?>
-			</div>
 			<div>
 				<?php echo $form->getInput('address', 'shipping'); ?>
 			</div>
