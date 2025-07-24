@@ -109,7 +109,6 @@ $document->addScriptOptions($id, [
 <div id="<?php echo $id; ?>" radicalmart-shipping-apiship-field-addresses="container" class="uk-position-relative">
 	<ul uk-tab>
 		<?php foreach ($addresses as $address) :
-
 			if ($address['uid'] === 'new')
 			{
 				$tab = Text::_('PLG_RADICALMART_SHIPPING_APISHIP_POINTS_ADDRESSES_FIELD_NEW');
