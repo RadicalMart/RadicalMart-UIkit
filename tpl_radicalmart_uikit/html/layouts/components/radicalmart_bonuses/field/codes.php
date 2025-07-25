@@ -136,7 +136,7 @@ if (!$readonly)
 					<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_CODES_CODE_APPLY'); ?>
 				</button>
 				<button type="button" radicalmart_bonuses-field-codes="hide"
-						class="uk-button uk-button-small uk-button-danger">>
+						class="uk-button uk-button-small uk-button-danger">
 					<?php echo Text::_('JCANCEL'); ?>
 				</button>
 			</div>
