@@ -112,24 +112,30 @@ $value = (!empty($value)) ? $value : 0;
 	<div class="uk-grid-small uk-grid-row-small uk-margin" uk-grid="">
 		<?php if (!$readonly): ?>
 			<div class="uk-width-2-5@s">
-				<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_CUSTOMER_CHECKOUT') . ':' ?>
+				<?php echo ($context === 'com_radicalmart.checkout')
+					? Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_CUSTOMER_CHECKOUT') . ':'
+					: Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_CUSTOMER') . ':'; ?>
 			</div>
 			<div class="uk-width-3-5@s uk-text-danger">
 				<?php echo $points_customer; ?>
 			</div>
 		<?php endif; ?>
 		<div class="uk-width-2-5@s">
-			<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_VALUE_CHECKOUT') . ':' ?>
+			<?php echo ($context === 'com_radicalmart.checkout')
+				? Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_VALUE_CHECKOUT') . ':'
+				: Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_VALUE') . ':'; ?>
 		</div>
 		<div class="uk-width-3-5@s uk-text-success">
 			<?php echo $value ?>
 		</div>
-		<div class="uk-width-2-5@s">
-			<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_APPLY_CHECKOUT') . ':' ?>
-		</div>
-		<div class="uk-width-3-5@s uk-text-warning">
-			<?php echo $points_apply; ?>
-		</div>
+		<?php if ($context === 'com_radicalmart.checkout'): ?>
+			<div class="uk-width-2-5@s">
+				<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_APPLY_CHECKOUT') . ':' ?>
+			</div>
+			<div class="uk-width-3-5@s uk-text-warning">
+				<?php echo $points_apply; ?>
+			</div>
+		<?php endif; ?>
 		<div class="uk-width-2-5@s">
 			<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_FORMULA') . ':'; ?>
 		</div>
