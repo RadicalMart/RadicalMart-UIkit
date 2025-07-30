@@ -277,6 +277,11 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 					<?php endif; ?>
 				</div>
 			</div>
+			<?php if ($this->items && $this->pagination): ?>
+				<div class="list-pagination uk-margin-medium">
+					<?php echo $this->pagination->getPaginationLinks(); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

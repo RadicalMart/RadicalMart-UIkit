@@ -109,7 +109,7 @@ $value = (!empty($value)) ? $value : 0;
 	</div>
 	<input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>"
 		   radicalmart_bonuses-field-points="field">
-	<div class="uk-grid-small uk-grid-row-small uk-margin" uk-grid="">
+	<div class="uk-grid-small uk-grid-row-small" uk-grid="">
 		<?php if (!$readonly): ?>
 			<div class="uk-width-2-5@s">
 				<?php echo ($context === 'com_radicalmart.checkout')
