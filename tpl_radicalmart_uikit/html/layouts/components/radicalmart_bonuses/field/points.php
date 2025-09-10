@@ -144,7 +144,7 @@ $value = (!empty($value)) ? $value : 0;
 		</div>
 	</div>
 	<?php if (!$readonly): ?>
-		<div>
+		<div class="uk-margin-small-top">
 			<button type="button" radicalmart_bonuses-field-points="add"
 					class="uk-button uk-button-small uk-button-secondary"
 					style="display: none">

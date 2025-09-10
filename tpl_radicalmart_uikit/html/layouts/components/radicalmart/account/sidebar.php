@@ -49,16 +49,20 @@ $assets->useScript('com_radicalmart.site.settings');
 					. HTMLHelper::date($user->registerDate, Text::_('DATE_FORMAT_LC4')); ?>
 			</div>
 			<div>
-				<a href="<?php echo $menus['com_radicalmart.settings']['link']; ?>"
-				   class="uk-button uk-button-default uk-button-small">
-					<span class="" uk-icon="icon: cog; ratio: .75;"></span>
-					<?php echo '  ' . Text::_($menus['com_radicalmart.settings']['text']); ?>
-				</a>
-				<a href="<?php echo $menus['com_users.logout']['link']; ?>"
-				   class="uk-button uk-button-default uk-button-small"
-				   title="<?php echo Text::_($menus['com_users.logout']['text']); ?>" uk-tooltip="">
-					<span uk-icon="icon: sign-out; ratio: .75;"></span>
-				</a>
+				<?php if (!empty($menus['com_radicalmart.settings'])): ?>
+					<a href="<?php echo $menus['com_radicalmart.settings']['link']; ?>"
+					   class="uk-button uk-button-default uk-button-small">
+						<span class="" uk-icon="icon: cog; ratio: .75;"></span>
+						<?php echo '  ' . Text::_($menus['com_radicalmart.settings']['text']); ?>
+					</a>
+				<?php endif; ?>
+				<?php if (!empty($menus['com_users.logout'])): ?>
+					<a href="<?php echo $menus['com_users.logout']['link']; ?>"
+					   class="uk-button uk-button-default uk-button-small"
+					   title="<?php echo Text::_($menus['com_users.logout']['text']); ?>" uk-tooltip="">
+						<span uk-icon="icon: sign-out; ratio: .75;"></span>
+					</a>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
