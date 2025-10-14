@@ -76,7 +76,7 @@ $document->addScriptOptions($id, [
 		</div>
 	<?php endif; ?>
 	<div radicalmart-shipping-apiship-field-tariffs="list"></div>
-	<?php foreach (['id', 'name', 'hash'] as $key)
+	<?php foreach (['id', 'name', 'cost', 'hash'] as $key)
 	{
 		$attributes = [
 			'id'    => $id . '_' . $key,

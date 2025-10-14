@@ -83,6 +83,9 @@ if (!empty($map_key))
 		}
 		#' . $id . ' ymaps[class*="-image"] {
 			background-repeat: no-repeat !important;
+		}
+		#' . $id . ' ymaps[class*="-float-button"] {
+			max-width: inherit !important;
 		}		
 	');
 

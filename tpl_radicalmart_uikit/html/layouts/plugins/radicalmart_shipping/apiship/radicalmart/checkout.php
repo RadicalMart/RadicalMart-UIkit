@@ -33,7 +33,8 @@ if (empty($shipping))
 	return;
 }
 
-$delivery_type = (int) $shipping->params->get('delivery_type', 2);
+$delivery_type     = (int) $shipping->params->get('delivery_type', 2);
+$recipient_payment = ((int) $shipping->params->get('recipient_payment', 0) == 1);
 
 // Load assets
 /** @var \Joomla\CMS\Document\Document $document */
@@ -82,10 +83,22 @@ $assets->useScript('plg_radicalmart_shipping_apiship.site.checkout');
 
 	<div class="uk-flex uk-flex-middle uk-margin-small">
 		<div class="uk-margin-small-right uk-text-bold">
-			<?php echo Text::_('PLG_RADICALMART_SHIPPING_APISHIP_COST') . ': '; ?>
+			<?php echo ($recipient_payment)
+				? Text::_('PLG_RADICALMART_SHIPPING_APISHIP_COST_RECIPIENT_PAYMENT') . ': '
+				: Text::_('PLG_RADICALMART_SHIPPING_APISHIP_COST') . ': '; ?>
 		</div>
 		<div radicalmart-checkout-display="shipping.order.price.final_string">
 			<?php echo Text::_('PLG_RADICALMART_SHIPPING_APISHIP_COST_CALCULATE'); ?>
 		</div>
 	</div>
+	<?php if ($recipient_payment): ?>
+		<div>
+			<div class="uk-text-warning">
+				<?php echo Text::_('PLG_RADICALMART_SHIPPING_APISHIP_COST_RECIPIENT_PAYMENT_MESSAGE'); ?>
+			</div>
+			<div class="uk-text-small uk-text-muted">
+				<?php echo Text::_('PLG_RADICALMART_SHIPPING_APISHIP_COST_RECIPIENT_PAYMENT_NOTE'); ?>
+			</div>
+		</div>
+	<?php endif; ?>
 </div>
