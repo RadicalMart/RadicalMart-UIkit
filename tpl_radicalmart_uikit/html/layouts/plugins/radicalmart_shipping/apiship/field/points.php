@@ -49,8 +49,9 @@ extract($displayData);
  * @var   array                    $options        Options available for this field.
  *
  * Field specific variables
- * @var  int                       $shipping       Shipping method id.
  * @var  string                    $context        Context selector string.
+ * @var  int                       $order_id       Current order id.
+ * @var  int                       $shipping       Shipping method id.
  * @var  \Joomla\Registry\Registry $shippingParams Available Operation Filter.
  * @var  string|null               $map_error      Yandex.Map empty key message.
  */
@@ -106,6 +107,7 @@ if (!empty($map_key))
 		'value'         => $value,
 		'shipping'      => $shipping,
 		'context'       => (!empty($context)) ? $context : 'com_radicalmart.order',
+		'order_id'      => (!empty($order_id)) ? $order_id : 0,
 		'providers'     => $shippingParams->get('providers', []),
 		'markers'       => ApiShip::getMapMarkers(),
 		'markerPreset'  => [
