@@ -50,6 +50,7 @@ extract($displayData);
  *
  * Field specific variables
  * @var  int                       $shipping       Shipping method id.
+ * @var  string                    $context        Context selector string.
  * @var  \Joomla\Registry\Registry $shippingParams Available Operation Filter.
  * @var  string|null               $map_error      Yandex.Map empty key message.
  */
@@ -104,6 +105,7 @@ if (!empty($map_key))
 		'name'          => $name,
 		'value'         => $value,
 		'shipping'      => $shipping,
+		'context'       => (!empty($context)) ? $context : 'com_radicalmart.order',
 		'providers'     => $shippingParams->get('providers', []),
 		'markers'       => ApiShip::getMapMarkers(),
 		'markerPreset'  => [
