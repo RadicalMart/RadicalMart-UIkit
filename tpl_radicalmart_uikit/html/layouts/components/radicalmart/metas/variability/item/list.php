@@ -28,7 +28,7 @@ extract($displayData);
 
 $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empty($product->price['hide']));
 ?>
-<div class="product-block uk-transition-toggle uk-card-body uk-card-small">
+<div class="product-block uk-transition-toggle uk-card-body uk-card-small uk-card-default">
 	<div class="uk-child-width-expand@s uk-grid-divider" uk-grid="">
 		<div>
 			<div class="uk-child-width-expand@m" uk-grid="">
@@ -37,18 +37,18 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 						<a href="<?php echo $product->link; ?>"
 						   class="uk-height-medium uk-width-1-1 uk-flex uk-flex-center uk-flex-middle uk-transition-scale-up uk-transition-opaque ">
 							<?php echo MediaHelper::renderImage(
-								'com_radicalmart.metas.variability.list',
-								$product->image,
-								[
-									'alt'     => $product->title,
-									'loading' => 'lazy',
-									'class'   => 'uk-height-max-medium'
-								],
-								[
-									'meta_id'  => $product->id,
-									'no_image' => true,
-									'thumb'    => true,
-								]); ?>
+									'com_radicalmart.metas.variability.list',
+									$product->image,
+									[
+											'alt'     => $product->title,
+											'loading' => 'lazy',
+											'class'   => 'uk-height-max-medium'
+									],
+									[
+											'meta_id'  => $product->id,
+											'no_image' => true,
+											'thumb'    => true,
+									]); ?>
 						</a>
 						<?php if (!empty($product->badges)): ?>
 							<ul class="uk-thumbnav uk-position-top-right uk-margin-small-top">
@@ -59,17 +59,17 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 											<?php if ($src = $badge->media->get('icon'))
 											{
 												echo MediaHelper::renderImage(
-													'com_radicalmart.categories.badge',
-													$src,
-													[
-														'alt'     => $badge->title,
-														'loading' => 'lazy',
-													],
-													[
-														'category_id' => $badge->id,
-														'no_image'    => false,
-														'thumb'       => true,
-													]);
+														'com_radicalmart.categories.badge',
+														$src,
+														[
+																'alt'     => $badge->title,
+																'loading' => 'lazy',
+														],
+														[
+																'category_id' => $badge->id,
+																'no_image'    => false,
+																'thumb'       => true,
+														]);
 											}
 											else
 											{
@@ -110,17 +110,17 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 											<?php if ($src = $manufacturer->media->get('icon'))
 											{
 												echo MediaHelper::renderImage(
-													'com_radicalmart.categories.manufacturer',
-													$src,
-													[
-														'alt'     => $manufacturer->title,
-														'loading' => '$manufacturer',
-													],
-													[
-														'category_id' => $manufacturer->id,
-														'no_image'    => false,
-														'thumb'       => true,
-													]);
+														'com_radicalmart.categories.manufacturer',
+														$src,
+														[
+																'alt'     => $manufacturer->title,
+																'loading' => '$manufacturer',
+														],
+														[
+																'category_id' => $manufacturer->id,
+																'no_image'    => false,
+																'thumb'       => true,
+														]);
 											}
 											else
 											{

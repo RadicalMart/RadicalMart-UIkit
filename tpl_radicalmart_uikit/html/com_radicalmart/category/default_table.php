@@ -15,7 +15,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 ?>
 <div class="uk-padding-remove-vertical">
-	<table class="uk-table uk-table-divider uk-table-responsive">
+	<table class="uk-table uk-table-divider uk-table-responsive uk-card-default">
 		<?php foreach ($this->items as $item)
 		{
 			$layout = ($item->isMeta) ? 'components.radicalmart.metas.' . $item->type . '.item.table'

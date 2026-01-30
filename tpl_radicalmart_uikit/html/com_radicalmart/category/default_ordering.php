@@ -14,17 +14,21 @@
 use Joomla\CMS\Language\Text;
 
 $options = [
-	'p.ordering ASC' => 'COM_RADICALMART_PRODUCTS_LIST_ORDERING_ORDERING',
-	'price ASC'      => 'COM_RADICALMART_PRODUCTS_LIST_ORDERING_PRICE_ASC',
-	'price DESC'     => 'COM_RADICALMART_PRODUCTS_LIST_ORDERING_PRICE_DESC',
-	'p.created DESC' => 'COM_RADICALMART_PRODUCTS_LIST_ORDERING_CREATED',
-	'p.title ASC'    => 'COM_RADICALMART_PRODUCTS_LIST_ORDERING_TITLE',
+		'ordering ASC'         => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_ORDERING',
+		'ordering_title ASC'   => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_TITLE_ASC',
+		'ordering_title DESC'  => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_TITLE_DESC',
+		'ordering_price ASC'   => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_PRICE_ASC',
+		'ordering_price DESC'  => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_PRICE_DESC',
+		'ordering_rating ASC'  => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_RATING_ASC',
+		'ordering_rating DESC' => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_RATING_DESC',
+		'ordering_date ASC'    => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_DATE_ASC',
+		'ordering_date DESC'   => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_DATE_DESC',
 ]
 ?>
 <select class="uk-select uk-form-width-medium" onchange="setProductsOrdering(this.value);">
 	<?php foreach ($options as $value => $text): ?>
 		<option value="<?php echo $value; ?>"
-			<?php if (strtolower($value) === strtolower($this->productsListOrdering)) echo 'selected'; ?>>
+				<?php if (strtolower($value) === strtolower($this->productsListOrdering)) echo 'selected'; ?>>
 			<?php echo Text::_($text); ?>
 		</option>
 	<?php endforeach; ?>

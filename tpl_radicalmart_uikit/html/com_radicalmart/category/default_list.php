@@ -14,10 +14,13 @@
 use Joomla\CMS\Layout\LayoutHelper;
 
 ?>
+
 <?php foreach ($this->items as $i => $item):
-	if ($i > 0) echo '<hr class="uk-margin-remove">';
 	$layout = 'components.radicalmart.products.item.list';
-	if ($item->isMeta) $layout = 'components.radicalmart.metas.' . $item->type . '.item.list';
+	if ($item->isMeta)
+	{
+		$layout = 'components.radicalmart.metas.' . $item->type . '.item.list';
+	}
 	?>
 	<div class="item-<?php echo $item->id; ?>">
 		<?php echo LayoutHelper::render($layout, ['product' => $item, 'mode' => $this->mode]); ?>

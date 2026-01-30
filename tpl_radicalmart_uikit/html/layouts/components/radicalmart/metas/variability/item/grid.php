@@ -27,58 +27,55 @@ extract($displayData);
  */
 $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empty($product->price['hide']));
 ?>
-<div class="product-block uk-transition-toggle">
-	<div class="uk-overflow-hidden">
-		<div class="uk-position-relative">
-			<a href="<?php echo $product->link; ?>"
-			   class="uk-height-medium uk-width-1-1 uk-flex uk-flex-center uk-flex-middle uk-transition-scale-up uk-transition-opaque ">
-				<?php echo MediaHelper::renderImage(
+<div class="product-block uk-cart uk-card-default uk-card-small">
+	<div class="uk-position-relative">
+		<a href="<?php echo $product->link; ?>" class="uk-card-media-top uk-text-center uk-display-block">
+			<?php echo MediaHelper::renderImage(
 					'com_radicalmart.metas.variability.grid',
 					$product->image,
 					[
-						'alt'     => $product->title,
-						'loading' => 'lazy',
-						'class'   => 'uk-height-max-medium'
+							'alt'     => $product->title,
+							'loading' => 'lazy',
+							'class'   => 'uk-height-max-medium'
 					],
 					[
-						'meta_id'  => $product->id,
-						'no_image' => true,
-						'thumb'    => true,
+							'meta_id'  => $product->id,
+							'no_image' => true,
+							'thumb'    => true,
 					]); ?>
-			</a>
-			<?php if (!empty($product->badges)): ?>
-				<ul class="uk-thumbnav uk-position-top-right uk-margin-small-top">
-					<?php foreach ($product->badges as $badge): ?>
-						<li>
-							<a href="<?php echo $badge->link; ?>" uk-tooltip
-							   title="<?php echo Text::sprintf('COM_RADICALMART_PRODUCT_BADGE_LINK', $badge->title); ?>">
-								<?php if ($src = $badge->media->get('icon'))
-								{
-									echo MediaHelper::renderImage(
+		</a>
+		<?php if (!empty($product->badges)): ?>
+			<ul class="uk-thumbnav uk-position-top-right uk-margin-small-top">
+				<?php foreach ($product->badges as $badge): ?>
+					<li>
+						<a href="<?php echo $badge->link; ?>" uk-tooltip
+						   title="<?php echo Text::sprintf('COM_RADICALMART_PRODUCT_BADGE_LINK', $badge->title); ?>">
+							<?php if ($src = $badge->media->get('icon'))
+							{
+								echo MediaHelper::renderImage(
 										'com_radicalmart.categories.badge',
 										$src,
 										[
-											'alt'     => $badge->title,
-											'loading' => 'lazy',
+												'alt'     => $badge->title,
+												'loading' => 'lazy',
 										],
 										[
-											'category_id' => $badge->id,
-											'no_image'    => false,
-											'thumb'       => true,
+												'category_id' => $badge->id,
+												'no_image'    => false,
+												'thumb'       => true,
 										]);
-								}
-								else
-								{
-									echo '<span class="uk-label">' . $badge->title . '</span>';
-								} ?>
-							</a>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
-		</div>
+							}
+							else
+							{
+								echo '<span class="uk-label">' . $badge->title . '</span>';
+							} ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
 	</div>
-	<div class="middle uk-margin-small">
+	<div class="uk-card-body">
 		<?php if ($product->category): ?>
 			<div>
 				<a href="<?php echo $product->category->link; ?>"
@@ -91,7 +88,7 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 			<a href="<?php echo $product->link; ?>" class="uk-link-reset"><?php echo $product->title; ?></a>
 		</div>
 	</div>
-	<div class="uk-flex uk-flex-bottom uk-flex-between uk-margin-small">
+	<div class="uk-card-footer uk-flex uk-flex-bottom uk-flex-between">
 		<?php if (!$hidePrice): ?>
 			<div>
 				<strong>
