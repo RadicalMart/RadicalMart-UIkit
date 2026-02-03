@@ -27,22 +27,26 @@ extract($displayData);
  */
 ?>
 
-<a href="#" style="width: 60px; height: 40px;">
-	<div class="uk-flex uk-background-muted uk-flex-middle uk-flex-center uk-padding-small uk-height-1-1 uk-width-1-1">
-		<?php echo MediaHelper::renderImage(
+<div class="uk-flex uk-flex-center uk-flex-middle uk-position-relative uk-overflow-hidden"
+	 style="height: 64px; width: 64px">
+	<div class="uk-position-cover uk-background-cover uk-background-center-center"
+		 style="background-image: url('<?php echo $item->src; ?>');
+				 filter: blur(14px) brightness(0.85);
+				 transform: scale(1.1);"></div>
+
+	<?php echo MediaHelper::renderImage(
 			'com_radicalmart.product.gallery.preview',
 			$item->src,
 			[
-				'alt'     => (!empty($item->alt)) ? $item->alt : $product->title,
-				'loading' => 'lazy',
-				'style'   => 'max-width: 100%; max-height:100%;'
+					'alt'     => (!empty($item->alt)) ? $item->alt : $product->title,
+					'loading' => 'lazy',
+					'style'   => 'max-width: 100%; max-height:100%;',
+					'class'   => 'uk-position-relative uk-position-z-index',
 			],
 			[
-				'product_id' => $product->id,
-				'no_image'   => true,
-				'thumb'      => true,
+					'product_id' => $product->id,
+					'no_image'   => true,
+					'thumb'      => true,
 			]);
-		?>
-	</div>
-</a>
-
+	?>
+</div>

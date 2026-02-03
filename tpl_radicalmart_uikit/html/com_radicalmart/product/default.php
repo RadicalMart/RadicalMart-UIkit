@@ -31,59 +31,55 @@ if ($this->params->get('trigger_js', 1))
 }
 ?>
 <div id="RadicalMart" class="product">
-	<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
-		<?php echo $this->params->get('seo_product_h1', $this->product->title); ?>
-	</h1>
-	<?php echo $this->product->event->afterDisplayTitle; ?>
-	<div class="uk-card uk-card-default">
+	<div class="uk-card uk-card-default uk-card-body uk-card-small">
 		<div class="uk-grid-divider uk-grid-small uk-child-width-expand@m" uk-grid>
-			<div class="uk-width-1-2@m">
-				<div class="uk-padding">
-					<?php echo $this->loadTemplate('gallery'); ?>
-					<?php if (!empty($this->product->badges)): ?>
-						<hr>
-						<div class="uk-margin">
-							<ul class="uk-thumbnav">
-								<?php foreach ($this->product->badges as $badge): ?>
-									<li>
-										<a href="<?php echo $badge->link; ?>" uk-tooltip
-										   title="<?php echo Text::sprintf('COM_RADICALMART_PRODUCT_BADGE_LINK', $badge->title); ?>">
-											<?php if ($src = $badge->media->get('icon'))
-											{
-												echo MediaHelper::renderImage(
+			<div class="uk-width-3-5@m">
+				<?php echo $this->loadTemplate('gallery'); ?>
+				<?php if (!empty($this->product->badges)): ?>
+					<hr>
+					<div class="uk-margin">
+						<ul class="uk-thumbnav">
+							<?php foreach ($this->product->badges as $badge): ?>
+								<li>
+									<a href="<?php echo $badge->link; ?>" uk-tooltip
+									   title="<?php echo Text::sprintf('COM_RADICALMART_PRODUCT_BADGE_LINK', $badge->title); ?>">
+										<?php if ($src = $badge->media->get('icon'))
+										{
+											echo MediaHelper::renderImage(
 													'com_radicalmart.categories.badge',
 													$src,
 													[
-														'alt'     => $badge->title,
-														'loading' => 'lazy',
+															'alt'     => $badge->title,
+															'loading' => 'lazy',
 													],
 													[
-														'category_id' => $badge->id,
-														'no_image'    => false,
-														'thumb'       => true,
+															'category_id' => $badge->id,
+															'no_image'    => false,
+															'thumb'       => true,
 													]);
-											}
-											else
-											{
-												echo '<span class="uk-label">' . $badge->title . '</span>';
-											} ?>
-										</a>
-									</li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
-					<?php endif; ?>
-				</div>
+										}
+										else
+										{
+											echo '<span class="uk-label">' . $badge->title . '</span>';
+										} ?>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				<?php endif; ?>
 			</div>
 			<div>
-				<div class="uk-padding">
-					<?php echo $this->loadTemplate('info'); ?>
-					<?php echo $this->loadTemplate('variability'); ?>
-					<?php echo $this->loadTemplate('buy'); ?>
-				</div>
+				<h1 class="uk-h2 uk-margin">
+					<?php echo $this->params->get('seo_product_h1', $this->product->title); ?>
+				</h1>
+				<?php echo $this->product->event->afterDisplayTitle; ?>
+				<?php echo $this->loadTemplate('info'); ?>
+				<?php echo $this->loadTemplate('variability'); ?>
+				<?php echo $this->loadTemplate('buy'); ?>
 			</div>
 		</div>
-		<hr class="uk-margin-remove-top">
+		<hr>
 		<?php if (!empty($this->modules['radicalmart-product-before-content'])): ?>
 			<div class="uk-margin">
 				<?php foreach ($this->modules['radicalmart-product-before-content'] as $module): ?>
@@ -109,7 +105,10 @@ if ($this->params->get('trigger_js', 1))
 					</li>
 					<?php if (!empty($this->product->fieldsets)): ?>
 						<?php foreach ($this->product->fieldsets as $fieldset):
-							if ($fieldset->alias === 'root') continue; ?>
+							if ($fieldset->alias === 'root')
+							{
+								continue;
+							} ?>
 							<li>
 								<a href="#fields_<?php echo $fieldset->alias; ?>">
 									<?php echo $fieldset->title; ?>
