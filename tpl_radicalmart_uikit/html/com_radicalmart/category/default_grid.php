@@ -22,7 +22,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 			$layout = 'components.radicalmart.metas.' . $item->type . '.item.grid';
 		}
 		?>
-		<div class="uk-width-1-3@s">
+		<div class="uk-width-1-3@m uk-width-1-2@s">
 			<?php echo LayoutHelper::render($layout, ['product' => $item, 'mode' => $this->mode]); ?>
 		</div>
 	<?php endforeach; ?>

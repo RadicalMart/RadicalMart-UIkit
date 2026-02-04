@@ -13,9 +13,10 @@
 
 use Joomla\CMS\Language\Text;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 if ($this->mode === 'shop')
 {
 	$assets->useScript('com_radicalmart.site.cart');
@@ -29,12 +30,21 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 
-$showAddition = ((!$this->pagination || (int) $this->pagination->pagesCurrent === 1) && empty($this->activeFilters));
+$showAddition = ((!$this->pagination || $this->pagination->pagesCurrent === 1) && empty($this->activeFilters));
 $filter       = (!empty($this->children));
 
+if ($this->productsListTemplate !== 'grid')
+{
+	$assets->addInlineScript("
+		const mql = window.matchMedia('(max-width: 959px)');
+		const apply = () => mql.matches && window.setProductsListTemplate('grid');
+		apply();
+		mql.addEventListener ? mql.addEventListener('change', apply) : mql.addListener(apply);
+	");
+}
 ?>
 <div id="RadicalMart" class="category">
-	<h1 class="uk-h2" radicalmart-ajax="title">
+	<h1 class="uk-h2 uk-margin" radicalmart-ajax="title">
 		<?php echo $this->params->get('seo_category_h1', $this->category->title); ?>
 	</h1>
 	<?php if (!empty($this->modules['radicalmart-category-before-introtext'])): ?>
@@ -67,7 +77,7 @@ $filter       = (!empty($this->children));
 		</div>
 	<?php endif; ?>
 	<?php if (!empty($this->children)): ?>
-		<div class="children uk-text-center">
+		<div class="children uk-margin">
 			<?php foreach ($this->children as $child): ?>
 				<a href="<?php echo $child->link; ?>"
 				   class="uk-button uk-button-small uk-button-default uk-margin-small-right uk-margin-small-bottom">
@@ -109,7 +119,7 @@ $filter       = (!empty($this->children));
 				 style="display: none">
 				<div uk-spinner="ratio: 3"></div>
 			</div>
-			<div class="uk-grid-small uk-flex-middle uk-margin" uk-grid>
+			<div class="uk-grid-small uk-flex-middle uk-margin-bottom" uk-grid>
 				<div class="uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
 					<?php echo $this->loadTemplate('ordering'); ?>
 				</div>
@@ -126,7 +136,7 @@ $filter       = (!empty($this->children));
 							<li class="">
 								<a class="uk-link <?php echo ($this->productsListTemplate === $layout) ? 'uk-text-primary' : ''; ?>"
 								   uk-icon="<?php echo $layout; ?>" uk-tooltip
-								   onclick="setProductsListTemplate('<?php echo $layout; ?>')"
+								   onclick="window.setProductsListTemplate('<?php echo $layout; ?>')"
 								   title="<?php echo Text::_('COM_RADICALMART_PRODUCTS_LIST_LAYOUT_' . $layout); ?>"></a>
 							</li>
 						<?php endforeach; ?>

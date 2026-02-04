@@ -11,15 +11,29 @@
 
 \defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
 ?>
 <div class="uk-padding-remove-vertical">
-	<table class="uk-table uk-table-divider uk-table-responsive uk-card-default">
+	<table class="uk-table uk-table-divider uk-table-small uk-table-striped uk-table-responsive uk-card-default">
+		<thead>
+		<tr>
+			<th class="uk-text-center">
+				<?php echo Text::_('COM_RADICALMART_PRODUCT'); ?>
+			</th>
+			<th>
+				<?php echo Text::_('COM_RADICALMART_CATEGORY'); ?>
+			</th>
+			<th  colspan="2">
+				<?php echo Text::_('COM_RADICALMART_PRICE'); ?>
+			</th>
+		</tr>
+		</thead>
 		<?php foreach ($this->items as $item)
 		{
 			$layout = ($item->isMeta) ? 'components.radicalmart.metas.' . $item->type . '.item.table'
-				: 'components.radicalmart.products.item.table';
+					: 'components.radicalmart.products.item.table';
 
 			echo LayoutHelper::render($layout, ['product' => $item, 'mode' => $this->mode]);
 		} ?>

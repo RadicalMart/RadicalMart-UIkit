@@ -12,8 +12,8 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\Component\RadicalMart\Administrator\Helper\ParamsHelper;
-use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
 extract($displayData);
 
@@ -25,55 +25,14 @@ extract($displayData);
  * @var  string $mode    RadicalMart mode.
  *
  */
+
 $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empty($product->price['hide']));
 ?>
-<div class="product-block uk-cart uk-card-default uk-card-small">
+<div class="product-block uk-cart uk-card-default uk-card-small"
+		<?php if (!$product->in_stock) echo 'style="opacity:0.5"'; ?>>
 	<div class="uk-position-relative">
-		<a href="<?php echo $product->link; ?>" class="uk-card-media-top uk-text-center uk-display-block">
-			<?php echo MediaHelper::renderImage(
-					'com_radicalmart.metas.variability.grid',
-					$product->image,
-					[
-							'alt'     => $product->title,
-							'loading' => 'lazy',
-							'class'   => 'uk-height-max-medium'
-					],
-					[
-							'meta_id'  => $product->id,
-							'no_image' => true,
-							'thumb'    => true,
-					]); ?>
-		</a>
-		<?php if (!empty($product->badges)): ?>
-			<ul class="uk-thumbnav uk-position-top-right uk-margin-small-top">
-				<?php foreach ($product->badges as $badge): ?>
-					<li>
-						<a href="<?php echo $badge->link; ?>" uk-tooltip
-						   title="<?php echo Text::sprintf('COM_RADICALMART_PRODUCT_BADGE_LINK', $badge->title); ?>">
-							<?php if ($src = $badge->media->get('icon'))
-							{
-								echo MediaHelper::renderImage(
-										'com_radicalmart.categories.badge',
-										$src,
-										[
-												'alt'     => $badge->title,
-												'loading' => 'lazy',
-										],
-										[
-												'category_id' => $badge->id,
-												'no_image'    => false,
-												'thumb'       => true,
-										]);
-							}
-							else
-							{
-								echo '<span class="uk-label">' . $badge->title . '</span>';
-							} ?>
-						</a>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		<?php endif; ?>
+		<?php echo LayoutHelper::render('components.radicalmart.items.image', $displayData);
+		echo LayoutHelper::render('components.radicalmart.items.badges', $displayData); ?>
 	</div>
 	<div class="uk-card-body">
 		<?php if ($product->category): ?>
@@ -89,16 +48,23 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 		</div>
 	</div>
 	<div class="uk-card-footer uk-flex uk-flex-bottom uk-flex-between">
-		<?php if (!$hidePrice): ?>
-			<div>
-				<strong>
-					<?php echo Text::sprintf('COM_RADICALMART_PRICE_FROM', $product->price['min_string']); ?>
-				</strong>
-			</div>
-		<?php endif; ?>
 		<div>
-			<a href="<?php echo $product->link; ?>"
-			   class="uk-button uk-button-primary">
+			<?php if (!$product->in_stock): ?>
+				<div>
+					<span class="uk-text-danger">
+						<?php echo Text::_('COM_RADICALMART_NOT_IN_STOCK'); ?>
+					</span>
+				</div>
+			<?php elseif (!$hidePrice): ?>
+				<div>
+					<strong>
+						<?php echo Text::sprintf('COM_RADICALMART_PRICE_FROM', $product->price['min_string']); ?>
+					</strong>
+				</div>
+			<?php endif; ?>
+		</div>
+		<div>
+			<a href="<?php echo $product->link; ?>" class="uk-button uk-button-primary">
 				<?php echo Text::_('COM_RADICALMART_SHOW_VARIANTS'); ?>
 			</a>
 		</div>
