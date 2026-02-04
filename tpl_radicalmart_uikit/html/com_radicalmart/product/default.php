@@ -14,9 +14,10 @@
 use Joomla\CMS\Language\Text;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Product\HtmlView $this */
+
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 if ($this->mode === 'shop')
 {
 	$assets->useScript('com_radicalmart.site.cart');
@@ -28,6 +29,18 @@ if ($this->mode === 'shop')
 if ($this->params->get('trigger_js', 1))
 {
 	$assets->useScript('com_radicalmart.site.trigger');
+}
+
+$hasTabs = false;
+foreach ($this->product->fieldsets as $fieldset)
+{
+	if ($fieldset->alias === 'root')
+	{
+		continue;
+	}
+
+	$hasTabs = true;
+	break;
 }
 ?>
 <div id="RadicalMart" class="product">
@@ -79,78 +92,95 @@ if ($this->params->get('trigger_js', 1))
 				<?php echo $this->loadTemplate('buy'); ?>
 			</div>
 		</div>
-		<hr>
-		<?php if (!empty($this->modules['radicalmart-product-before-content'])): ?>
-			<div class="uk-margin">
-				<?php foreach ($this->modules['radicalmart-product-before-content'] as $module): ?>
-					<div class="uk-margin">
-						<?php if ($module->showtitle): ?>
-							<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
-						<?php endif; ?>
-						<div><?php echo $module->render; ?></div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		<?php endif; ?>
+	</div>
 
-		<?php echo $this->product->event->beforeDisplayContent; ?>
+	<?php if (!empty($this->modules['radicalmart-product-before-content'])): ?>
+		<div class="uk-margin">
+			<?php foreach ($this->modules['radicalmart-product-before-content'] as $module): ?>
+				<div class="uk-margin">
+					<?php if ($module->showtitle): ?>
+						<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+					<?php endif; ?>
+					<div><?php echo $module->render; ?></div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 
-		<div id="ProductDescription" class="uk-padding">
-			<div class="uk-flex uk-flex-center">
-				<ul class="uk-subnav uk-subnav-pill js-product-switcher uk-flex-inline" uk-switcher="connect: .js-tabs">
+	<?php echo $this->product->event->beforeDisplayContent; ?>
+
+	<div id="ProductDescription" class="uk-margin">
+		<?php if ($hasTabs):
+			$overview = $this->loadTemplate('overview'); ?>
+			<ul class="uk-subnav uk-subnav-pill js-product-switcher uk-flex-inline"
+				uk-switcher="connect: .js-tabs">
+				<?php if (!empty($overview)): ?>
 					<li>
 						<a href="#ProductDescription" class="uk-active">
 							<?php echo Text::_('COM_RADICALMART_OVERVIEW'); ?>
 						</a>
 					</li>
+				<?php endif; ?>
+				<?php if (!empty($this->product->fieldsets)): ?>
+					<?php foreach ($this->product->fieldsets as $fieldset):
+						if ($fieldset->alias === 'root')
+						{
+							continue;
+						} ?>
+						<li>
+							<a href="#fields_<?php echo $fieldset->alias; ?>">
+								<?php echo $fieldset->title; ?>
+							</a>
+						</li>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</ul>
+			<div class="uk-card uk-card-default uk-card-body uk-card-small">
+				<div class="uk-switcher js-product-switcher js-tabs">
+					<?php if (!empty($overview)): ?>
+						<div><?php echo $overview; ?></div>
+					<?php endif; ?>
 					<?php if (!empty($this->product->fieldsets)): ?>
 						<?php foreach ($this->product->fieldsets as $fieldset):
 							if ($fieldset->alias === 'root')
 							{
 								continue;
 							} ?>
-							<li>
-								<a href="#fields_<?php echo $fieldset->alias; ?>">
-									<?php echo $fieldset->title; ?>
-								</a>
-							</li>
+							<div>
+								<?php foreach ($fieldset->fields as $field):
+									if (empty($field->value))
+									{
+										continue;
+									} ?>
+									<div class="uk-form-horizontal uk-margin-remove uk-clearfix">
+										<div class="uk-form-label"><?php echo $field->title; ?></div>
+										<div class="uk-form-controls uk-form-controls-text">
+											<?php echo $field->value; ?>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							</div>
 						<?php endforeach; ?>
 					<?php endif; ?>
-				</ul>
+				</div>
 			</div>
-			<div class="uk-switcher js-product-switcher js-tabs">
-				<div><?php echo $this->loadTemplate('overview'); ?></div>
-				<?php if (!empty($this->product->fieldsets)): ?>
-					<?php foreach ($this->product->fieldsets as $fieldset):
-						if ($fieldset->alias === 'root') continue; ?>
-						<div>
-							<?php foreach ($fieldset->fields as $field):
-								if (empty($field->value)) continue; ?>
-								<div class="uk-form-horizontal uk-margin-remove uk-clearfix">
-									<div class="uk-form-label"><?php echo $field->title; ?></div>
-									<div class="uk-form-controls uk-form-controls-text">
-										<?php echo $field->value; ?>
-									</div>
-								</div>
-							<?php endforeach; ?>
-						</div>
-					<?php endforeach; ?>
-				<?php endif; ?>
-			</div>
-		</div>
-		<?php if (!empty($this->modules['radicalmart-product-after-content'])): ?>
-			<div class="uk-margin">
-				<?php foreach ($this->modules['radicalmart-product-after-content'] as $module): ?>
-					<div class="uk-margin">
-						<?php if ($module->showtitle): ?>
-							<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
-						<?php endif; ?>
-						<div><?php echo $module->render; ?></div>
-					</div>
-				<?php endforeach; ?>
-			</div>
+		<?php else: ?>
+			<div><?php echo $this->loadTemplate('overview'); ?></div>
 		<?php endif; ?>
 	</div>
+
+	<?php if (!empty($this->modules['radicalmart-product-after-content'])): ?>
+		<div class="uk-margin">
+			<?php foreach ($this->modules['radicalmart-product-after-content'] as $module): ?>
+				<div class="uk-margin">
+					<?php if ($module->showtitle): ?>
+						<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+					<?php endif; ?>
+					<div><?php echo $module->render; ?></div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 
 	<?php echo $this->product->event->afterDisplayContent; ?>
 </div>

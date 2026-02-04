@@ -13,6 +13,8 @@
 
 use Joomla\CMS\Layout\LayoutHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Product\HtmlView $this */
+
 ?>
 <div uk-slideshow="animation: push">
 	<div class="uk-position-relative uk-visible-toggle" tabindex="-1">

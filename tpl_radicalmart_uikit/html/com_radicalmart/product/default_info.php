@@ -14,6 +14,8 @@
 use Joomla\CMS\Language\Text;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Product\HtmlView $this */
+
 ?>
 <?php if (!empty($this->product->categories)): ?>
 	<div class="categories uk-margin">
@@ -54,7 +56,8 @@ use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 		<?php endforeach; ?>
 	</div>
 <?php endif; ?>
-<?php if (!empty($this->product->fieldsets) && isset($this->product->fieldsets['root']) && !empty($this->product->fieldsets['root']->fields)): ?>
+<?php if (!empty($this->product->fieldsets) && isset($this->product->fieldsets['root'])
+		&& !empty($this->product->fieldsets['root']->fields)): ?>
 	<div class="product-main-fields uk-margin">
 		<?php foreach ($this->product->fieldsets['root']->fields as $field):
 			if (empty($field->value)) continue; ?>
@@ -77,17 +80,17 @@ use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 						<?php if ($src = $manufacturer->media->get('icon'))
 						{
 							echo MediaHelper::renderImage(
-								'com_radicalmart.categories.manufacturer',
-								$src,
-								[
-									'alt'     => $manufacturer->title,
-									'loading' => '$manufacturer',
-								],
-								[
-									'category_id' => $manufacturer->id,
-									'no_image'    => false,
-									'thumb'       => true,
-								]);
+									'com_radicalmart.categories.manufacturer',
+									$src,
+									[
+											'alt'     => $manufacturer->title,
+											'loading' => '$manufacturer',
+									],
+									[
+											'category_id' => $manufacturer->id,
+											'no_image'    => false,
+											'thumb'       => true,
+									]);
 						}
 						else
 						{

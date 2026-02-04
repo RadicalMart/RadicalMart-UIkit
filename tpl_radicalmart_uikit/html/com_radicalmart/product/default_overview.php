@@ -13,6 +13,13 @@
 
 use Joomla\CMS\Language\Text;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Product\HtmlView $this */
+
+if (empty($this->modules['radicalmart-product-after-content']) && empty($this->product->fulltext))
+{
+	return;
+}
+
 ?>
 <?php if (!empty($this->modules['radicalmart-product-before-overview'])): ?>
 	<div class="uk-margin">

@@ -14,7 +14,12 @@
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
-if ($this->params->get('hide_prices', 0) || !empty($this->product->price['hide'])) return;
+/** @var \Joomla\Component\RadicalMart\Site\View\Product\HtmlView $this */
+
+if ($this->params->get('hide_prices', 0) || !empty($this->product->price['hide']))
+{
+	return;
+}
 ?>
 <?php if (!empty($this->modules['radicalmart-product-before-price'])): ?>
 	<div class="uk-margin">
@@ -48,7 +53,7 @@ if ($this->params->get('hide_prices', 0) || !empty($this->product->price['hide']
 					if ($this->product->price['discount_end'])
 					{
 						echo ' ' . Text::_('COM_RADICALMART_PRICE_DISCOUNT_END') . ' '
-							. HTMLHelper::date($this->product->price['discount_end'], Text::_('DATE_FORMAT_LC6'));
+								. HTMLHelper::date($this->product->price['discount_end'], Text::_('DATE_FORMAT_LC6'));
 					}
 					?>
 				</div>
@@ -65,11 +70,11 @@ if ($this->params->get('hide_prices', 0) || !empty($this->product->price['hide']
 							   class="uk-input uk-form-width-small uk-text-center"
 							   step="<?php echo $this->product->quantity['step']; ?>"
 							   min="<?php echo $this->product->quantity['min']; ?>"
-							<?php if (!empty($this->product->quantity['max']))
-							{
-								echo 'max="' . $this->product->quantity['max'] . '"';
-							}
-							?>
+								<?php if (!empty($this->product->quantity['max']))
+								{
+									echo 'max="' . $this->product->quantity['max'] . '"';
+								}
+								?>
 							   value="<?php echo $this->product->quantity['min']; ?>"/>
 						<span class="uk-link uk-margin-small-left"
 							  uk-icon="icon: plus"
