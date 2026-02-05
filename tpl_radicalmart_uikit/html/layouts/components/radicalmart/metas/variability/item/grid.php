@@ -34,7 +34,7 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 		<?php echo LayoutHelper::render('components.radicalmart.items.image', $displayData);
 		echo LayoutHelper::render('components.radicalmart.items.badges', $displayData); ?>
 	</div>
-	<div class="uk-card-body">
+	<div class="uk-card-body middle">
 		<?php if ($product->category): ?>
 			<div>
 				<a href="<?php echo $product->category->link; ?>"

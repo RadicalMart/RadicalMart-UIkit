@@ -13,6 +13,8 @@
 
 use Joomla\CMS\Language\Text;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
 $options = [
 		'ordering ASC'         => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_ORDERING',
 		'ordering_title ASC'   => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_TITLE_ASC',

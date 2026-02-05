@@ -14,17 +14,17 @@
 use Joomla\CMS\Language\Text;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
+
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 if ($this->mode === 'shop')
 {
 	$assets->useScript('com_radicalmart.site.cart');
 	if ($this->params->get('radicalmart_js', 1))
 	{
-		$assets->useScript('com_radicalmart.site')
-			->useScript('bootstrap.toast')
-			->useScript('bootstrap.offcanvas');
+		$assets->useScript('com_radicalmart.site');
 	}
 }
 if ($this->params->get('trigger_js', 1))
@@ -32,57 +32,62 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 
+
 $showAddition = ((!$this->pagination || (int) $this->pagination->pagesCurrent === 1));
 ?>
 <div id="RadicalMart" class="category-manufacturer">
-	<div class="uk-child-width-expand@m uk-grid-small uk-margin" uk-grid="">
-		<div>
-			<h1 class="uk-h2 uk-margin uk-margin-remove-top" radicalmart-ajax="title">
-				<?php echo $this->params->get('seo_category_h1', $this->category->title); ?>
-			</h1>
-			<?php if (!empty($this->modules['radicalmart-category-before-introtext'])): ?>
-				<div class="uk-margin">
-					<?php foreach ($this->modules['radicalmart-category-before-introtext'] as $module): ?>
+	<div class="uk-card uk-card-default uk-card-small">
+		<div class="uk-child-width-expand@m uk-grid-small uk-margin" uk-grid="">
+			<div>
+				<div class="uk-card-body">
+					<h1 class="uk-h2 uk-margin uk-margin-remove-top" radicalmart-ajax="title">
+						<?php echo $this->params->get('seo_category_h1', $this->category->title); ?>
+					</h1>
+					<?php if (!empty($this->modules['radicalmart-category-before-introtext'])): ?>
 						<div class="uk-margin">
-							<?php if ($module->showtitle): ?>
-								<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
-							<?php endif; ?>
-							<div><?php echo $module->render; ?></div>
+							<?php foreach ($this->modules['radicalmart-category-before-introtext'] as $module): ?>
+								<div class="uk-margin">
+									<?php if ($module->showtitle): ?>
+										<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+									<?php endif; ?>
+									<div><?php echo $module->render; ?></div>
+								</div>
+							<?php endforeach; ?>
 						</div>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
-			<?php if (!empty($this->category->introtext)): ?>
-				<div class="info">
-					<?php echo $this->category->introtext; ?>
-				</div>
-			<?php endif; ?>
-			<?php if (!empty($this->modules['radicalmart-category-after-introtext'])): ?>
-				<div class="uk-margin">
-					<?php foreach ($this->modules['radicalmart-category-after-introtext'] as $module): ?>
+					<?php endif; ?>
+					<?php if (!empty($this->category->introtext)): ?>
+						<div class="info">
+							<?php echo $this->category->introtext; ?>
+						</div>
+					<?php endif; ?>
+					<?php if (!empty($this->modules['radicalmart-category-after-introtext'])): ?>
 						<div class="uk-margin">
-							<?php if ($module->showtitle): ?>
-								<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
-							<?php endif; ?>
-							<div><?php echo $module->render; ?></div>
+							<?php foreach ($this->modules['radicalmart-category-after-introtext'] as $module): ?>
+								<div class="uk-margin">
+									<?php if ($module->showtitle): ?>
+										<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
+									<?php endif; ?>
+									<div><?php echo $module->render; ?></div>
+								</div>
+							<?php endforeach; ?>
 						</div>
-					<?php endforeach; ?>
+					<?php endif; ?>
 				</div>
-			<?php endif; ?>
-		</div>
-		<div class="uk-width-1-4@m uk-visible@m">
-			<?php echo MediaHelper::renderImage(
-				'com_radicalmart.category.manufacturer',
-				$this->category->media->get('image', $this->category->media->get('icon')),
-				[
-					'alt'     => $this->category->title,
-					'loading' => 'lazy',
-				],
-				[
-					'category_id' => $this->category->id,
-					'no_image'    => true,
-					'thumb'       => true,
-				]); ?>
+			</div>
+			<div class="uk-width-1-4@m uk-visible@m">
+				<?php echo MediaHelper::renderImage(
+						'com_radicalmart.category.manufacturer',
+						$this->category->media->get('image', $this->category->media->get('icon')),
+						[
+								'alt'     => $this->category->title,
+								'loading' => 'lazy',
+						],
+						[
+								'category_id' => $this->category->id,
+								'no_image'    => true,
+								'thumb'       => true,
+						]); ?>
+			</div>
 		</div>
 	</div>
 	<div radicalmart-ajax="loading"
@@ -103,12 +108,10 @@ $showAddition = ((!$this->pagination || (int) $this->pagination->pagesCurrent ==
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>
-		<div class="uk-card uk-card-default">
+		<div radicalmart-ajax="products">
 			<?php if (empty($this->items)) : ?>
-				<div class="uk-card-body">
-					<div class="uk-alert uk-alert-warning">
-						<?php echo Text::_('COM_RADICALMART_ERROR_PRODUCTS_NOT_FOUND'); ?>
-					</div>
+				<div class="uk-alert uk-alert-warning">
+					<?php echo Text::_('COM_RADICALMART_ERROR_PRODUCTS_NOT_FOUND'); ?>
 				</div>
 			<?php else: ?>
 				<div class="products-list">
@@ -150,7 +153,7 @@ $showAddition = ((!$this->pagination || (int) $this->pagination->pagesCurrent ==
 			</div>
 		<?php endif; ?>
 		<?php if ($showAddition && !empty($this->category->fulltext)): ?>
-			<div class="fulltext uk-margin-medium">
+			<div class="fulltext uk-margin-medium uk-card uk-card-default uk-card-body">
 				<?php echo $this->category->fulltext; ?>
 			</div>
 		<?php endif; ?>

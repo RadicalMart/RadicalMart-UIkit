@@ -25,11 +25,12 @@ use Joomla\CMS\Layout\LayoutHelper;
 			<th>
 				<?php echo Text::_('COM_RADICALMART_CATEGORY'); ?>
 			</th>
-			<th  colspan="2">
+			<th colspan="2">
 				<?php echo Text::_('COM_RADICALMART_PRICE'); ?>
 			</th>
 		</tr>
 		</thead>
+		<tbody>
 		<?php foreach ($this->items as $item)
 		{
 			$layout = ($item->isMeta) ? 'components.radicalmart.metas.' . $item->type . '.item.table'
@@ -37,5 +38,6 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 			echo LayoutHelper::render($layout, ['product' => $item, 'mode' => $this->mode]);
 		} ?>
+		</tbody>
 	</table>
 </div>

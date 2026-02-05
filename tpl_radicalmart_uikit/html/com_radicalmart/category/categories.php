@@ -47,7 +47,7 @@ if ($this->params->get('trigger_js', 1))
 		</div>
 	<?php endif; ?>
 	<?php if (!empty($this->category->fulltext)): ?>
-		<div class="fulltext">
+		<div class="fulltext uk-margin-medium uk-card uk-card-default uk-card-body">
 			<?php echo $this->category->fulltext; ?>
 		</div>
 	<?php endif; ?>

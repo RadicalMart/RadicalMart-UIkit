@@ -12,6 +12,7 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\Component\RadicalMart\Administrator\Helper\ParamsHelper;
 
 if (empty($displayData) || !is_array($displayData) || empty($displayData['list']) || empty($displayData['list']['pages'])) return;
 
@@ -33,8 +34,10 @@ $firstDots = (!in_array(2, $numbers));
 $lastDots  = (!in_array($last - 1, $numbers));
 $lastShow  = (!in_array($last, $numbers));
 
-$list  = $displayData['list'];
-$pages = $list['pages'];
+$list   = $displayData['list'];
+$pages  = $list['pages'];
+$modern = ((int) ParamsHelper::getComponentParams()->get('modern_pagination', 0) === 1);
+
 ?>
 <div class="uk-flex uk-flex-middle uk-flex-between">
 	<div>
@@ -48,55 +51,61 @@ $pages = $list['pages'];
 				  title="<?php echo Text::_('COM_RADICALMART_PAGINATION_PREV'); ?>" uk-tooltip></span>
 		<?php endif; ?>
 	</div>
+
 	<div class="uk-text-center">
-		<ul class="uk-pagination uk-flex-center uk-margin-remove-bottom">
-			<?php if ($firstShow): ?>
-				<li>
-					<a href="<?php echo rtrim(str_replace('start=0', '', $pages['start']['data']->link), '?') ?>"
-					   title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', 1); ?>" uk-tooltip>
-						1
-					</a>
-				</li>
-			<?php endif; ?>
-			<?php if ($firstDots): ?>
-				<li class="uk-disabled"><span>...</span></li>
-			<?php endif; ?>
-			<?php foreach ($pages['pages'] as $number => $page): ?>
-				<?php
-				if (!in_array($number, $numbers))
-				{
-					continue;
-				} ?>
-				<?php if (!$page['data']->active): ?>
+		<?php if (!$modern): ?>
+			<ul class="uk-pagination uk-flex-center uk-margin-remove-bottom">
+				<?php if ($firstShow): ?>
 					<li>
-						<a href="<?php echo rtrim(str_replace('start=0', '', $page['data']->link), '?'); ?>"
-						   title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $number); ?>" uk-tooltip>
-							<?php echo $page['data']->text; ?>
+						<a href="<?php echo rtrim(str_replace('start=0', '', $pages['start']['data']->link), '?') ?>"
+						   title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', 1); ?>" uk-tooltip>
+							1
 						</a>
 					</li>
-				<?php else: ?>
-					<li class="uk-active">
-						<span title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $number); ?>" uk-tooltip>
-							<?php echo $page['data']->text; ?>
-						</span>
+				<?php endif; ?>
+				<?php if ($firstDots): ?>
+					<li class="uk-disabled"><span>...</span></li>
+				<?php endif; ?>
+				<?php foreach ($pages['pages'] as $number => $page): ?>
+					<?php
+					if (!in_array($number, $numbers))
+					{
+						continue;
+					} ?>
+					<?php if (!$page['data']->active): ?>
+						<li>
+							<a href="<?php echo rtrim(str_replace('start=0', '', $page['data']->link), '?'); ?>"
+							   title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $number); ?>" uk-tooltip>
+								<?php echo $page['data']->text; ?>
+							</a>
+						</li>
+					<?php else: ?>
+						<li class="uk-active">
+							<span title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $number); ?>"
+								  uk-tooltip>
+								<?php echo $page['data']->text; ?>
+							</span>
+						</li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				<?php if ($lastDots): ?>
+					<li class="uk-disabled"><span>...</span></li>
+				<?php endif; ?>
+				<?php if ($lastShow): ?>
+					<li>
+						<a href="<?php echo $pages['end']['data']->link ?>"
+						   title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $last); ?>" uk-tooltip>
+							<?php echo $last; ?>
+						</a>
 					</li>
 				<?php endif; ?>
-			<?php endforeach; ?>
-			<?php if ($lastDots): ?>
-				<li class="uk-disabled"><span>...</span></li>
-			<?php endif; ?>
-			<?php if ($lastShow): ?>
-				<li>
-					<a href="<?php echo $pages['end']['data']->link ?>"
-					   title="<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $last); ?>" uk-tooltip>
-						<?php echo $last; ?>
-					</a>
-				</li>
-			<?php endif; ?>
-		</ul>
-		<div class="uk-text-small uk-text-meta uk-text-center">
-			<?php echo $list['pagescounter']; ?>
-		</div>
+			</ul>
+			<div class="uk-text-small uk-text-meta uk-text-center">
+				<?php echo $list['pagescounter']; ?>
+			</div>
+		<?php else: ?>
+			<?php echo Text::sprintf('COM_RADICALMART_PAGINATION', $current); ?>
+		<?php endif; ?>
 	</div>
 	<div>
 		<?php if ($pages['next']['active']): ?>

@@ -13,6 +13,8 @@
 
 use Joomla\CMS\Layout\LayoutHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
 ?>
 <div uk-grid uk-height-match="target: > div > .product-block .middle">
 	<?php foreach ($this->items as $item):

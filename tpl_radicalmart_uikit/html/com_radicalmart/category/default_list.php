@@ -13,6 +13,8 @@
 
 use Joomla\CMS\Layout\LayoutHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
 ?>
 
 <?php foreach ($this->items as $i => $item):

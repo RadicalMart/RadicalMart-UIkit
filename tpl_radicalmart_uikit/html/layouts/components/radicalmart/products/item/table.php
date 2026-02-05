@@ -62,7 +62,7 @@ if (!$hidePrice && $product->in_stock)
 							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
-					<div class="uk-h4 uk-margin-remove">
+					<div class="uk-h5 uk-margin-remove">
 						<a href="<?php echo $product->link; ?>"
 						   class="uk-link-reset"><?php echo $product->title; ?></a>
 					</div>
