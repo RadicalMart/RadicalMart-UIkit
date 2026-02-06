@@ -39,8 +39,16 @@ $this->getDocument()->getWebAssetManager()
 		->useScript('com_radicalmart.site.variability');
 ?>
 <div radicalmart-variability="<?php echo $jsSelector; ?>">
-	<?php foreach ($this->variabilityForm->getFieldsets() as $fieldset)
-	{
-		echo $this->variabilityForm->renderFieldset($fieldset->name);
-	} ?>
+	<?php foreach ($this->variabilityForm->getGroup('') as $field):
+		$group = $field->__get('group');
+		$name = $field->__get('fieldname'); ?>
+		<div class="uk-form-horizontal uk-margin-small uk-clearfix">
+			<div class="uk-form-label">
+				<?php echo $this->variabilityForm->getLabel($name, $group); ?>
+			</div>
+			<div class="uk-form-controls uk-form-controls-text">
+				<?php echo $this->variabilityForm->getInput($name, $group); ?>
+			</div>
+		</div>
+	<?php endforeach; ?>
 </div>

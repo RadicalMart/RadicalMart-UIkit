@@ -25,18 +25,16 @@ extract($displayData);
  * @var object  $category Product category object.
  *
  */
-?>
 
+
+?>
 <div class="uk-flex uk-flex-center uk-flex-middle uk-position-relative uk-overflow-hidden"
 	 style="height: 64px; width: 64px">
 	<div class="uk-position-cover uk-background-cover uk-background-center-center"
 		 style="background-image: url('<?php echo $item->src; ?>');
 				 filter: blur(14px) brightness(0.85);
 				 transform: scale(1.1);"></div>
-
-	<?php echo MediaHelper::renderImage(
-			'com_radicalmart.product.gallery.preview',
-			$item->src,
+	<?php echo MediaHelper::renderImage('com_radicalmart.product.gallery.preview', $item->src,
 			[
 					'alt'     => (!empty($item->alt)) ? $item->alt : $product->title,
 					'loading' => 'lazy',

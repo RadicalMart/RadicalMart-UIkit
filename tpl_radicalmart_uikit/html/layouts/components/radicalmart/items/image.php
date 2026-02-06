@@ -26,7 +26,7 @@ extract($displayData);
  * @var  string $width_class  Sting uikit height class (uk-height-medium as default)
  */
 
-$blur = (!empty($product->image)) ? $product->image
+$blur = (!empty($product->image)) ? HTMLHelper::image($product->image, '', [], false, true)
 		: HTMLHelper::image('com_radicalmart/no-image.svg', '', [], true, true);
 
 $style = '';

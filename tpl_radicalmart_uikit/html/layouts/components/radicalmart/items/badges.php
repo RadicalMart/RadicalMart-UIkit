@@ -30,10 +30,10 @@ if (empty($product->badges))
 	return;
 }
 ?>
-<div class="uk-position-top-right uk-position-z-index">
+<div class="uk-position-top-left uk-position-z-index">
 	<?php foreach ($product->badges as $badge): ?>
 		<a href="<?php echo $badge->link; ?>" uk-tooltip
-		   class="uk-display-inline-block uk-margin-small-top uk-margin-small-right"
+		   class="uk-display-inline-block uk-margin-small-top uk-margin-small-left"
 		   style="height: 45px; width: 45px"
 		   title="<?php echo Text::sprintf('COM_RADICALMART_PRODUCT_BADGE_LINK', $badge->title); ?>">
 			<?php if ($src = $badge->media->get('icon'))
