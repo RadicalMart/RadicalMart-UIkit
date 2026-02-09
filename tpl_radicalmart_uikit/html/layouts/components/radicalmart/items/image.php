@@ -20,17 +20,18 @@ extract($displayData);
  *
  * @var  object $product      Product object.
  * @var  string $mode         RadicalMart mode.
- * @var int     $height_px    Int height value in px
- * @var int     $width_px     Int width value in px
+ * @var  int    $height_px    Int height value in px
+ * @var  int    $width_px     Int width value in px
  * @var  string $height_class Sting uikit height class (uk-height-medium as default)
  * @var  string $width_class  Sting uikit height class (uk-height-medium as default)
+ * @var  bool   $link         Is link block
  */
 
 $blur = (!empty($product->image)) ? HTMLHelper::image($product->image, '', [], false, true)
 		: HTMLHelper::image('com_radicalmart/no-image.svg', '', [], true, true);
 
 $style = '';
-$class = '';
+$class = 'uk-flex uk-flex-center uk-flex-middle uk-position-relative uk-overflow-hidden ';
 if (!empty($height_px))
 {
 	$style .= ' height: ' . $height_px . 'px;';
@@ -57,25 +58,51 @@ else
 	$class .= ' uk-width-1-1';
 }
 
+if (!isset($link))
+{
+	$link = $product->link;
+}
+
+
 ?>
-<a href="<?php echo $product->link; ?>"
-   class="uk-flex uk-flex-center uk-flex-middle uk-position-relative uk-overflow-hidden <?php echo $class; ?>"
-   style="<?php echo $style; ?>">
-	<div class="uk-position-cover uk-background-cover uk-background-center-center" style="
-			background-image: url('<?php echo $blur; ?>');
-			filter: blur(14px) brightness(0.85);
-			transform: scale(1.1);"></div>
-	<?php echo MediaHelper::renderImage(
-			'com_radicalmart.metas.variability.grid', $product->image,
-			[
-					'alt'     => $product->title,
-					'loading' => 'lazy',
-					'style'   => 'max-width: 100%; max-height:100%;',
-					'class'   => 'uk-position-relative uk-position-z-index',
-			],
-			[
-					'meta_id'  => $product->id,
-					'no_image' => true,
-					'thumb'    => true,
-			]); ?>
-</a>
+<?php if (!empty($link)) : ?>
+	<a href="<?php echo $link; ?>" class="<?php echo $class; ?>" style="<?php echo $style; ?>">
+		<div class="uk-position-cover uk-background-cover uk-background-center-center" style="
+				background-image: url('<?php echo $blur; ?>');
+				filter: blur(14px) brightness(0.85);
+				transform: scale(1.1);"></div>
+		<?php echo MediaHelper::renderImage(
+				'com_radicalmart.metas.variability.grid', $product->image,
+				[
+						'alt'     => $product->title,
+						'loading' => 'lazy',
+						'style'   => 'max-width: 100%; max-height:100%;',
+						'class'   => 'uk-position-relative uk-position-z-index',
+				],
+				[
+						'meta_id'  => $product->id,
+						'no_image' => true,
+						'thumb'    => true,
+				]); ?>
+	</a>
+<?php else: ?>
+	<div class="<?php echo $class; ?>" style="<?php echo $style; ?>">
+		<div class="uk-position-cover uk-background-cover uk-background-center-center" style="
+				background-image: url('<?php echo $blur; ?>');
+				filter: blur(14px) brightness(0.85);
+				transform: scale(1.1);"></div>
+		<?php echo MediaHelper::renderImage(
+				'com_radicalmart.metas.variability.grid', $product->image,
+				[
+						'alt'     => $product->title,
+						'loading' => 'lazy',
+						'style'   => 'max-width: 100%; max-height:100%;',
+						'class'   => 'uk-position-relative uk-position-z-index',
+				],
+				[
+						'meta_id'  => $product->id,
+						'no_image' => true,
+						'thumb'    => true,
+				]); ?>>
+	</div>
+<?php endif; ?>

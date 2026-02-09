@@ -12,6 +12,7 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 
 extract($displayData);
 
@@ -26,17 +27,25 @@ extract($displayData);
  */
 ?>
 <div radicalmart-cart-layout="notification_add">
-	<div id="radicalmartCartNotificationAdd" class="uk-flex-top" uk-modal="container:false">
-		<div class="uk-modal-dialog uk-margin-auto-vertical">
-			<div class="uk-modal-body uk-text-center">
-				<div class="uk-h2"><?php echo Text::_('COM_RADICALMART_CART_NOTIFICATION_ADD'); ?></div>
-				<div>
-					<a class="uk-modal-close uk-button uk-button-default">
-						<?php echo Text::_('COM_RADICALMART_CONTINUE_SHOPPING'); ?></a>
-					<a href="<?php echo $cart->link; ?>" class="uk-button uk-button-primary">
-						<?php echo Text::_('COM_RADICALMART_CHECKOUT'); ?></a>
+	<div id="radicalmart_cart_notification_add" style="display: none !important;">
+		<a href="<?php echo $cart->link; ?>" class="uk-flex uk-flex-middle uk-grid-small uk-child-width-expand
+		uk-link-reset uk-text-decoration-none uk-text-normal">
+			<div class="uk-width-auto">
+				<?php echo LayoutHelper::render('components.radicalmart.items.image', [
+						'product'   => $product,
+						'link'      => false,
+						'height_px' => 64,
+						'width_px'  => 64,
+				]); ?>
+			</div>
+			<div>
+				<div class="uk-text-meta">
+					<?php echo Text::_('COM_RADICALMART_CART_NOTIFICATION_ADD'); ?>
+				</div>
+				<div class="uk-h5 uk-margin-remove-top uk-margin-small-bottom">
+					<?php echo $product->title ?>
 				</div>
 			</div>
-		</div>
+		</a>
 	</div>
 </div>

@@ -12,7 +12,6 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
 extract($displayData);
 
@@ -25,7 +24,7 @@ extract($displayData);
  */
 ?>
 <div radicalmart-cart-layout="module">
-	<div id="radicalmartCartModule" uk-offcanvas="flip: true; overlay: true">
+	<div id="radicalmart_cart_module" uk-offcanvas="flip: true; overlay: true">
 		<div class="uk-offcanvas-bar uk-padding-remove">
 			<div class="uk-flex uk-flex-column uk-height-1-1">
 				<div>
@@ -48,76 +47,61 @@ extract($displayData);
 				</div>
 				<?php if ($cart && !empty($cart->products)): ?>
 					<div class="uk-flex uk-flex-column uk-overflow-auto" style="flex-grow: 1">
-						<div class="uk-padding-small">
-							<ul class="uk-list uk-list-divider">
-								<?php foreach ($cart->products as $p => $product): ?>
-									<li radicalmart-cart="product" class="uk-text-small"
-										data-id="<?php echo $product->id; ?>"
-										data-key="<?php echo $p; ?>"
-										data-cart-product="1">
-										<div class="uk-grid-small uk-child-width-expand" uk-grid>
-											<div class="uk-width-1-4">
+						<table class="uk-table uk-table-divider uk-table-middle uk-table-small uk-table-striped">
+							<tbody>
+							<?php foreach ($cart->products as $product_key => $product): ?>
+								<tr radicalmart-cart="product"
+									data-id="<?php echo $product->id; ?>"
+									data-key="<?php echo $product_key; ?>"
+									data-cart-product="1">
+									<td>
+										<div class="">
+											<?php if ($product->category): ?>
+												<div class="uk-text-small">
+													<a href="<?php echo $product->category->link; ?>"
+													   class="uk-text-nowrap uk-link-muted">
+														<?php echo $product->category->title; ?>
+													</a>
+												</div>
+											<?php endif; ?>
+											<div class="">
 												<a href="<?php echo $product->link; ?>"
-												   class="uk-height-max-small uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
-													<?php echo MediaHelper::renderImage(
-														'com_radicalmart.products.cart.module',
-														$product->image,
-														[
-															'alt'     => $product->title,
-															'loading' => 'lazy',
-															'class'   => 'uk-height-max-medium'
-														],
-														[
-															'product_id' => $product->id,
-															'no_image'   => true,
-															'thumb'      => true,
-														]); ?>
-												</a>
+												   class="uk-link-reset"><?php echo $product->title; ?></a>
 											</div>
-											<div class="uk-position-relative">
-												<span class="uk-link uk-text-danger uk-position-top-right"
-													  radicalmart-cart="remove" uk-close=""></span>
-												<?php if ($product->category): ?>
-													<div>
-														<a href="<?php echo $product->category->link; ?>"
-														   class="uk-text-nowrap uk-link-muted">
-															<?php echo $product->category->title; ?>
-														</a>
-													</div>
-												<?php endif; ?>
-												<div>
-													<a href="<?php echo $product->link; ?>"
-													   class="uk-link-reset"><?php echo $product->title; ?></a>
+											<?php if (!empty($product->extra_display)): ?>
+												<div class="uk-flex uk-flex-wrap">
+													<?php foreach ($product->extra_display as $extra):
+														if (empty($extra) || empty($extra['html']))
+														{
+															continue;
+														}
+														?>
+														<div class="uk-margin-small-right uk-margin-small-bottom">
+															<?php echo $extra['html']; ?>
+														</div>
+													<?php endforeach; ?>
 												</div>
-												<?php if (!empty($product->extra_display)): ?>
-													<div class="uk-flex uk-flex-wrap">
-														<?php foreach ($product->extra_display as $extra):
-															if (empty($extra) || empty($extra['html']))
-															{
-																continue;
-															}
-															?>
-															<div class="uk-margin-small-right uk-margin-small-bottom">
-																<?php echo $extra['html']; ?>
-															</div>
-														<?php endforeach; ?>
-													</div>
-												<?php endif; ?>
-											</div>
-											<div class="uk-flex uk-flex-wrap uk-flex-between">
-												<div class="uk-text-muted uk-margin-right">
-													<?php echo $product->order['quantity'] . ' x '
-														. $product->order['final_string']; ?>
-												</div>
-												<div class="uk-text-bold">
-													<?php echo $product->order['sum_final_string']; ?>
-												</div>
-											</div>
+											<?php endif; ?>
 										</div>
-									</li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
+									</td>
+									<td class="uk-text-right">
+										<div class="uk-text-muted uk-text-nowrap">
+											<?php echo $product->order['quantity'] . ' x '
+													. $product->order['final_string']; ?>
+										</div>
+										<div class="uk-text-bold uk-text-nowrap">
+											<?php echo $product->order['sum_final_string']; ?>
+										</div>
+									</td>
+									<td>
+										<a href class="uk-link uk-text-danger"
+										   style="width: 1rem"
+										   radicalmart-cart="remove" uk-close></a>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+							</tbody>
+						</table>
 					</div>
 					<div>
 						<hr class="uk-margin-remove">

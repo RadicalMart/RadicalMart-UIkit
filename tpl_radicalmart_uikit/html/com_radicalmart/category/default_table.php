@@ -16,7 +16,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 ?>
 <div class="uk-padding-remove-vertical">
-	<table class="uk-table uk-table-divider uk-table-small uk-table-striped uk-table-responsive uk-card-default">
+	<table class="uk-table uk-table-divider uk-table-small uk-table-striped uk-card-default">
 		<thead>
 		<tr>
 			<th class="uk-text-center">
