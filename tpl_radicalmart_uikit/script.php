@@ -13,9 +13,6 @@
 
 use Joomla\CMS\Application\AdministratorApplication;
 use Joomla\CMS\Factory;
-use Joomla\CMS\Filesystem\File;
-use Joomla\CMS\Filesystem\Folder;
-use Joomla\CMS\Filesystem\Path;
 use Joomla\CMS\Installer\InstallerAdapter;
 use Joomla\CMS\Installer\InstallerScriptInterface;
 use Joomla\CMS\Language\Text;
@@ -24,9 +21,11 @@ use Joomla\CMS\Version;
 use Joomla\Database\DatabaseDriver;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
+use Joomla\Filesystem\Folder;
+use Joomla\Filesystem\Path;
 
 return new class () implements ServiceProviderInterface {
-	public function register(Container $container)
+	public function register(Container $container): void
 	{
 		$container->set(InstallerScriptInterface::class, new class ($container->get(AdministratorApplication::class)) implements InstallerScriptInterface {
 			/**
@@ -121,7 +120,7 @@ return new class () implements ServiceProviderInterface {
 				{
 					// Remove old files
 					$path = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit');
-					if (Folder::exists($path))
+					if (is_dir($path))
 					{
 						Folder::delete($path);
 					}
@@ -172,7 +171,7 @@ return new class () implements ServiceProviderInterface {
 					foreach ($sources as $src)
 					{
 						$files = [];
-						if (strpos($src, $media_src) !== false)
+						if (str_contains($src, $media_src))
 						{
 							$dest    = Path::clean(str_replace($media_src, $media_dest, $src));
 							$files[] = [
@@ -181,22 +180,17 @@ return new class () implements ServiceProviderInterface {
 								'type' => 'file',
 							];
 
-							$dest    = Path::clean(str_replace($media_src, $root_dest, $src));
-							$files[] = [
-								'src'  => Path::clean($src),
-								'dest' => $dest,
-								'type' => 'file',
-							];
+							$dest = Path::clean(str_replace($media_src, $root_dest, $src));
 						}
 						else
 						{
-							$dest    = Path::clean(str_replace($root_src, $root_dest, $src));
-							$files[] = [
-								'src'  => Path::clean($src),
-								'dest' => $dest,
-								'type' => 'file',
-							];
+							$dest = Path::clean(str_replace($root_src, $root_dest, $src));
 						}
+						$files[] = [
+							'src'  => Path::clean($src),
+							'dest' => $dest,
+							'type' => 'file',
+						];
 
 						foreach ($files as $file)
 						{
@@ -211,7 +205,7 @@ return new class () implements ServiceProviderInterface {
 								}
 							}
 
-							if (File::exists($file['dest']))
+							if (is_file($file['dest']))
 							{
 								$overrideFiles[] = '<code>' .
 									str_replace(JPATH_ROOT . '/', '/', $file['dest']) . '</code>';
@@ -240,6 +234,8 @@ return new class () implements ServiceProviderInterface {
 
 					return $result;
 				}
+
+				return true;
 			}
 		});
 	}
