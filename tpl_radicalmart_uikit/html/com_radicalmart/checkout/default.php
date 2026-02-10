@@ -18,6 +18,8 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\Component\RadicalMart\Site\Helper\RouteHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Checkout\HtmlView $this */
+
 // Check products errors
 $app = Factory::getApplication();
 if (empty($this->cart) || !empty($this->productsErrors))
@@ -36,9 +38,9 @@ if (empty($this->cart) || !empty($this->productsErrors))
 
 // Load assets
 /** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 $assets->useScript('com_radicalmart.site.checkout')
-	->useScript('keepalive');
+		->useScript('keepalive');
 
 if ($this->params->get('radicalmart_js', 1))
 {
@@ -50,41 +52,69 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 
+function setUikitFormClasses(\Joomla\CMS\Form\Form $form): void
+{
+	/** @var Joomla\CMS\Form\FormFactory $formFactory */
+	$formFactory = Factory::getContainer()->get(\Joomla\CMS\Form\FormFactoryInterface::class);
+	foreach ($form->getGroup('') as $field)
+	{
+		$name     = $field->__get('fieldname');
+		$group    = $field->__get('group');
+		$setClass = null;
+		if ($field instanceof Joomla\CMS\Form\Field\TextareaField)
+		{
+			$setClass .= ' uk-textarea';
+		}
+		elseif ($field instanceof Joomla\CMS\Form\Field\CheckboxesField)
+		{
+			continue;
+		}
+		elseif ($field instanceof Joomla\CMS\Form\Field\CheckboxField)
+		{
+			$setClass .= ' uk-checkbox';
+		}
+		elseif ($field instanceof Joomla\CMS\Form\Field\RangeField)
+		{
+			$setClass .= ' uk-range';
+		}
+		elseif ($field instanceof Joomla\CMS\Form\Field\ListField)
+		{
+			$setClass .= ' uk-select';
+		}
+		elseif ($field instanceof Joomla\CMS\Form\Field\RadioField)
+		{
+			$setClass .= ' uk-radio';
+		}
+		elseif ($field instanceof Joomla\CMS\Form\Field\TextField)
+		{
+			$setClass .= ' uk-input';
+		}
+		elseif ($field instanceof Joomla\CMS\Form\Field\SubformField)
+		{
+			$source  = $field->__get('formsource');
+			$subform = $formFactory->createForm($form->getName() . '.subform.' . '.' . $group . '.' . $name);
+			$subform->load($source);
+
+			setUikitFormClasses($subform);
+
+			$form->setFieldAttribute($name, 'formsource', $subform->getXml()->asXML(), $group);
+		}
+
+		$class = $field->getAttribute('class');
+		if ($setClass && !str_contains($class, $setClass))
+		{
+			$class .= ' ' . $setClass;
+			$form->setFieldAttribute($name, 'class', $class, $group);
+		}
+	}
+}
+
+setUikitFormClasses($this->form);
+
 $hasConsents = false;
 $others      = [];
 foreach ($this->form->getFieldsets() as $key => $fieldset)
 {
-	foreach ($this->form->getFieldset($key) as $field)
-	{
-		$name  = $field->fieldname;
-		$group = $field->group;
-		$type  = strtolower($field->type);
-		$class = $this->form->getFieldAttribute($name, 'class', '', $group);
-		$input = $field->input;
-		if ($type === 'subform')
-		{
-			continue;
-		}
-		if ($type === 'text' || $type === 'email')
-		{
-			$class .= ' uk-input';
-		}
-		elseif ($type === 'list' || preg_match('#<select#', $input))
-		{
-			$class .= ' uk-select';
-		}
-		elseif ($type === 'textarea' || preg_match('#<textarea#', $input))
-		{
-			$class .= ' uk-textarea';
-		}
-		elseif ($type === 'range')
-		{
-			$class .= ' uk-range';
-		}
-
-		$this->form->setFieldAttribute($name, 'class', $class, $group);
-	}
-
 	if ($key === 'consents')
 	{
 		$hasConsents = true;
@@ -95,7 +125,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 		$others[$key] = $fieldset;
 	}
 }
-$i = 1;
+$i = 0;
 ?>
 <div id="RadicalMart" class="checkout">
 	<?php if (empty($this->item) || empty($this->item->products)): ?>
@@ -104,9 +134,9 @@ $i = 1;
 		</h1>
 		<div class="uk-text-muted uk-text-center"><?php echo Text::_('COM_RADICALMART_CART_EMPTY_DESC'); ?></div>
 	<?php else: ?>
-		<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center">
+		<h1 class="uk-h2 uk-margin uk-margin-remove-top">
 			<?php echo $this->params->get('seo_checkout_h1',
-				($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_CHECKOUT')); ?>
+					($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_CHECKOUT')); ?>
 		</h1>
 		<div radicalmart-checkout="loading"
 			 class="uk-position-fixed uk-position-cover uk-overlay-default uk-flex uk-position-z-index uk-flex-center uk-flex-middle"
@@ -133,13 +163,21 @@ $i = 1;
 						</div>
 					<?php endif; ?>
 					<?php if ($contactsFields = $this->form->renderFieldset('contacts')): ?>
-						<div id="checkout_contacts" class="uk-margin">
-							<h2>
-								<span class="uk-text-muted"><?php echo $i;
-									$i++; ?>. </span>
-								<?php echo Text::_('COM_RADICALMART_CONTACTS'); ?>
-							</h2>
-							<div class="uk-card uk-card-default uk-card-body uk-card-small">
+						<div id="checkout_contacts"
+							 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
+							<div class="uk-card-header">
+								<h2 class="uk-margin-remove uk-h4">
+									<?php echo Text::_('COM_RADICALMART_CONTACTS'); ?>
+								</h2>
+							</div>
+							<div id="checkout_contacts_loading"
+								 class="uk-position-cover uk-position-z-index
+									 uk-flex uk-flex-center uk-flex-middle
+									 uk-overlay-default"
+								 style="display: none">
+								<div uk-spinner="ratio: 3"></div>
+							</div>
+							<div class="uk-card-body">
 								<div class="uk-child-width-1-2@s" uk-grid>
 									<?php echo $contactsFields; ?>
 								</div>
@@ -147,27 +185,30 @@ $i = 1;
 						</div>
 					<?php endif; ?>
 					<?php if ($this->item->shippingMethods): ?>
-						<div id="checkout_shipping" class="uk-margin">
-							<h2>
-								<span class="uk-text-muted"><?php echo $i;
-									$i++; ?>.</span>
-								<?php echo Text::_('COM_RADICALMART_SHIPPING'); ?>
-							</h2>
-							<div class="uk-position-relative uk-card uk-card-default uk-card-body uk-card-small">
+						<div id="checkout_shipping"
+							 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
+							<div class="uk-card-header">
+								<h2 class="uk-margin-remove uk-h4">
+									<?php echo Text::_('COM_RADICALMART_SHIPPING'); ?>
+								</h2>
+							</div>
+							<div id="checkout_shipping_loading"
+								 class="uk-position-cover uk-position-z-index
+									 uk-flex uk-flex-center uk-flex-middle
+									 uk-overlay-default"
+								 style="display: none">
+								<div uk-spinner="ratio: 3"></div>
+							</div>
+							<div class="uk-card-body">
 								<div><?php echo $this->form->getInput('id', 'shipping'); ?></div>
-								<div id="checkout_shipping_loading"
-									 class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-overlay-default"
-									 style="display: none">
-									<div uk-spinner="ratio: 3"></div>
-								</div>
 								<?php
 								$content = null;
 								if (!empty($this->item->shipping->layout))
 								{
 									$content = LayoutHelper::render($this->item->shipping->layout, [
-										'item'     => $this->item,
-										'form'     => $this->form,
-										'shipping' => $this->item->shipping,
+											'item'     => $this->item,
+											'form'     => $this->form,
+											'shipping' => $this->item->shipping,
 									]);
 								}
 								else
@@ -176,7 +217,7 @@ $i = 1;
 									if (!empty($fieldset))
 									{
 										$content = '<div class="uk-child-width-1-2@s" uk-grid>'
-											. $fieldset . '</div>';
+												. $fieldset . '</div>';
 									}
 								} ?>
 								<?php if (!empty($content)): ?>
@@ -188,27 +229,30 @@ $i = 1;
 						</div>
 					<?php endif; ?>
 					<?php if ($this->item->paymentMethods): ?>
-						<div id="checkout_payment" class="uk-margin">
-							<h2>
-								<span class="uk-text-muted"><?php echo $i;
-									$i++; ?>.</span>
-								<?php echo Text::_('COM_RADICALMART_PAYMENT'); ?>
-							</h2>
-							<div class="uk-position-relative uk-card uk-card-default uk-card-body uk-card-small">
+						<div id="checkout_payment"
+							 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
+							<div class="uk-card-header">
+								<h2 class="uk-margin-remove uk-h4">
+									<?php echo Text::_('COM_RADICALMART_PAYMENT'); ?>
+								</h2>
+							</div>
+							<div id="checkout_payment_loading"
+								 class="uk-position-cover uk-position-z-index
+									 uk-flex uk-flex-center uk-flex-middle
+									 uk-overlay-default"
+								 style="display: none">
+								<div uk-spinner="ratio: 3"></div>
+							</div>
+							<div class="uk-card-body">
 								<div><?php echo $this->form->getInput('id', 'payment'); ?></div>
-								<div id="checkout_payment_loading"
-									 class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-overlay-default"
-									 style="display: none">
-									<div uk-spinner="ratio: 3"></div>
-								</div>
 								<?php
 								$content = null;
 								if (!empty($this->item->payment->layout))
 								{
 									$content = LayoutHelper::render($this->item->payment->layout, [
-										'item'    => $this->item,
-										'form'    => $this->form,
-										'payment' => $this->item->payment,
+											'item'    => $this->item,
+											'form'    => $this->form,
+											'payment' => $this->item->payment,
 									]);
 								}
 								else
@@ -217,7 +261,7 @@ $i = 1;
 									if (!empty($fieldset))
 									{
 										$content = '<div class="uk-child-width-1-2@s" uk-grid>'
-											. $fieldset . '</div>';
+												. $fieldset . '</div>';
 									}
 								} ?>
 								<?php if (!empty($content)): ?>
@@ -227,7 +271,7 @@ $i = 1;
 								<?php endif; ?>
 								<?php if ($this->item->payment->params->get('billing', 0)): ?>
 									<div id="checkout_payment_billing" class="uk-margin-top">
-										<div class="uk-h4">
+										<div class="uk-h5">
 											<?php echo Text::_('COM_RADICALMART_BILLING'); ?>
 										</div>
 										<div class="uk-child-width-1-2@s" uk-grid>
@@ -238,15 +282,24 @@ $i = 1;
 							</div>
 						</div>
 					<?php endif; ?>
+
 					<?php if (!empty($others)): ?>
 						<?php foreach ($others as $key => $fieldset): ?>
-							<div id="checkout_<?php echo $key; ?>" class="uk-margin">
-								<h2>
-									<span class="uk-text-muted"><?php echo $i;
-										$i++; ?>.</span>
-									<?php echo Text::_($fieldset->label); ?>
-								</h2>
-								<div class="uk-card uk-card-default uk-card-body uk-card-small">
+							<div id="checkout_<?php echo $key; ?>"
+								 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
+								<div class="uk-card-header">
+									<h2 class="uk-margin-remove uk-h4">
+										<?php echo Text::_($fieldset->label); ?>
+									</h2>
+								</div>
+								<div id="checkout_<?php echo $key; ?>_loading"
+									 class="uk-position-cover uk-position-z-index
+									 uk-flex uk-flex-center uk-flex-middle
+									 uk-overlay-default"
+									 style="display: none">
+									<div uk-spinner="ratio: 3"></div>
+								</div>
+								<div class="uk-card-body">
 									<div class="uk-child-width-1-2@s" uk-grid>
 										<?php echo $this->form->renderFieldset($key); ?>
 									</div>
@@ -256,16 +309,18 @@ $i = 1;
 					<?php endif; ?>
 
 					<?php if ($hasConsents): ?>
-						<div id="checkout_consents" class="uk-margin">
-							<div class="uk-card uk-card-default uk-card-body uk-card-small">
+						<div id="checkout_consents"
+							 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
+							<div class="uk-card-body uk-card-small">
 								<?php foreach ($this->form->getFieldset('consents') as $field): ?>
 									<div class="uk-margin">
-										<?php echo $field->input; ?>
+										<?php echo $field->__get('input'); ?>
 									</div>
 								<?php endforeach; ?>
 							</div>
 						</div>
 					<?php endif; ?>
+
 					<?php if (!empty($this->modules['radicalmart-checkout-after-form'])): ?>
 						<div class="uk-margin">
 							<?php foreach ($this->modules['radicalmart-checkout-after-form'] as $module): ?>
@@ -279,10 +334,8 @@ $i = 1;
 						</div>
 					<?php endif; ?>
 				</div>
-				<div class="uk-width-1-4@m">
-					<div class="uk-card uk-card-default uk-card-small">
-						<?php echo $this->loadTemplate('sidebar'); ?>
-					</div>
+				<div class="uk-width-medium@m uk-width-large@l">
+					<?php echo $this->loadTemplate('sidebar'); ?>
 					<?php if (!empty($this->modules['radicalmart-checkout-sidebar'])): ?>
 						<div class="uk-margin">
 							<?php foreach ($this->modules['radicalmart-checkout-sidebar'] as $module): ?>
