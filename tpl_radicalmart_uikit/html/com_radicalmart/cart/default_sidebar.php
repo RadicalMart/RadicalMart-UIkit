@@ -9,9 +9,11 @@
  * @link        https://radicalmart.ru/
  */
 
+\defined('_JEXEC') or die;
+
 use Joomla\CMS\Language\Text;
 
-\defined('_JEXEC') or die;
+/** @var \Joomla\Component\RadicalMart\Site\View\Cart\HtmlView $this */
 
 ?>
 <div class="uk-card uk-card-default uk-card-small">
@@ -25,7 +27,7 @@ use Joomla\CMS\Language\Text;
 			</div>
 		</div>
 		<div class="uk-grid-small" radicalmart-cart="discount-block" uk-grid
-			<?php if (empty($this->cart->total['discount'])) echo 'style="display:none"'; ?>>
+				<?php if (empty($this->cart->total['discount'])) echo 'style="display:none"'; ?>>
 			<div class="uk-width-expand uk-text-muted">
 				<?php echo Text::_('COM_RADICALMART_PRICE_DISCOUNT'); ?>
 			</div>

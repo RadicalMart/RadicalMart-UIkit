@@ -13,6 +13,8 @@
 
 use Joomla\CMS\Language\Text;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Checkout\HtmlView $this */
+
 ?>
 <div class="uk-card uk-card-default uk-card-small">
 	<div class="uk-card-header">

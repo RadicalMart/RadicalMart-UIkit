@@ -122,7 +122,7 @@ if (!empty($this->productsErrors))
 										</a>
 									</div>
 								</div>
-								<div class="uk-width-small@s uk-text-center@s uk-text-left@s">
+								<div class="uk-width-small@s uk-text-center@s uk-text-right@m uk-text-left@l">
 									<?php if ($in_stock): ?>
 										<div class="uk-text-small uk-text-muted"
 											 radicalmart-cart="product-discount-block"
