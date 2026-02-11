@@ -18,7 +18,6 @@ use Joomla\CMS\Layout\LayoutHelper;
 /** @var \Joomla\Component\RadicalMart\Site\View\Cart\HtmlView $this */
 
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = $this->document->getWebAssetManager();
 $assets->useScript('com_radicalmart.site.cart');
 

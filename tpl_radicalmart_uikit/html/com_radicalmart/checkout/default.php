@@ -37,7 +37,6 @@ if (empty($this->cart) || !empty($this->productsErrors))
 }
 
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = $this->getDocument()->getWebAssetManager();
 $assets->useScript('com_radicalmart.site.checkout')
 		->useScript('keepalive');
@@ -125,7 +124,6 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 		$others[$key] = $fieldset;
 	}
 }
-$i = 0;
 ?>
 <div id="RadicalMart" class="checkout">
 	<?php if (empty($this->item) || empty($this->item->products)): ?>

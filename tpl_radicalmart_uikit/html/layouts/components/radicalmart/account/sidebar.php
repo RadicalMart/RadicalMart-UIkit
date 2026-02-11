@@ -24,16 +24,17 @@ $menus  = UserHelper::getMenu();
 $assets = Factory::getApplication()->getDocument()->getWebAssetManager();
 $assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
 $assets->useScript('com_radicalmart.site.settings');
+
 ?>
 <div class="uk-card uk-card-default">
 	<div class="uk-card-header uk-padding-small">
 		<div class="uk-width-small uk-margin-auto uk-visible-toggle uk-position-relative uk-border-circle uk-overflow-hidden uk-light"
 			 radicalmart-settings="avatar">
 			<div class="uk-height-small uk-cover-container">
-				<?php echo HTMLHelper::image(($avatar) ? $avatar : 'com_radicalmart/no-avatar.svg',
-					htmlspecialchars($user->name), ['class' => 'uk-width-1-1', 'uk-cover' => ''], (!$avatar));
+				<?php echo HTMLHelper::image(($avatar) ?: 'com_radicalmart/no-avatar.svg',
+						htmlspecialchars($user->name), ['class' => 'uk-width-1-1', 'uk-cover' => ''], (!$avatar));
 				HTMLHelper::image('com_radicalmart/no-avatar.svg', htmlspecialchars($user->name),
-					['class' => 'uk-width-1-1', 'uk-cover' => ''], true); ?>
+						['class' => 'uk-width-1-1', 'uk-cover' => ''], true); ?>
 			</div>
 			<label class="uk-link-reset uk-overlay-primary uk-position-cover uk-hidden-hover">
 				<span class="uk-position-center" uk-icon="icon: camera; ratio: 1.25;"></span>
@@ -46,7 +47,7 @@ $assets->useScript('com_radicalmart.site.settings');
 			</div>
 			<div class="uk-margin-small">
 				<?php echo Text::_('COM_RADICALMART_JOINED') . ' '
-					. HTMLHelper::date($user->registerDate, Text::_('DATE_FORMAT_LC4')); ?>
+						. HTMLHelper::date($user->registerDate, Text::_('DATE_FORMAT_LC4')); ?>
 			</div>
 			<div>
 				<?php if (!empty($menus['com_radicalmart.settings'])): ?>
