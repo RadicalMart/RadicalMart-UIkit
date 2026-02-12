@@ -15,7 +15,6 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
-
 /** @var \Joomla\Component\RadicalMart\Site\View\Personal\HtmlView $this */
 
 // Load assets
@@ -129,7 +128,6 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 			</h1>
 			<form action="<?php echo $this->link; ?>" name="personalForm" id="personalForm" method="post"
 				  enctype="multipart/form-data" class="uk-form form-validate">
-
 				<?php if (!empty($sections['contacts'])): ?>
 					<div id="personal_section_contacts"
 						 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
