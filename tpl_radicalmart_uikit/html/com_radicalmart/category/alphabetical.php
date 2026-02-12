@@ -18,7 +18,7 @@ use Joomla\Utilities\ArrayHelper;
 
 // Load assets
 /** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 if ($this->params->get('trigger_js', 1))
 {
 	$assets->useScript('com_radicalmart.site.trigger');
