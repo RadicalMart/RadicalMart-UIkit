@@ -76,7 +76,7 @@ setUikitFormClasses($this->form);
 						 style="display: none"></div>
 					<div class="uk-card-body uk-form uk-form-horizontal">
 						<?php echo str_replace('readonly', 'disabled readonly',
-								$this->form->renderFieldset($key)); ?>
+								$this->form->renderFieldset($key, ['class' => 'uk-margin'])); ?>
 					</div>
 					<div class="uk-card-footer">
 						<a onclick="RadicalMartSettingsUpdate_<?php echo $key; ?>(this)"

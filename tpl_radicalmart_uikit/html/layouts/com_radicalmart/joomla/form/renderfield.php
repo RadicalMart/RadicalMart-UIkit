@@ -35,7 +35,7 @@ if (!empty($options['showonEnabled']))
 	$wa->useScript('showon');
 }
 
-$class           = empty($options['class']) ? 'uk-margin' : ' ' . $options['class'];
+$class           = empty($options['class']) ? '' : ' ' . $options['class'];
 $rel             = empty($options['rel']) ? '' : ' ' . $options['rel'];
 $id              = ($id ?? $name) . '-desc';
 $hideLabel       = !empty($options['hiddenLabel']);
