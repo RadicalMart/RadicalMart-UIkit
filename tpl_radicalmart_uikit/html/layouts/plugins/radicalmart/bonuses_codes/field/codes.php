@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -75,17 +75,19 @@ if (!$readonly)
 {
 	/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 	$assets = Factory::getApplication()->getDocument()->getWebAssetManager();
-	$assets->getRegistry()->addExtensionRegistryFile('com_radicalmart_bonuses');
-	$assets->useScript('com_radicalmart_bonuses.fields.codes');
+	$assets->getRegistry()->addExtensionRegistryFile('plg_radicalmart_bonuses_codes');
+	$assets->useScript('plg_radicalmart_bonuses_codes.fields.codes');
 }
 ?>
-<div radicalmart_bonuses-field-codes="container" data-name="<?php echo $name; ?>" data-context="<?php echo $context; ?>"
+<div radicalmart_bonuses_codes-field-codes="container" data-name="<?php echo $name; ?>"
+	 data-context="<?php echo $context; ?>"
 	 data-customer_id="<?php echo $customer_id; ?>"
-	 data-order_id="<?php echo $order_id; ?>" data-currency="<?php echo $currency; ?>">
-	<div radicalmart_bonuses-field-codes="error" class="uk-alert uk-alert-danger"
+	 data-order_id="<?php echo $order_id; ?>"
+	 data-currency="<?php echo $currency; ?>">
+	<div radicalmart_bonuses_codes-field-codes="error" class="uk-alert uk-alert-danger"
 		 style="display: none"></div>
-	<div radicalmart_bonuses-field-codes="success" class="uk-alert uk-alert-success" style="display: none"></div>
-	<div radicalmart_bonuses-field-codes="loading"
+	<div radicalmart_bonuses_codes-field-codes="success" class="uk-alert uk-alert-success" style="display: none"></div>
+	<div radicalmart_bonuses_codes-field-codes="loading"
 		 class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-overlay-default"
 		 style="display: none">
 		<div uk-spinner="ratio: 3"></div>
@@ -99,18 +101,21 @@ if (!$readonly)
 					$codeTitle .= ' (' . Text::_('COM_RADICALMART_BONUSES_CODE_REFERRAL') . ')';
 				}
 				?>
-				<div radicalmart_bonuses-field-codes="code" data-code="<?php echo $code->code; ?>">
+				<div radicalmart_bonuses_codes-field-codes="code" data-code="<?php echo $code->code; ?>">
 					<?php if ($readonly): ?>
-						<span class="uk-button uk-button-small uk-button-default uk-margin-small-right uk-margin-small-bottom">
+						<span class="uk-button uk-button-small uk-button-default
+							uk-margin-small-right uk-margin-small-bottom">
 							<?php echo $codeTitle; ?>
 						</span>
 					<?php else: ?>
 						<button type="button"
-								class="uk-button uk-button-small uk-button-default uk-margin-small-right uk-margin-small-bottom uk-flex uk-flex-nowrap uk-flex-middle"
-								radicalmart_bonuses-field-codes="delete"
+								class="uk-button uk-button-small uk-button-default
+								uk-margin-small-right uk-margin-small-bottom uk-flex uk-flex-nowrap uk-flex-middle"
+								radicalmart_bonuses_codes-field-codes="delete"
 								data-code="<?php echo $code->code; ?>">
 							<?php echo $codeTitle; ?>
-							<span radicalmart_bonuses-field-codes="delete" class="uk-text-danger uk-margin-small-left"
+							<span radicalmart_bonuses_codes-field-codes="delete"
+								  class="uk-text-danger uk-margin-small-left"
 								  uk-icon="icon:close; ratio:0.9"></span>
 						</button>
 					<?php endif; ?>
@@ -121,21 +126,21 @@ if (!$readonly)
 	<?php endif; ?>
 	<?php if (!$readonly): ?>
 		<div>
-			<button type="button" radicalmart_bonuses-field-codes="show"
-					class="uk-button uk-button-small uk-button-secondary">
+			<button type="button" radicalmart_bonuses_codes-field-codes="show"
+					class="uk-button uk-button-small uk-button-primary">
 				<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_CODES_FORM_SHOW'); ?>
 			</button>
 		</div>
-		<div class="uk-margin-small-top" radicalmart_bonuses-field-codes="form" style="display: none">
+		<div class="uk-margin-small-top" radicalmart_bonuses_codes-field-codes="form" style="display: none">
 			<div>
-				<input class="form-control uk-input" radicalmart_bonuses-field-codes="input"/>
+				<input class="form-control uk-input" radicalmart_bonuses_codes-field-codes="input"/>
 			</div>
 			<div class="uk-margin-small-top">
-				<button type="button" radicalmart_bonuses-field-codes="apply"
+				<button type="button" radicalmart_bonuses_codes-field-codes="apply"
 						class="uk-button uk-button-small uk-button-primary">
 					<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_CODES_CODE_APPLY'); ?>
 				</button>
-				<button type="button" radicalmart_bonuses-field-codes="hide"
+				<button type="button" radicalmart_bonuses_codes-field-codes="hide"
 						class="uk-button uk-button-small uk-button-danger">
 					<?php echo Text::_('JCANCEL'); ?>
 				</button>
@@ -143,4 +148,3 @@ if (!$readonly)
 		</div>
 	<?php endif; ?>
 </div>
-

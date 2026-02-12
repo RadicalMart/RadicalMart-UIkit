@@ -87,28 +87,28 @@ if (!$readonly)
 {
 	/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 	$assets = Factory::getApplication()->getDocument()->getWebAssetManager();
-	$assets->getRegistry()->addExtensionRegistryFile('com_radicalmart_bonuses');
-	$assets->useScript('com_radicalmart_bonuses.fields.points');
+	$assets->getRegistry()->addExtensionRegistryFile('plg_radicalmart_bonuses_points');
+	$assets->useScript('plg_radicalmart_bonuses_points.fields.points');
 }
 
 $value = (!empty($value)) ? $value : 0;
 ?>
-<div radicalmart_bonuses-field-points="container"
+<div radicalmart_bonuses_points-field-points="container"
 	 data-name="<?php echo $name; ?>"
 	 data-context="<?php echo $context; ?>"
 	 data-customer_id="<?php echo $customer_id; ?>"
 	 data-order_id="<?php echo $order_id; ?>"
 	 data-currency="<?php echo $currency; ?>">
-	<div radicalmart_bonuses-field-points="error" class="uk-alert uk-alert-danger"
+	<div radicalmart_bonuses_points-field-points="error" class="uk-alert uk-alert-danger"
 		 style="display: none"></div>
-	<div radicalmart_bonuses-field-points="success" class="uk-alert uk-alert-success" style="display: none"></div>
-	<div radicalmart_bonuses-field-points="loading"
+	<div radicalmart_bonuses_points-field-points="success" class="uk-alert uk-alert-success" style="display: none"></div>
+	<div radicalmart_bonuses_points-field-points="loading"
 		 class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-overlay-default"
 		 style="display: none">
 		<div uk-spinner="ratio: 3"></div>
 	</div>
 	<input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>"
-		   radicalmart_bonuses-field-points="field">
+		   radicalmart_bonuses_points-field-points="field">
 	<div class="uk-grid-small uk-grid-row-small" uk-grid="">
 		<?php if (!$readonly): ?>
 			<div class="uk-width-2-5@s">
@@ -145,27 +145,27 @@ $value = (!empty($value)) ? $value : 0;
 	</div>
 	<?php if (!$readonly): ?>
 		<div class="uk-margin-small-top">
-			<button type="button" radicalmart_bonuses-field-points="add"
-					class="uk-button uk-button-small uk-button-secondary"
+			<button type="button" radicalmart_bonuses_points-field-points="add"
+					class="uk-button uk-button-small uk-button-primary"
 					style="display: none">
 				<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_FORM_ADD'); ?>
 			</button>
-			<button type="button" radicalmart_bonuses-field-points="change"
-					class="uk-button uk-button-small uk-button-secondary"
+			<button type="button" radicalmart_bonuses_points-field-points="change"
+					class="uk-button uk-button-small uk-button-primary"
 					style="display: none">
 				<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_FORM_CHANGE'); ?>
 			</button>
 		</div>
-		<div class="uk-margin-top" radicalmart_bonuses-field-points="form" style="display: none">
+		<div class="uk-margin-top" radicalmart_bonuses_points-field-points="form" style="display: none">
 			<div>
-				<input class="uk-input" radicalmart_bonuses-field-points="input"/>
+				<input class="uk-input" radicalmart_bonuses_points-field-points="input"/>
 			</div>
 			<div class="uk-margin-small-top">
-				<button type="button" radicalmart_bonuses-field-points="apply"
+				<button type="button" radicalmart_bonuses_points-field-points="apply"
 						class="uk-button uk-button-small uk-button-primary">
 					<?php echo Text::_('COM_RADICALMART_BONUSES_FIELD_POINTS_FORM_APPLY'); ?>
 				</button>
-				<button type="button" radicalmart_bonuses-field-points="hide"
+				<button type="button" radicalmart_bonuses_points-field-points="hide"
 						class="uk-button uk-button-small uk-button-danger">
 					<?php echo Text::_('JCANCEL'); ?>
 				</button>

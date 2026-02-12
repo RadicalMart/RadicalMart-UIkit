@@ -144,8 +144,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							</div>
 							<div class="uk-card-body">
 								<div><?php echo $this->form->getInput('id', 'shipping'); ?></div>
-								<?php
-								$content = null;
+								<?php $content = null;
 								if (!empty($this->item->shipping->layout))
 								{
 									$content = LayoutHelper::render($this->item->shipping->layout, [
@@ -227,7 +226,45 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 					<?php endif; ?>
 
 					<?php if (!empty($others)): ?>
-						<?php foreach ($others as $key => $fieldset): ?>
+						<?php foreach ($others as $key => $fieldset):
+							if (!empty($fieldset->layout))
+							{
+								$content = LayoutHelper::render($fieldset->layout, [
+										'item'     => $this->item,
+										'form'     => $this->form,
+										'fieldset' => $fieldset,
+								]);
+							}
+							else
+							{
+								$fieldset_content = $this->form->renderFieldset($fieldset->name);
+								if (!empty($fieldset->full_width))
+								{
+									$fieldset_class = 'uk-child-width-1-1';
+								}
+								else
+								{
+									$fieldset_class = 'uk-child-width-1-2@s';
+								}
+
+								if (!empty($fieldset->class))
+								{
+									$fieldset_class .= ' ' . $fieldset->class;
+								}
+
+								if (!empty($fieldset))
+								{
+									$content = '<div class="' . $fieldset_class . '" uk-grid>'
+											. $fieldset_content . '</div>';
+								}
+							}
+
+							if (empty($content))
+							{
+								continue;
+							}
+
+							?>
 							<div id="checkout_<?php echo $key; ?>"
 								 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
 								<div class="uk-card-header">
@@ -243,9 +280,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 									<div uk-spinner="ratio: 3"></div>
 								</div>
 								<div class="uk-card-body">
-									<div class="uk-child-width-1-2@s" uk-grid>
-										<?php echo $this->form->renderFieldset($key); ?>
-									</div>
+									<?php echo $content; ?>
 								</div>
 							</div>
 						<?php endforeach; ?>
@@ -276,6 +311,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
+
 				</div>
 				<div class="uk-width-medium@m uk-width-large@l">
 					<?php echo $this->loadTemplate('sidebar'); ?>
