@@ -15,9 +15,11 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
+/** @var \Joomla\Component\RadicalMartBonuses\Site\View\Points\HtmlView $this */
+
 // Load assets
 /** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 $assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
 if ($this->params->get('radicalmart_js', 1))
 {
