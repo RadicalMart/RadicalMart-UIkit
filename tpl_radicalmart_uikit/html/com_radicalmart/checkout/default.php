@@ -51,63 +51,8 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 
-function setUikitFormClasses(\Joomla\CMS\Form\Form $form): void
-{
-	/** @var Joomla\CMS\Form\FormFactory $formFactory */
-	$formFactory = Factory::getContainer()->get(\Joomla\CMS\Form\FormFactoryInterface::class);
-	foreach ($form->getGroup('') as $field)
-	{
-		$name     = $field->__get('fieldname');
-		$group    = $field->__get('group');
-		$setClass = null;
-		if ($field instanceof Joomla\CMS\Form\Field\TextareaField)
-		{
-			$setClass .= ' uk-textarea';
-		}
-		elseif ($field instanceof Joomla\CMS\Form\Field\CheckboxesField)
-		{
-			continue;
-		}
-		elseif ($field instanceof Joomla\CMS\Form\Field\CheckboxField)
-		{
-			$setClass .= ' uk-checkbox';
-		}
-		elseif ($field instanceof Joomla\CMS\Form\Field\RangeField)
-		{
-			$setClass .= ' uk-range';
-		}
-		elseif ($field instanceof Joomla\CMS\Form\Field\ListField)
-		{
-			$setClass .= ' uk-select';
-		}
-		elseif ($field instanceof Joomla\CMS\Form\Field\RadioField)
-		{
-			$setClass .= ' uk-radio';
-		}
-		elseif ($field instanceof Joomla\CMS\Form\Field\TextField)
-		{
-			$setClass .= ' uk-input';
-		}
-		elseif ($field instanceof Joomla\CMS\Form\Field\SubformField)
-		{
-			$source  = $field->__get('formsource');
-			$subform = $formFactory->createForm($form->getName() . '.subform.' . '.' . $group . '.' . $name);
-			$subform->load($source);
-
-			setUikitFormClasses($subform);
-
-			$form->setFieldAttribute($name, 'formsource', $subform->getXml()->asXML(), $group);
-		}
-
-		$class = $field->getAttribute('class');
-		if ($setClass && !str_contains($class, $setClass))
-		{
-			$class .= ' ' . $setClass;
-			$form->setFieldAttribute($name, 'class', $class, $group);
-		}
-	}
-}
-
+// Set uikit classes to form
+require_once(JPATH_THEMES . '/system/radicalmart_uikit/helpers/uikit_form_classes.php');
 setUikitFormClasses($this->form);
 
 $hasConsents = false;

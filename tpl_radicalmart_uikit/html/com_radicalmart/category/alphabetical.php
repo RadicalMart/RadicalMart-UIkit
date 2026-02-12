@@ -55,11 +55,11 @@ if (!empty($this->children))
 }
 ?>
 <div id="RadicalMart" class="categories-alphabetical">
-	<h1 class="h2 text-center mb-3">
+	<h1 class="uk-h2 uk-margin">
 		<?php echo $this->params->get('seo_categories_h1', $this->category->title); ?>
 	</h1>
 	<?php if (!empty($this->category->introtext)): ?>
-		<div class="category info text-center">
+		<div class="category info uk-text-center">
 			<?php echo $this->category->introtext; ?>
 		</div>
 	<?php endif; ?>

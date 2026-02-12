@@ -29,39 +29,10 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 
-foreach ($this->form->getFieldsets() as $key => $fieldset)
-{
-	foreach ($this->form->getFieldset($key) as $field)
-	{
-		$name  = $field->fieldname;
-		$group = $field->group;
-		$type  = strtolower($field->type);
-		$class = $this->form->getFieldAttribute($name, 'class', '', $group);
-		$input = $field->input;
-		if ($type === 'subform')
-		{
-			continue;
-		}
-		if ($type === 'text' || $type === 'email')
-		{
-			$class .= ' uk-input';
-		}
-		elseif ($type === 'list' || preg_match('#<select#', $input))
-		{
-			$class .= ' uk-select';
-		}
-		elseif ($type === 'textarea' || preg_match('#<textarea#', $input))
-		{
-			$class .= ' uk-textarea';
-		}
-		elseif ($type === 'range')
-		{
-			$class .= ' uk-range';
-		}
+// Set uikit classes to form
+require_once(JPATH_THEMES . '/system/radicalmart_uikit/helpers/uikit_form_classes.php');
+setUikitFormClasses($this->form);
 
-		$this->form->setFieldAttribute($name, 'class', $class, $group);
-	}
-}
 ?>
 <div id="RadicalMart" class="order">
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top">
@@ -69,7 +40,6 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 	</h1>
 
 	<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
-
 		<div>
 			<div class="order_products">
 				<?php foreach ($this->order->products as $product_key => $product): ?>

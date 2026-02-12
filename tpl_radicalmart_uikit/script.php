@@ -160,59 +160,50 @@ return new class () implements ServiceProviderInterface {
 						}
 					}
 
-					$root_src   = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit');
-					$root_dest  = Path::clean(JPATH_ROOT . '/templates/' . $template);
-					$media_src  = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit/media');
-					$media_dest = Path::clean(JPATH_ROOT . '/media/templates/site/' . $template);
-					$sources    = Folder::files($root_src, '.', true, true);
+					$root_src  = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit');
+					$root_dest = Path::clean(JPATH_ROOT . '/templates/' . $template);
+
+					$media_src   = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit/media');
+					$media_dest  = Path::clean(JPATH_ROOT . '/media/templates/site/' . $template);
+
+					$helpers_src = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit/helpers');
+					$sources = Folder::files($root_src, '.', true, true);
 
 					$overrideFiles = [];
 					$copyFiles     = [];
 					foreach ($sources as $src)
 					{
-						$files = [];
-						if (str_contains($src, $media_src))
+						if (str_contains($src, $helpers_src))
 						{
-							$dest    = Path::clean(str_replace($media_src, $media_dest, $src));
-							$files[] = [
-								'src'  => Path::clean($src),
-								'dest' => $dest,
-								'type' => 'file',
-							];
+							continue;
+						}
 
-							$dest = Path::clean(str_replace($media_src, $root_dest, $src));
-						}
-						else
-						{
-							$dest = Path::clean(str_replace($root_src, $root_dest, $src));
-						}
-						$files[] = [
+						$file = [
 							'src'  => Path::clean($src),
-							'dest' => $dest,
+							'dest' => (str_contains($src, $media_src)) ?
+								Path::clean(str_replace($media_src, $media_dest, $src))
+								: Path::clean(str_replace($root_src, $root_dest, $src)),
 							'type' => 'file',
 						];
 
-						foreach ($files as $file)
+						if (basename($file['dest']) !== $file['dest'])
 						{
-							if (basename($file['dest']) !== $file['dest'])
+							$newdir = dirname($file['dest']);
+							if (!Folder::create($newdir))
 							{
-								$newdir = dirname($file['dest']);
-								if (!Folder::create($newdir))
-								{
-									Log::add(Text::sprintf('JLIB_INSTALLER_ERROR_CREATE_DIRECTORY', $newdir), Log::WARNING, 'jerror');
+								Log::add(Text::sprintf('JLIB_INSTALLER_ERROR_CREATE_DIRECTORY', $newdir), Log::WARNING, 'jerror');
 
-									return false;
-								}
+								return false;
 							}
-
-							if (is_file($file['dest']))
-							{
-								$overrideFiles[] = '<code>' .
-									str_replace(JPATH_ROOT . '/', '/', $file['dest']) . '</code>';
-							}
-
-							$copyFiles[] = $file;
 						}
+
+						if (is_file($file['dest']))
+						{
+							$overrideFiles[] = '<code>' .
+								str_replace(JPATH_ROOT . '/', '/', $file['dest']) . '</code>';
+						}
+
+						$copyFiles[] = $file;
 					}
 
 					$result = $adapter->getParent()->copyFiles($copyFiles, true);

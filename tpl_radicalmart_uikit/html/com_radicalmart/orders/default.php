@@ -34,11 +34,11 @@ if ($this->params->get('trigger_js', 1))
 		<div class="uk-width-medium@m uk-flex-last uk-flex-first@m">
 			<?php echo LayoutHelper::render('components.radicalmart.account.sidebar'); ?>
 			<?php if (!empty($this->modules['radicalmart-account-sidebar'])): ?>
-				<div class="mt-3">
+				<div class="uk-margin">
 					<?php foreach ($this->modules['radicalmart-account-sidebar'] as $module): ?>
-						<div class="mb-3">
+						<div class="uk-margin">
 							<?php if ($module->showtitle): ?>
-								<div class="h3"><?php echo Text::_($module->title); ?></div>
+								<div class="uk-h3"><?php echo Text::_($module->title); ?></div>
 							<?php endif; ?>
 							<div><?php echo $module->render; ?></div>
 						</div>

@@ -139,7 +139,7 @@ if (!empty($map_key))
 				<div id="<?php echo $id . '_map'; ?>" radicalmart-shipping-apiship-field-points="map"></div>
 			</div>
 
-			<div class="uk-margin-small-bottom mb-3">
+			<div class="uk-margin-small-bottom">
 				<?php
 				$attributes = [
 					'id'          => $id . '_display',

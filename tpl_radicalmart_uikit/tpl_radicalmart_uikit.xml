@@ -12,6 +12,7 @@
 	<scriptfile>script.php</scriptfile>
 	<fileset>
 		<files target="templates/system/radicalmart_uikit">
+			<folder>helpers</folder>
 			<folder>html</folder>
 			<folder>media</folder>
 		</files>

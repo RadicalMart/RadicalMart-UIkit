@@ -24,7 +24,7 @@ if ($this->params->get('trigger_js', 1))
 }
 ?>
 <div id="RadicalMart" class="categories">
-	<h1>
+	<h1 class="uk-h2 uk-margin uk-margin-remove-top">
 		<?php echo $this->params->get('seo_categories_h1', $this->category->title); ?>
 	</h1>
 	<?php if (!empty($this->category->introtext)): ?>
