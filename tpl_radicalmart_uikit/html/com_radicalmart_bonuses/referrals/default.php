@@ -152,7 +152,7 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 													<?php echo $item->link; ?>
 												</a>
 												<button type="button"
-														radicalmart_bonuses-referral_code-share="<?php echo $item->link; ?>"
+														radicalmart_bonuses-referrals_code-share="<?php echo $item->link; ?>"
 														class="uk-button uk-button-small uk-button-default uk-hidden@m">
 													<?php echo Text::_('COM_RADICALMART_BONUSES_CODE_SHARE'); ?>
 												</button>
@@ -193,13 +193,13 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 				<?php endif; ?>
 				<?php if ($this->createCodeForm): ?>
 					<div class="uk-card-footer">
-						<div radicalmart_bonuses-referral_code="container" data-reload="0">
-							<div radicalmart_bonuses-referral_code="error" class="uk-alert uk-alert-danger"
+						<div radicalmart_bonuses-referrals_code="container" data-reload="0">
+							<div radicalmart_bonuses-referrals_code="error" class="uk-alert uk-alert-danger"
 								 style="display: none"></div>
-							<div radicalmart_bonuses-referral_code="success" class="uk-alert uk-alert-success"
+							<div radicalmart_bonuses-referrals_code="success" class="uk-alert uk-alert-success"
 								 style="display: none"></div>
 							<div class="uk-position-relative">
-								<div radicalmart_bonuses-referral_code="loading"
+								<div radicalmart_bonuses-referrals_code="loading"
 									 class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-overlay-default"
 									 style="display: none">
 									<div uk-spinner="ratio: 3"></div>
@@ -229,7 +229,7 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 									}
 									?>
 								</div>
-								<button type="button" radicalmart_bonuses-referral_code="button"
+								<button type="button" radicalmart_bonuses-referrals_code="create"
 										class="uk-button uk-button-small uk-button-primary">
 									<?php echo Text::_('COM_RADICALMART_BONUSES_REFERRALS_CODES_CREATE_BUTTON'); ?>
 								</button>

@@ -34,7 +34,7 @@ if (empty($this->gallery))
 	];
 }
 ?>
-<div uk-slideshow="animation: push">
+<div uk-slideshow="animation: push; min-height:300px; max-height:300px;">
 	<div class="uk-position-relative uk-visible-toggle" tabindex="-1">
 		<div class="uk-slideshow-items" uk-lightbox>
 			<?php foreach ($this->gallery as $media):

@@ -50,9 +50,10 @@ $providerTitle        = Text::_('PLG_RADICALMART_SHIPPING_APISHIP_PROVIDER_' . $
 				   type="radio"
 				   value="<?php echo $tariff->tariffId; ?>"
 				   class="uk-radio"
-				<?php if ($tariff->tariffId === $value) echo 'checked'; ?>
+					<?php if ($tariff->tariffId === $value) echo 'checked'; ?>
 				   radicalmart-shipping-apiship-field-tariffs="input_tariff"
-				   data-tariff_name="<?php echo $tariff->tariffName; ?>">
+				   data-tariff_name="<?php echo $tariff->tariffName; ?>"
+				   data-tariff_cost="<?php echo $tariff->deliveryCost; ?>">
 			<?php echo $tariff_title; ?>
 		</label>
 	</div>
