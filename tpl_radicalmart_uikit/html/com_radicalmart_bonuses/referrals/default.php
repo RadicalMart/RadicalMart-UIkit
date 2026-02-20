@@ -153,7 +153,7 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 												</a>
 												<button type="button"
 														radicalmart_bonuses-referrals_code-share="<?php echo $item->link; ?>"
-														class="uk-button uk-button-small uk-button-default uk-hidden@m">
+														class="uk-button uk-button-small uk-button-primary uk-hidden@m">
 													<?php echo Text::_('COM_RADICALMART_BONUSES_CODE_SHARE'); ?>
 												</button>
 											<?php endif; ?>
