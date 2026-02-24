@@ -4,78 +4,71 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
 
 \defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
-use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
-$assets->addInlineScript("
-	document.addEventListener('DOMContentLoaded', function () {
-		let productLightbox = document.querySelector('#RadicalMart.product .product-gallery .uk-slideshow-items');
-		if (productLightbox) {
-			UIkit.lightbox(productLightbox, {
-				container: '#RadicalMart.product'
-			});
-		}
-	});
-");
+/** @var \Joomla\Component\RadicalMart\Site\View\Product\HtmlView $this */
+if (empty($this->gallery))
+{
+	$noImageItem       = new \stdClass();
+	$noImageItem->type = 'image';
+	$noImageItem->src  = HTMLHelper::image('com_radicalmart/no-image.svg', '', [], true, true);
+	$noImageItem->alt  = '';
+
+	$this->gallery = [
+			[
+					'item' => $noImageItem,
+					'type' => [
+							'type'           => 'image',
+							'layout_slide'   => 'components.radicalmart.gallery.image.slide',
+							'layout_preview' => 'components.radicalmart.gallery.image.preview'
+					]
+			]
+	];
+}
 ?>
-<div class="product-gallery uk-position-relative" uk-slideshow="animation: fade; autoplay: true; ratio: 3:2">
-	<ul class="uk-slideshow-items">
-		<?php if (count($this->gallery) > 0):
-			foreach ($this->gallery as $media):
+<div uk-slideshow="animation: push; min-height:300px; max-height:300px;">
+	<div class="uk-position-relative uk-visible-toggle" tabindex="-1">
+		<div class="uk-slideshow-items" uk-lightbox>
+			<?php foreach ($this->gallery as $media):
 				$displayData = [
-					'item'     => $media['item'],
-					'type'     => $media['type'],
-					'product'  => $this->product,
-					'category' => $this->category
+						'item'     => $media['item'],
+						'type'     => $media['type'],
+						'product'  => $this->product,
+						'category' => $this->category
 				] ?>
 				<li>
 					<?php echo LayoutHelper::render($media['type']['layout_slide'], $displayData); ?>
 				</li>
 			<?php endforeach; ?>
-		<?php else: ?>
-			<li>
-				<?php echo MediaHelper::renderImage(
-					'com_radicalmart.product.gallery.slide',
-					$this->product->image,
-					[
-						'alt'      => $this->product->title,
-						'loading'  => 'lazy',
-						'uk-cover' => ''
-					],
-					[
-						'product_id' => $this->product->id,
-						'no_image'   => true,
-						'thumb'      => true,
-					]); ?>
-			</li>
-		<?php endif; ?>
-	</ul>
-	<?php if (count($this->gallery) > 0): ?>
-		<a href="#" class="uk-position-center-left uk-position-small uk-icon-button"
-		   uk-icon="icon: chevron-left;" uk-slideshow-item="previous"></a>
-		<a href="#" class="uk-position-center-right uk-position-small uk-icon-button"
-		   uk-icon="icon: chevron-right;" uk-slideshow-item="next"></a>
-		<ul class="el-nav uk-thumbnav uk-flex-left uk-margin-top">
-			<?php foreach ($this->gallery as $i => $media):
-				$displayData = [
+		</div>
+		<a class="uk-position-center-left uk-position-small uk-hidden-hover uk-lightbox-button" href
+		   uk-slidenav-previous
+		   uk-slideshow-item="previous"></a>
+		<a class="uk-position-center-right uk-position-small uk-hidden-hover uk-lightbox-button" href uk-slidenav-next
+		   uk-slideshow-item="next"></a>
+	</div>
+
+	<ul class="uk-thumbnav uk-margin">
+		<?php foreach ($this->gallery as $m => $media):
+			$displayData = [
 					'item'     => $media['item'],
 					'type'     => $media['type'],
 					'product'  => $this->product,
 					'category' => $this->category
-				] ?>
-				<li class="<?php echo ($i === 0) ? 'uk-active' : ''; ?>" uk-slideshow-item="<?php echo $i; ?>">
+			] ?>
+			<li class="<?php echo ($m === 0) ? 'uk-active' : ''; ?>" uk-slideshow-item="<?php echo $m; ?>">
+				<a href class="uk-display-block">
 					<?php echo LayoutHelper::render($media['type']['layout_preview'], $displayData); ?>
-				</li>
-			<?php endforeach; ?>
-		</ul>
-	<?php endif; ?>
+				</a>
+			</li>
+		<?php endforeach; ?>
+	</ul>
 </div>

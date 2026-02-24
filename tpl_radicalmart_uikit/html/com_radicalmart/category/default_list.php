@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -13,11 +13,16 @@
 
 use Joomla\CMS\Layout\LayoutHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
 ?>
+
 <?php foreach ($this->items as $i => $item):
-	if ($i > 0) echo '<hr class="uk-margin-remove">';
 	$layout = 'components.radicalmart.products.item.list';
-	if ($item->isMeta) $layout = 'components.radicalmart.metas.' . $item->type . '.item.list';
+	if ($item->isMeta)
+	{
+		$layout = 'components.radicalmart.metas.' . $item->type . '.item.list';
+	}
 	?>
 	<div class="item-<?php echo $item->id; ?>">
 		<?php echo LayoutHelper::render($layout, ['product' => $item, 'mode' => $this->mode]); ?>

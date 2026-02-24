@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -13,9 +13,10 @@
 
 use Joomla\CMS\Language\Text;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 if ($this->mode === 'shop')
 {
 	$assets->useScript('com_radicalmart.site.cart');
@@ -29,12 +30,21 @@ if ($this->params->get('trigger_js', 1))
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 
-$showAddition = ((!$this->pagination || (int) $this->pagination->pagesCurrent === 1) && empty($this->activeFilters));
+$showAddition = ((!$this->pagination || $this->pagination->pagesCurrent === 1) && empty($this->activeFilters));
 $filter       = (!empty($this->children));
 
+if ($this->productsListTemplate !== 'grid')
+{
+	$assets->addInlineScript("
+		const mql = window.matchMedia('(max-width: 959px)');
+		const apply = () => mql.matches && window.setProductsListTemplate('grid');
+		apply();
+		mql.addEventListener ? mql.addEventListener('change', apply) : mql.addListener(apply);
+	");
+}
 ?>
 <div id="RadicalMart" class="category">
-	<h1 class="uk-h2 uk-margin uk-margin-remove-top uk-text-center" radicalmart-ajax="title">
+	<h1 class="uk-h2 uk-margin uk-margin-remove-top" radicalmart-ajax="title">
 		<?php echo $this->params->get('seo_category_h1', $this->category->title); ?>
 	</h1>
 	<?php if (!empty($this->modules['radicalmart-category-before-introtext'])): ?>
@@ -50,7 +60,7 @@ $filter       = (!empty($this->children));
 		</div>
 	<?php endif; ?>
 	<?php if (!empty($this->category->introtext)): ?>
-		<div class="info uk-text-center">
+		<div class="info">
 			<?php echo $this->category->introtext; ?>
 		</div>
 	<?php endif; ?>
@@ -63,16 +73,6 @@ $filter       = (!empty($this->children));
 					<?php endif; ?>
 					<div><?php echo $module->render; ?></div>
 				</div>
-			<?php endforeach; ?>
-		</div>
-	<?php endif; ?>
-	<?php if (!empty($this->children)): ?>
-		<div class="children uk-text-center">
-			<?php foreach ($this->children as $child): ?>
-				<a href="<?php echo $child->link; ?>"
-				   class="uk-button uk-button-small uk-button-default uk-margin-small-right uk-margin-small-bottom">
-					<?php echo $child->title; ?>
-				</a>
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
@@ -109,53 +109,58 @@ $filter       = (!empty($this->children));
 				 style="display: none">
 				<div uk-spinner="ratio: 3"></div>
 			</div>
-			<div class="uk-card uk-card-default">
-				<div class="uk-card-header">
-					<div class="uk-grid-small uk-flex-middle" uk-grid>
-						<div class="uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
-							<?php echo $this->loadTemplate('ordering'); ?>
-						</div>
-						<div class="uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
-							<?php if (!empty($this->modules['radicalmart-filter-mobile'])): ?>
-								<span class="uk-button uk-button-default uk-button-small uk-hidden@m"
-									  uk-toggle="target: #productsFilters">
-									<span class="uk-margin-xsmall-right" uk-icon="icon: settings; ratio: .75;"></span>
-									<?php echo Text::_('COM_RADICALMART_FILTERS'); ?>
-								</span>
-							<?php endif; ?>
-							<ul class="uk-subnav uk-iconnav uk-margin-small-left uk-visible@s">
-								<li class="<?php echo ($this->productsListTemplate === 'grid') ? 'uk-active' : ''; ?>">
-									<span class="uk-link"
-										  uk-icon="grid" uk-tooltip onclick="setProductsListTemplate('grid')"
-										  title="<?php echo Text::_('COM_RADICALMART_PRODUCTS_LIST_LAYOUT_GRID'); ?>"></span>
-								</li>
-								<li class="<?php echo ($this->productsListTemplate === 'list') ? 'uk-active' : ''; ?>">
-									<span class="uk-link"
-										  uk-icon="list" uk-tooltip onclick="setProductsListTemplate('list')"
-										  title="<?php echo Text::_('COM_RADICALMART_PRODUCTS_LIST_LAYOUT_LIST'); ?>"></span>
-								</li>
-								<li class="<?php echo ($this->productsListTemplate === 'table') ? 'uk-active' : ''; ?>">
-									<span class="uk-link"
-										  uk-icon="table" uk-tooltip onclick="setProductsListTemplate('table')"
-										  title="<?php echo Text::_('COM_RADICALMART_PRODUCTS_LIST_LAYOUT_TABLE'); ?>"></span>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div radicalmart-ajax="products">
-					<?php if (empty($this->items)) : ?>
-						<div class="uk-card-body">
-							<div class="uk-alert uk-alert-warning">
-								<?php echo Text::_('COM_RADICALMART_ERROR_PRODUCTS_NOT_FOUND'); ?>
+			<div class="uk-grid-small uk-flex-middle uk-margin-bottom" uk-grid>
+				<div class="uk-width-expand@s uk-flex uk-flex-center uk-flex-left@s uk-text-small">
+					<?php if (!empty($this->children)): ?>
+						<div class="uk-inline uk-margin-small-right">
+							<button class="uk-button uk-button-default uk-background-default uk-flex uk-flex-middle"
+									type="button">
+								<span uk-icon="thumbnails" class="uk-margin-small-right"></span>
+								<?php echo Text::_('COM_RADICALMART_CATEGORIES'); ?>
+							</button>
+							<div uk-dropdown="mode: click">
+								<ul class="uk-nav uk-dropdown-nav">
+									<?php foreach ($this->children as $child): ?>
+										<li class="uk-active">
+											<a href="<?php echo $child->link; ?>"><?php echo $child->title; ?></a>
+										</li>
+									<?php endforeach; ?>
+								</ul>
 							</div>
 						</div>
-					<?php else: ?>
-						<div class="products-list">
-							<?php echo $this->loadTemplate($this->productsListTemplate); ?>
-						</div>
 					<?php endif; ?>
+					<?php echo $this->loadTemplate('ordering'); ?>
 				</div>
+				<div class="uk-width-auto@s uk-flex uk-flex-center uk-flex-middle">
+					<?php if (!empty($this->modules['radicalmart-filter-mobile'])): ?>
+						<span class="uk-button uk-button-default uk-button-small uk-hidden@m"
+							  uk-toggle="target: #productsFilters">
+							<span class="uk-margin-xsmall-right" uk-icon="icon: settings; ratio: .75;"></span>
+							<?php echo Text::_('COM_RADICALMART_FILTERS'); ?>
+						</span>
+					<?php endif; ?>
+					<div class="uk-button-group uk-margin-small-left uk-visible@m">
+						<?php foreach (['grid', 'list', 'table'] as $layout): ?>
+							<a class="uk-button <?php echo ($this->productsListTemplate === $layout) ?
+									' uk-button-primary uk-active' : 'uk-button-default uk-background-default'; ?>"
+							   uk-icon="icon:<?php echo $layout; ?>" uk-tooltip
+							   onclick="window.setProductsListTemplate('<?php echo $layout; ?>')"
+							   title="<?php echo Text::_('COM_RADICALMART_PRODUCTS_LIST_LAYOUT_' . $layout); ?>">
+							</a>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+			<div radicalmart-ajax="products">
+				<?php if (empty($this->items)) : ?>
+					<div class="uk-alert uk-alert-warning">
+						<?php echo Text::_('COM_RADICALMART_ERROR_PRODUCTS_NOT_FOUND'); ?>
+					</div>
+				<?php else: ?>
+					<div class="products-list">
+						<?php echo $this->loadTemplate($this->productsListTemplate); ?>
+					</div>
+				<?php endif; ?>
 			</div>
 			<?php if (!empty($this->modules['radicalmart-category-after-products'])): ?>
 				<div class="uk-margin">
@@ -194,7 +199,7 @@ $filter       = (!empty($this->children));
 			</div>
 		<?php endif; ?>
 		<?php if ($showAddition && !empty($this->category->fulltext)): ?>
-			<div class="fulltext uk-margin-medium">
+			<div class="fulltext uk-margin-medium uk-card uk-card-default uk-card-body">
 				<?php echo $this->category->fulltext; ?>
 			</div>
 		<?php endif; ?>

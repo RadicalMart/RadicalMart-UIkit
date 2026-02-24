@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -43,11 +43,11 @@ if (!$hideTotal)
 <div>
 	<?php if ($hideTotal): ?>
 		<a href="<?php echo Route::_(RouteHelper::getCartRoute(), false); ?>"
-		   class="uk-link-reset uk-button uk-button-link radicalmart-icon">
+		   class="uk-button uk-button-link radicalmart-icon">
 			<span uk-icon="cart" class="uk-icon"></span>
 		</a>
 	<?php else: ?>
-		<button radicalmart-cart="display_module" class="uk-link-reset uk-button uk-button-link radicalmart-icon"
+		<button radicalmart-cart="display_module" class="uk-button uk-button-link radicalmart-icon"
 				uk-tooltip>
 			<span uk-icon="cart" class="uk-icon"></span>
 			<span class="uk-badge quantity" radicalmart-cart-display="total.products" style="display:none">0</span>

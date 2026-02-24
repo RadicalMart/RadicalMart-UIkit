@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -139,7 +139,7 @@ if (!empty($map_key))
 				<div id="<?php echo $id . '_map'; ?>" radicalmart-shipping-apiship-field-points="map"></div>
 			</div>
 
-			<div class="uk-margin-small-bottom mb-3">
+			<div class="uk-margin-small-bottom">
 				<?php
 				$attributes = [
 					'id'          => $id . '_display',

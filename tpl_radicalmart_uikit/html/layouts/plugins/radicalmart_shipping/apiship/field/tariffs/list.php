@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -50,9 +50,10 @@ $providerTitle        = Text::_('PLG_RADICALMART_SHIPPING_APISHIP_PROVIDER_' . $
 				   type="radio"
 				   value="<?php echo $tariff->tariffId; ?>"
 				   class="uk-radio"
-				<?php if ($tariff->tariffId === $value) echo 'checked'; ?>
+					<?php if ($tariff->tariffId === $value) echo 'checked'; ?>
 				   radicalmart-shipping-apiship-field-tariffs="input_tariff"
-				   data-tariff_name="<?php echo $tariff->tariffName; ?>">
+				   data-tariff_name="<?php echo $tariff->tariffName; ?>"
+				   data-tariff_cost="<?php echo $tariff->deliveryCost; ?>">
 			<?php echo $tariff_title; ?>
 		</label>
 	</div>

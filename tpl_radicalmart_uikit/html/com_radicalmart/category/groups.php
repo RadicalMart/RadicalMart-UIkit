@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -12,20 +12,19 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-use Joomla\Component\RadicalMart\Administrator\Helper\ParamsHelper;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\Utilities\ArrayHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 if ($this->mode === 'shop')
 {
 	$assets->useScript('com_radicalmart.site.cart');
 	if ($this->params->get('radicalmart_js', 1))
 	{
-		$assets->useScript('com_radicalmart.site')
-			->useScript('bootstrap.toast')
-			->useScript('bootstrap.offcanvas');
+		$assets->useScript('com_radicalmart.site');
 	}
 }
 if ($this->params->get('trigger_js', 1))
@@ -117,75 +116,37 @@ if (!empty($this->items))
 				<div class="products-list uk-card uk-card-default uk-margin">
 					<?php if (!$group->current): ?>
 						<div class="uk-card-header">
-							<h2 class="h3">
+							<h2 class="uk-h4">
 								<a href="<?php echo $group->link; ?>">
 									<?php echo $group->title; ?>
 								</a>
 							</h2>
 						</div>
 					<?php endif; ?>
-					<table class="uk-table uk-table-divider uk-table-responsive">
-						<?php foreach ($group->products as $product):
-							$hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0)
-								|| !empty($product->price['hide'])
-								|| empty($product->in_stock));
-							?>
-							<tr>
-								<td>
-									<div>
-										<a href="<?php echo $product->link; ?>">
-											<?php echo $product->title; ?>
-										</a>
-									</div>
-									<?php if (!empty($product->introtext)): ?>
-										<div class="uk-text-small uk-text-muted">
-											<?php echo $product->introtext; ?>
-										</div>
-									<?php endif; ?>
-								</td>
-								<td style="width: 10%" class="uk-text-nowrap">
-									<?php if (!$hidePrice): ?>
-										<?php if ($product->price['discount_enable']): ?>
-											<div class="uk-text-small uk-text-muted">
-												<s><?php echo $product->price['base_string']; ?></s>
-											</div>
-										<?php endif; ?>
-										<div>
-											<strong><?php echo $product->price['final_string']; ?></strong>
-										</div>
-									<?php elseif (empty($product->in_stock)): ?>
-										<span class="uk-text-danger">
-											<?php echo Text::_('COM_RADICALMART_NOT_IN_STOCK'); ?>
-										</span>
-									<?php endif; ?>
-								</td>
-								<td style="width: 1%" class="uk-text-nowrap">
-									<?php if (!$hidePrice && $this->mode === 'shop' && (int) $product->state === 1): ?>
-										<div radicalmart-cart="product" data-id="<?php echo $product->id; ?>">
-											<input radicalmart-cart="quantity" type="hidden" name="quantity"
-												   class="uk-input uk-form-width-small uk-text-center"
-												   step="<?php echo $product->quantity['step']; ?>"
-												   min="<?php echo $product->quantity['min']; ?>"
-												<?php if (!empty($product->quantity['max']))
-												{
-													echo 'max="' . $product->quantity['max'] . '"';
-												}
-												?>
-												   value="<?php echo $product->quantity['min']; ?>"/>
-											<button radicalmart-cart="add" type="button"
-													class="uk-button uk-button-primary">
-												<?php echo Text::_('COM_RADICALMART_CART_ADD'); ?>
-											</button>
-										</div>
-									<?php elseif ($hidePrice || $this->mode === 'catalog'): ?>
-										<a href="<?php echo $product->link; ?>"
-										   class="uk-button uk-button-primary">
-											<?php echo Text::_('COM_RADICALMART_READMORE'); ?>
-										</a>
-									<?php endif; ?>
-								</td>
-							</tr>
-						<?php endforeach; ?>
+					<table class="uk-table uk-table-divider uk-table-small uk-table-striped uk-table-responsive uk-card-default uk-padding-remove-vertical uk-margin-remove">
+						<thead>
+						<tr>
+							<th class="uk-text-center">
+								<?php echo Text::_('COM_RADICALMART_PRODUCT'); ?>
+							</th>
+							<th>
+								<?php echo Text::_('COM_RADICALMART_CATEGORY'); ?>
+							</th>
+							<th colspan="2">
+								<?php echo Text::_('COM_RADICALMART_PRICE'); ?>
+							</th>
+						</tr>
+						</thead>
+						<tbody>
+						<?php foreach ($group->products as $product)
+						{
+							$layout = ($product->isMeta) ? 'components.radicalmart.metas.' . $product->type . '.item.table'
+									: 'components.radicalmart.products.item.table';
+
+							echo LayoutHelper::render($layout, ['product' => $product, 'mode' => $this->mode]);
+						}
+						?>
+						</tbody>
 					</table>
 				</div>
 			<?php endforeach; ?>
@@ -216,7 +177,7 @@ if (!empty($this->items))
 		</div>
 	<?php endif; ?>
 	<?php if (!empty($this->category->fulltext)): ?>
-		<div class="fulltext uk-margin-medium">
+		<div class="fulltext uk-margin-medium uk-card uk-card-default uk-card-body">
 			<?php echo $this->category->fulltext; ?>
 		</div>
 	<?php endif; ?>

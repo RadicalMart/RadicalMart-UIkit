@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -14,16 +14,17 @@
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Category\HtmlView $this */
+
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 if ($this->params->get('trigger_js', 1))
 {
 	$assets->useScript('com_radicalmart.site.trigger');
 }
 ?>
 <div id="RadicalMart" class="categories">
-	<h1>
+	<h1 class="uk-h2 uk-margin uk-margin-remove-top">
 		<?php echo $this->params->get('seo_categories_h1', $this->category->title); ?>
 	</h1>
 	<?php if (!empty($this->category->introtext)): ?>
@@ -31,14 +32,14 @@ if ($this->params->get('trigger_js', 1))
 			<?php echo $this->category->introtext; ?>
 		</div>
 	<?php endif; ?>
-	<?php if (empty($this->items)) : ?>
+	<?php if (empty($this->children)) : ?>
 		<div class="uk-alert uk-alert-warning">
 			<?php echo Text::_('COM_RADICALMART_ERROR_CATEGORIES_NOT_FOUND'); ?>
 		</div>
 	<?php else : ?>
 		<div class="categories-list uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid
 			 uk-height-match="target: > div > .uk-card > .uk-card-body">
-			<?php foreach ($this->items as $item) : ?>
+			<?php foreach ($this->children as $item) : ?>
 				<div class="item-<?php echo $item->id; ?>">
 					<?php echo LayoutHelper::render('components.radicalmart.categories.item.grid', $item); ?>
 				</div>
@@ -46,7 +47,7 @@ if ($this->params->get('trigger_js', 1))
 		</div>
 	<?php endif; ?>
 	<?php if (!empty($this->category->fulltext)): ?>
-		<div class="fulltext">
+		<div class="fulltext uk-margin-medium uk-card uk-card-default uk-card-body">
 			<?php echo $this->category->fulltext; ?>
 		</div>
 	<?php endif; ?>

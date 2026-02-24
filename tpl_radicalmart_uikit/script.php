@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -13,9 +13,6 @@
 
 use Joomla\CMS\Application\AdministratorApplication;
 use Joomla\CMS\Factory;
-use Joomla\CMS\Filesystem\File;
-use Joomla\CMS\Filesystem\Folder;
-use Joomla\CMS\Filesystem\Path;
 use Joomla\CMS\Installer\InstallerAdapter;
 use Joomla\CMS\Installer\InstallerScriptInterface;
 use Joomla\CMS\Language\Text;
@@ -24,9 +21,11 @@ use Joomla\CMS\Version;
 use Joomla\Database\DatabaseDriver;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
+use Joomla\Filesystem\Folder;
+use Joomla\Filesystem\Path;
 
 return new class () implements ServiceProviderInterface {
-	public function register(Container $container)
+	public function register(Container $container): void
 	{
 		$container->set(InstallerScriptInterface::class, new class ($container->get(AdministratorApplication::class)) implements InstallerScriptInterface {
 			/**
@@ -121,7 +120,7 @@ return new class () implements ServiceProviderInterface {
 				{
 					// Remove old files
 					$path = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit');
-					if (Folder::exists($path))
+					if (is_dir($path))
 					{
 						Folder::delete($path);
 					}
@@ -161,64 +160,50 @@ return new class () implements ServiceProviderInterface {
 						}
 					}
 
-					$root_src   = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit');
-					$root_dest  = Path::clean(JPATH_ROOT . '/templates/' . $template);
-					$media_src  = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit/media');
-					$media_dest = Path::clean(JPATH_ROOT . '/media/templates/site/' . $template);
-					$sources    = Folder::files($root_src, '.', true, true);
+					$root_src  = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit');
+					$root_dest = Path::clean(JPATH_ROOT . '/templates/' . $template);
+
+					$media_src   = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit/media');
+					$media_dest  = Path::clean(JPATH_ROOT . '/media/templates/site/' . $template);
+
+					$helpers_src = Path::clean(JPATH_ROOT . '/templates/system/radicalmart_uikit/helpers');
+					$sources = Folder::files($root_src, '.', true, true);
 
 					$overrideFiles = [];
 					$copyFiles     = [];
 					foreach ($sources as $src)
 					{
-						$files = [];
-						if (strpos($src, $media_src) !== false)
+						if (str_contains($src, $helpers_src))
 						{
-							$dest    = Path::clean(str_replace($media_src, $media_dest, $src));
-							$files[] = [
-								'src'  => Path::clean($src),
-								'dest' => $dest,
-								'type' => 'file',
-							];
-
-							$dest    = Path::clean(str_replace($media_src, $root_dest, $src));
-							$files[] = [
-								'src'  => Path::clean($src),
-								'dest' => $dest,
-								'type' => 'file',
-							];
-						}
-						else
-						{
-							$dest    = Path::clean(str_replace($root_src, $root_dest, $src));
-							$files[] = [
-								'src'  => Path::clean($src),
-								'dest' => $dest,
-								'type' => 'file',
-							];
+							continue;
 						}
 
-						foreach ($files as $file)
+						$file = [
+							'src'  => Path::clean($src),
+							'dest' => (str_contains($src, $media_src)) ?
+								Path::clean(str_replace($media_src, $media_dest, $src))
+								: Path::clean(str_replace($root_src, $root_dest, $src)),
+							'type' => 'file',
+						];
+
+						if (basename($file['dest']) !== $file['dest'])
 						{
-							if (basename($file['dest']) !== $file['dest'])
+							$newdir = dirname($file['dest']);
+							if (!Folder::create($newdir))
 							{
-								$newdir = dirname($file['dest']);
-								if (!Folder::create($newdir))
-								{
-									Log::add(Text::sprintf('JLIB_INSTALLER_ERROR_CREATE_DIRECTORY', $newdir), Log::WARNING, 'jerror');
+								Log::add(Text::sprintf('JLIB_INSTALLER_ERROR_CREATE_DIRECTORY', $newdir), Log::WARNING, 'jerror');
 
-									return false;
-								}
+								return false;
 							}
-
-							if (File::exists($file['dest']))
-							{
-								$overrideFiles[] = '<code>' .
-									str_replace(JPATH_ROOT . '/', '/', $file['dest']) . '</code>';
-							}
-
-							$copyFiles[] = $file;
 						}
+
+						if (is_file($file['dest']))
+						{
+							$overrideFiles[] = '<code>' .
+								str_replace(JPATH_ROOT . '/', '/', $file['dest']) . '</code>';
+						}
+
+						$copyFiles[] = $file;
 					}
 
 					$result = $adapter->getParent()->copyFiles($copyFiles, true);
@@ -240,6 +225,8 @@ return new class () implements ServiceProviderInterface {
 
 					return $result;
 				}
+
+				return true;
 			}
 		});
 	}

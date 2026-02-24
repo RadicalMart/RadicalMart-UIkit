@@ -3,7 +3,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -162,9 +162,9 @@ document.addEventListener('onRadicalMartCartAfterRemoveProduct', function (event
 
 		if (event.detail.cart === false) {
 			if (window.RadicalMartDisplay.cart.moduleHide) {
-				let module = document.querySelector('#radicalmartCartModule');
+				let module = document.querySelector('#radicalmart_cart_module');
 				if (module) {
-					UIkit.offcanvas(document.querySelector('#radicalmartCartModule')).hide();
+					UIkit.offcanvas(document.querySelector('#radicalmart_cart_module')).hide();
 				}
 			}
 
@@ -181,14 +181,18 @@ document.addEventListener('onRadicalMartCartAfterRemoveProduct', function (event
 document.addEventListener('onRadicalMartCartRenderLayout', function (event) {
 	if (event.detail.name === 'notification_add') {
 		if (window.RadicalMartDisplay.cart.notification_addShow) {
-			let notification = document.querySelector('#radicalmartCartNotificationAdd');
+			let notification = document.querySelector('#radicalmart_cart_notification_add');
 			if (notification) {
-				UIkit.modal(notification).show();
+				UIkit.notification({
+					message: notification.innerHTML,
+					timeout: 4000,
+					pos: 'bottom-right'
+				});
 			}
 		}
 	} else if (event.detail.name === 'module') {
 		if (window.RadicalMartDisplay.cart.moduleShow) {
-			let module = document.querySelector('#radicalmartCartModule');
+			let module = document.querySelector('#radicalmart_cart_module');
 			if (module) {
 				UIkit.offcanvas(module).show();
 			}

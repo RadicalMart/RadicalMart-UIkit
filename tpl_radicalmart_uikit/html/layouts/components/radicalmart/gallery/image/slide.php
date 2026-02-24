@@ -4,7 +4,7 @@
  * @subpackage  tpl_radicalmart_uikit
  * @version     __DEPLOY_VERSION__
  * @author      RadicalMart Team - radicalmart.ru
- * @copyright   Copyright (c) 2025 RadicalMart. All rights reserved.
+ * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  * @link        https://radicalmart.ru/
  */
@@ -27,22 +27,28 @@ extract($displayData);
  */
 
 ?>
-<div class="uk-position-top-left uk-position-small uk-position-z-index">
-	<a href="<?php echo $item->src; ?>" class="uk-icon-button" uk-icon="icon:search"></a>
-</div>
-<div class="uk-flex uk-background-muted uk-flex-middle uk-flex-center uk-padding-small uk-height-1-1 uk-width-1-1">
-	<?php echo MediaHelper::renderImage(
-		'com_radicalmart.product.gallery.slide',
-		$item->src,
-		[
-			'alt'     => (!empty($item->alt)) ? $item->alt : $product->title,
-			'loading' => 'lazy',
-			'style'   => 'max-width: 100%; max-height:100%;'
-		],
-		[
-			'product_id' => $product->id,
-			'no_image'   => true,
-			'thumb'      => true,
-		]);
-	?>
+<div class="uk-height-1-1 uk-width-1-1 uk-position-relative">
+	<div class="uk-position-cover uk-background-cover uk-background-center-center"
+		 style="background-image: url('<?php echo $item->src; ?>');
+				 filter: blur(14px) brightness(0.85);
+				 transform: scale(1.1);"></div>
+
+	<a href="<?php echo $item->src; ?>"
+	   class="uk-height-1-1 uk-width-1-1 uk-flex uk-flex-middle uk-flex-center
+						   uk-position-relative uk-position-z-index">
+		<?php echo MediaHelper::renderImage(
+				'com_radicalmart.product.gallery.slide',
+				$item->src,
+				[
+						'alt'     => (!empty($item->alt)) ? $item->alt : $product->title,
+						'loading' => 'lazy',
+						'style'   => 'max-width: 100%; max-height: 100%'
+				],
+				[
+						'product_id' => $product->id,
+						'no_image'   => true,
+						'thumb'      => true,
+				]);
+		?>
+	</a>
 </div>
