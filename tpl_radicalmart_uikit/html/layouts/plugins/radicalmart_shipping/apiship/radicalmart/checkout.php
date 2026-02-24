@@ -2,7 +2,7 @@
 /*
  * @package     RadicalMart Uikit Package
  * @subpackage  tpl_radicalmart_uikit
- * @version     __DEPLOY_VERSION__
+ * @version     3.0.0
  * @author      RadicalMart Team - radicalmart.ru
  * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
@@ -14,7 +14,6 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
-use Joomla\Plugin\RadicalMartShipping\ApiShip\Extension\ApiShip;
 
 extract($displayData);
 

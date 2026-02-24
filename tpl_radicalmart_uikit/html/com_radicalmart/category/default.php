@@ -2,7 +2,7 @@
 /*
  * @package     RadicalMart Uikit Package
  * @subpackage  tpl_radicalmart_uikit
- * @version     __DEPLOY_VERSION__
+ * @version     3.0.0
  * @author      RadicalMart Team - radicalmart.ru
  * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
@@ -220,7 +220,7 @@ if ($this->productsListTemplate !== 'grid')
 		<?php if (!empty($this->modules['radicalmart-filter-mobile'])): ?>
 			<div id="productsFilters" uk-offcanvas="overlay: true">
 				<div class="uk-offcanvas-bar">
-					<span class="uk-offcanvas-close" type="button" uk-close></span>
+					<span class="uk-offcanvas-close" uk-close></span>
 					<?php foreach ($this->modules['radicalmart-filter-mobile'] as $module): ?>
 						<div class="uk-margin">
 							<?php if ($module->showtitle): ?>
