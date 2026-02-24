@@ -2,7 +2,7 @@
 /*
  * @package     RadicalMart Bonuses Package
  * @subpackage  com_radicalmart_bonuses
- * @version     3.0.0
+ * @version     3.0.4
  * @author      RadicalMart Team - radicalmart.ru
  * @copyright   Copyright (c) 2026 RadicalMart. All rights reserved.
  * @license     GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
