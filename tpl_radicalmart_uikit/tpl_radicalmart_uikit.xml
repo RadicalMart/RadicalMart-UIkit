@@ -2,12 +2,12 @@
 <extension type="file" method="upgrade">
 	<name>RadicalMart - UIkit</name>
 	<author>RadicalMart Team</author>
-	<creationDate>February 2026</creationDate>
+	<creationDate>March 2026</creationDate>
 	<copyright>Copyright © 2026 RadicalMart Team. All rights reserved.</copyright>
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>info@radicalmart.ru</authorEmail>
 	<authorUrl>https://radicalmart.ru</authorUrl>
-	<version>3.0.5-dev</version>
+	<version>3.0.5</version>
 	<description>UIkit overrides for RadicalMart</description>
 	<scriptfile>script.php</scriptfile>
 	<fileset>
