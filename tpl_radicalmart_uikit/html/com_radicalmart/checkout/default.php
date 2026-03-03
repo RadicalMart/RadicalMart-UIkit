@@ -110,7 +110,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
 							<div class="uk-card-header">
 								<h2 class="uk-margin-remove uk-h4">
-									<?php echo Text::_('COM_RADICALMART_CONTACTS'); ?>
+									<?php echo Text::_('COM_RADICALMART_ORDER_RECIPIENT_CONTACTS'); ?>
 								</h2>
 							</div>
 							<div id="checkout_contacts_loading"
