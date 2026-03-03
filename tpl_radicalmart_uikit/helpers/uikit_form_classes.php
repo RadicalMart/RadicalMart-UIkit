@@ -62,8 +62,8 @@ function setUikitFormClasses(Form $form): void
 
 			$form->setFieldAttribute($name, 'formsource', $subform->getXml()->asXML(), $group);
 		}
-
-		$class = $field->getAttribute('class');
+		
+		$class = $field->getAttribute('class', '');
 		if ($setClass && !str_contains($class, $setClass))
 		{
 			$class .= ' ' . $setClass;
