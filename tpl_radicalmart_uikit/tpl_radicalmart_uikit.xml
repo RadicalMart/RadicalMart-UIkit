@@ -7,7 +7,7 @@
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>info@radicalmart.ru</authorEmail>
 	<authorUrl>https://radicalmart.ru</authorUrl>
-	<version>3.0.9</version>
+	<version>3.0.10-dev</version>
 	<description>UIkit overrides for RadicalMart</description>
 	<scriptfile>script.php</scriptfile>
 	<fileset>
