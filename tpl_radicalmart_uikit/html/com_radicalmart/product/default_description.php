@@ -14,15 +14,18 @@
 use Joomla\CMS\Language\Text;
 
 $hasTabs = false;
-foreach ($this->product->fieldsets as $fieldset)
+if (!empty($this->product->fieldsets))
 {
-	if ($fieldset->alias === 'root')
+	foreach ($this->product->fieldsets as $fieldset)
 	{
-		continue;
-	}
+		if ($fieldset->alias === 'root')
+		{
+			continue;
+		}
 
-	$hasTabs = true;
-	break;
+		$hasTabs = true;
+		break;
+	}
 }
 
 $overview = $this->loadTemplate('overview');
