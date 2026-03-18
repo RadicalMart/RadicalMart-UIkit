@@ -72,7 +72,7 @@ $assets->useScript('com_radicalmart_search.field.ajax-search');
 			result = container.querySelector('[radicalmart_search-field-search-ajax="result"]'),
 			dropdown = UIkit.dropdown(result, {
 				pos: 'bottom-justify',
-				mode: 'click'
+				mode: 'none'
 			});
 		container.addEventListener('onRadicalMartSearchAjaxError', (event) => {
 			let data = event.detail;
