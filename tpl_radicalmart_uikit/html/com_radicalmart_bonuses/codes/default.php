@@ -19,7 +19,6 @@ use Joomla\Component\RadicalMart\Administrator\Helper\PriceHelper;
 /** @var \Joomla\Component\RadicalMartBonuses\Site\View\Codes\HtmlView $this */
 
 // Load assets
-/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 $assets = $this->getDocument()->getWebAssetManager();
 $assets->getRegistry()->addExtensionRegistryFile('com_radicalmart');
 if ($this->params->get('radicalmart_js', 1))
