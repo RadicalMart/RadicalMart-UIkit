@@ -88,8 +88,8 @@ $pattern             = '[0-9.' . $decimal_separator . $thousands_separator . ']+
 ?>
 <div class="radicalmart-input-filter-price">
 	<?php foreach ($vs as $v): ?>
-		<div class="uk-margin-small-bottom uk-flex uk-flex-middle">
-			<label for="<?php echo $id . '_' . $v; ?>" class="uk-margin-small-right">
+		<div class="uk-inline uk-margin-small-bottom">
+			<label for="<?php echo $id . '_' . $v; ?>"  class="uk-form-icon">
 				<?php echo Text::_('COM_RADICALMART_PRICE_FILTER_' . $v); ?>
 			</label>
 			<input id="<?php echo $id . '_' . $v; ?>" name="<?php echo $name . '[' . $v . ']'; ?>"
