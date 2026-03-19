@@ -14,7 +14,7 @@
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
-/** @var \Joomla\Component\RadicalMart\Site\View\Personal\HtmlView $this */
+/** @var \Joomla\Component\RadicalMart\Site\View\Settings\HtmlView $this */
 
 // Load assets
 $assets = $this->getDocument()->getWebAssetManager();
