@@ -61,17 +61,12 @@ $assetsRegistry->addExtensionRegistryFile('com_radicalmart_search');
 $assets->useScript('com_radicalmart_search.field.ajax-search');
 
 $document_key = 'com_radicalmart_search.field.ajax-search.loader';
-?>
-<div radicalmart_search-field-search-ajax="container" data-field_id="<?php echo $id; ?>">
-	<?php echo LayoutHelper::render('joomla.form.field.text', $displayData); ?>
-	<div radicalmart_search-field-search-ajax="result">
-	</div>
-</div>
-<?php if (empty($document->getScriptOptions($document_key))): ?>
-	<script type="text/javascript">
+if (empty($document->getScriptOptions($document_key)))
+{
+	$assets->addInlineScript("
 		document.addEventListener('DOMContentLoaded', () => {
-			document.querySelectorAll('[radicalmart_search-field-search-ajax="container"]').forEach((container) => {
-				let result = container.querySelector('[radicalmart_search-field-search-ajax="result"]'),
+			document.querySelectorAll('[radicalmart_search-field-search-ajax=\"container\"]').forEach((container) => {
+				let result = container.querySelector('[radicalmart_search-field-search-ajax=\"result\"]'),
 					dropdown = UIkit.dropdown(result, {
 						pos: 'bottom-justify',
 						mode: 'none'
@@ -90,6 +85,12 @@ $document_key = 'com_radicalmart_search.field.ajax-search.loader';
 				});
 			})
 		});
-	</script>
-	<?php $document->addScriptOptions($document_key, ['init' => 1]);
-endif; ?>
+	");
+	$document->addScriptOptions($document_key, ['init' => 1]);
+}
+?>
+<div radicalmart_search-field-search-ajax="container" data-field_id="<?php echo $id; ?>">
+	<?php echo LayoutHelper::render('joomla.form.field.text', $displayData); ?>
+	<div radicalmart_search-field-search-ajax="result">
+	</div>
+</div>
