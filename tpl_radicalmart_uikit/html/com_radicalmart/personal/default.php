@@ -247,11 +247,13 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 									</h2>
 								</div>
 							<?php endif; ?>
-							<fieldset id="personal_<?php echo $fieldset->name; ?>" class="uk-fieldset">
-								<div class="uk-child-width-1-2@s" uk-grid>
-									<?php echo $this->form->renderFieldset($fieldset->name); ?>
-								</div>
-							</fieldset>
+							<div class="uk-card-body">
+								<fieldset id="personal_<?php echo $fieldset->name; ?>" class="uk-fieldset">
+									<div class="uk-child-width-1-2@s" uk-grid>
+										<?php echo $this->form->renderFieldset($fieldset->name); ?>
+									</div>
+								</fieldset>
+							</div>
 						</div>
 					<?php endforeach; ?>
 				<?php endif; ?>
