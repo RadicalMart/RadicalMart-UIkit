@@ -56,10 +56,11 @@ if ($class === 'text-danger')
 }
 ?>
 <div class="<?php echo (!empty($class)) ? $class : 'uk-alert uk-alert-warning'; ?>">
-	<div class="">
-		<?php echo Text::_($message); ?>
-	</div>
 	<div class="uk-margin-small-bottom">
-		<?php echo LayoutHelper::render('components.radicalmart.login.button', ['class' => 'uk-button uk-button-small uk-button-primary']); ?>
+		<?php echo LayoutHelper::render('components.radicalmart.login.button',
+				['class' => 'uk-button uk-button-small uk-button-primary']); ?>
+	</div>
+	<div class="uk-text-small">
+		<?php echo Text::_($message); ?>
 	</div>
 </div>
