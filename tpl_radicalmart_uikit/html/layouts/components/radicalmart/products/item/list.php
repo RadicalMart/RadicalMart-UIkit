@@ -64,11 +64,6 @@ if (!$hidePrice && $product->in_stock)
 				<a href="<?php echo $product->link; ?>"
 				   class="uk-link-reset"><?php echo $product->title; ?></a>
 			</div>
-			<?php if (!empty($product->introtext)): ?>
-				<div class="uk-text-small">
-					<?php echo $product->introtext; ?>
-				</div>
-			<?php endif; ?>
 			<?php if (!empty($product->fields)): ?>
 				<?php foreach ($product->fields as $field):
 					if (empty($field->value)) continue; ?>

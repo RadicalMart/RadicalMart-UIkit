@@ -51,11 +51,6 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 					<?php echo $product->title; ?>
 				</a>
 			</div>
-			<?php if (!empty($product->introtext)): ?>
-				<div class="uk-text-small">
-					<?php echo $product->introtext; ?>
-				</div>
-			<?php endif; ?>
 			<?php echo LayoutHelper::render('components.radicalmart.items.manufacturers', $displayData); ?>
 		</div>
 		<div class="uk-width-1-5">
