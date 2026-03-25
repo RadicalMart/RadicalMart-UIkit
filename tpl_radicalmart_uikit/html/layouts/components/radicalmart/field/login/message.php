@@ -50,12 +50,16 @@ extract($displayData);
  * @var  string  $message        Message before button.
  */
 
+if ($class === 'text-danger')
+{
+	$class = 'uk-text-danger';
+}
 ?>
-<div class="<?php echo (!empty($class)) ? $class : 'uk-alert  uk-alert-warning'; ?>">
-	<div>
+<div class="<?php echo (!empty($class)) ? $class : 'uk-alert uk-alert-warning'; ?>">
+	<div class="">
 		<?php echo Text::_($message); ?>
 	</div>
 	<div class="uk-margin-small-bottom">
-		<?php echo LayoutHelper::render('components.radicalmart.login.button'); ?>
+		<?php echo LayoutHelper::render('components.radicalmart.login.button', ['class' => 'uk-button uk-button-small uk-button-primary']); ?>
 	</div>
 </div>

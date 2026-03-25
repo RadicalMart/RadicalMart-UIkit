@@ -31,39 +31,9 @@ $action = Route::link('site', 'index.php?option=com_radicalmart', false);
 
 foreach ([$login, $registration] as &$form)
 {
-	foreach ($form->getFieldsets() as $key => $fieldset)
-	{
-		foreach ($form->getFieldset($key) as $field)
-		{
-			$name  = $field->fieldname;
-			$group = $field->group;
-			$type  = strtolower($field->type);
-			$class = $form->getFieldAttribute($name, 'class', '', $group);
-			$input = $field->input;
-			if ($type === 'subform')
-			{
-				continue;
-			}
-			if ($type === 'text' || $type === 'email')
-			{
-				$class .= ' uk-input';
-			}
-			elseif ($type === 'list' || preg_match('#<select#', $input))
-			{
-				$class .= ' uk-select';
-			}
-			elseif ($type === 'textarea' || preg_match('#<textarea#', $input))
-			{
-				$class .= ' uk-textarea';
-			}
-			elseif ($type === 'range')
-			{
-				$class .= ' uk-range';
-			}
-
-			$form->setFieldAttribute($name, 'class', $class, $group);
-		}
-	}
+	// Set uikit classes to form
+	require_once(JPATH_THEMES . '/system/radicalmart_uikit/helpers/uikit_form_classes.php');
+	setUikitFormClasses($form);
 }
 ?>
 <div id="radicalmartLoginForm" class="uk-flex-top" uk-modal="container:false">
