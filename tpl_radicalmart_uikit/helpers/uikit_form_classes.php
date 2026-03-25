@@ -36,6 +36,10 @@ function setUikitFormClasses(Form $form): void
 		{
 			$setClass .= ' uk-checkbox';
 		}
+		elseif ($field instanceof Joomla\CMS\Form\Field\RadioField)
+		{
+			continue;
+		}
 		elseif ($field instanceof Joomla\CMS\Form\Field\RangeField)
 		{
 			$setClass .= ' uk-range';
@@ -43,10 +47,6 @@ function setUikitFormClasses(Form $form): void
 		elseif ($field instanceof Joomla\CMS\Form\Field\ListField)
 		{
 			$setClass .= ' uk-select';
-		}
-		elseif ($field instanceof Joomla\CMS\Form\Field\RadioField)
-		{
-			$setClass .= ' uk-radio';
 		}
 		elseif ($field instanceof Joomla\CMS\Form\Field\TextField)
 		{
