@@ -47,9 +47,8 @@ $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empt
 				</div>
 			<?php endif; ?>
 			<div>
-				<a href="<?php echo $product->link; ?>" class="uk-link-reset uk-h4">
-					<?php echo $product->title; ?>
-				</a>
+				<a href="<?php echo $product->link; ?>"
+				   class="uk-link-reset"><?php echo $product->title; ?></a>
 			</div>
 			<?php echo LayoutHelper::render('components.radicalmart.items.manufacturers', $displayData); ?>
 		</div>
