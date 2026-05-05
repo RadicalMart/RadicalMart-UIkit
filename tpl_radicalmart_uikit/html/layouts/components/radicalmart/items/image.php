@@ -63,7 +63,6 @@ if (!isset($link))
 	$link = $product->link;
 }
 
-
 ?>
 <?php if (!empty($link)) : ?>
 	<a href="<?php echo $link; ?>" class="<?php echo $class; ?>" style="<?php echo $style; ?>">
