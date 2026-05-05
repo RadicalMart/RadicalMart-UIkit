@@ -103,6 +103,6 @@ if (!isset($link))
 						'meta_id'  => $product->id,
 						'no_image' => true,
 						'thumb'    => true,
-				]); ?>>
+				]); ?>
 	</div>
 <?php endif; ?>
