@@ -26,29 +26,29 @@ extract($displayData);
  */
 
 $fields = [
-	'provider'  => 'uk-width-1-1',
-	'country'   => 'uk-width-1-1',
-	'region'    => 'uk-width-1-3@s',
-	'city'      => 'uk-width-2-3@s',
-	'zip'       => 'uk-width-1-3@s',
-	'street'    => 'uk-width-2-3@s',
-	'house'     => 'uk-width-1-4@s',
-	'building'  => 'uk-width-1-4@s',
-	'entrance'  => 'uk-width-1-4@s',
-	'floor'     => 'uk-width-1-4@s',
-	'apartment' => 'uk-width-1-4@s',
+		'provider'  => 'uk-width-1-1',
+		'country'   => 'uk-width-1-1',
+		'region'    => 'uk-width-1-3@s',
+		'city'      => 'uk-width-2-3@s',
+		'zip'       => 'uk-width-1-3@s',
+		'street'    => 'uk-width-2-3@s',
+		'house'     => 'uk-width-1-4@s',
+		'building'  => 'uk-width-1-4@s',
+		'entrance'  => 'uk-width-1-4@s',
+		'floor'     => 'uk-width-1-4@s',
+		'apartment' => 'uk-width-1-4@s',
 
-	'uid'     => 'uk-hidden',
-	'string'  => 'uk-hidden',
-	'display' => 'uk-hidden',
+		'uid'     => 'uk-hidden',
+		'string'  => 'uk-hidden',
+		'display' => 'uk-hidden',
 ]
 ?>
 <div class="subform-repeatable-group uk-card uk-card-default uk-card-body" data-base-name="<?php echo $basegroup; ?>"
-	 data-group="<?php echo $group; ?>">
+     data-group="<?php echo $group; ?>">
 	<?php if (!empty($buttons) && (!empty($buttons['remove']))) : ?>
 		<div class="uk-text-right">
 			<button type="button" class="group-remove uk-button uk-button-danger uk-button-small"
-					aria-label="<?php echo Text::_('JGLOBAL_FIELD_REMOVE'); ?>">
+			        aria-label="<?php echo Text::_('JGLOBAL_FIELD_REMOVE'); ?>">
 				<span uk-icon="icon:minus; ratio:0.8" aria-hidden="true"></span>
 			</button>
 		</div>
@@ -67,7 +67,7 @@ $fields = [
 	<?php if (!empty($buttons) && (!empty($buttons['add']))) : ?>
 	<div class="uk-text-right uk-margin-top">
 		<button type="button" class="group-add uk-button uk-button-primary uk-button-small"
-				aria-label="<?php echo Text::_('JGLOBAL_FIELD_ADD'); ?>">
+		        aria-label="<?php echo Text::_('JGLOBAL_FIELD_ADD'); ?>">
 			<span uk-icon="icon:plus; ratio:0.8" aria-hidden="true"></span>
 		</button>
 		<?php endif; ?>
