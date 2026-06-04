@@ -12,6 +12,7 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\Filter\OutputFilter;
 
 extract($displayData);
 
@@ -31,7 +32,7 @@ extract($displayData);
 	<div uk-icon="icon:credit-card; ratio:5"></div>
 	<div class="uk-h3 uk-margin-small"><?php echo $page_message; ?></div>
 	<div class="uk-text-muted uk-margin-small">
-		<?php echo Text::sprintf('COM_RADICALMART_PAYMENT_SUCCESS_PAGE_DESCRIPTION', $order->link); ?>
+		<?php echo Text::sprintf('COM_RADICALMART_PAYMENT_SUCCESS_PAGE_DESCRIPTION', $this->escape((string) $order->link)); ?>
 	</div>
 	<div class="uk-margin-small">
 		<?php echo Text::_('COM_RADICALMART_PAYMENT_SUCCESS_PAGE_TIMER'); ?>
@@ -42,7 +43,7 @@ extract($displayData);
 		timer = setInterval(function () {
 			if (left <= 0) {
 				clearInterval(timer);
-				window.location.href = '<?php echo $order->link;?>';
+				window.location.href = '<?php echo OutputFilter::stringJSSafe($order->link);?>';
 			}
 			document.querySelector('[radicalmart-payment-timer]').innerText = 10 - (10 - left);
 			left -= 1;

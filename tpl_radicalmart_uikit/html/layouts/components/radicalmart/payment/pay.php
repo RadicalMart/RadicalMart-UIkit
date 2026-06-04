@@ -12,6 +12,7 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\Filter\OutputFilter;
 
 extract($displayData);
 
@@ -25,12 +26,13 @@ extract($displayData);
  * @var  array  $payment      The payment plugin data.
  *
  */
+
 ?>
 <div class="uk-text-center uk-container uk-container-small">
 	<div uk-icon="icon:credit-card; ratio:5"></div>
 	<div class="uk-h3 uk-margin-small"><?php echo $page_message; ?></div>
 	<div class="uk-text-muted uk-margin-small">
-		<?php echo Text::sprintf('COM_RADICALMART_PAYMENT_PAY_PAGE_DESCRIPTION', $payment['link']); ?>
+		<?php echo Text::sprintf('COM_RADICALMART_PAYMENT_PAY_PAGE_DESCRIPTION', $this->escape((string) $payment['link'])); ?>
 	</div>
 	<div class="uk-margin-small">
 		<?php echo Text::_('COM_RADICALMART_PAYMENT_PAY_PAGE_TIMER'); ?>
@@ -41,7 +43,7 @@ extract($displayData);
 		timer = setInterval(function () {
 			if (left <= 0) {
 				clearInterval(timer);
-				window.location.href = '<?php echo $payment['link']?>';
+				window.location.href = '<?php echo OutputFilter::stringJSSafe((string) $payment['link'])?>';
 			}
 			document.querySelector('[radicalmart-payment-timer]').innerText = 10 - (10 - left);
 			left -= 1;
