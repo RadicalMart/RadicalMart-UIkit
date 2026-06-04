@@ -32,7 +32,7 @@ extract($displayData);
 	<div uk-icon="icon:credit-card; ratio:5"></div>
 	<div class="uk-h3 uk-margin-small"><?php echo $page_message; ?></div>
 	<div class="uk-text-muted uk-margin-small">
-		<?php echo Text::sprintf('COM_RADICALMART_PAYMENT_SUCCESS_PAGE_DESCRIPTION', $this->escape((string) $order->link)); ?>
+		<?php echo Text::sprintf('COM_RADICALMART_PAYMENT_SUCCESS_PAGE_DESCRIPTION', $order->link); ?>
 	</div>
 	<div class="uk-margin-small">
 		<?php echo Text::_('COM_RADICALMART_PAYMENT_SUCCESS_PAGE_TIMER'); ?>
