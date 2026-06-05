@@ -43,7 +43,7 @@ extract($displayData);
 		timer = setInterval(function () {
 			if (left <= 0) {
 				clearInterval(timer);
-				window.location.href = '<?php echo OutputFilter::stringJSSafe($order->link);?>';
+				window.location.href = '<?php echo OutputFilter::stringJSSafe((string)$order->link);?>';
 			}
 			document.querySelector('[radicalmart-payment-timer]').innerText = 10 - (10 - left);
 			left -= 1;

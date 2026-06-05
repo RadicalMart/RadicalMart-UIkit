@@ -110,7 +110,7 @@ document.addEventListener('onRadicalMartCartAfterUpdateDisplayData', function (e
 			document.querySelectorAll('[radicalmart-cart="discount-block"],' +
 				'[data-radicalmart-cart="discount-block"]')
 				.forEach(function (block) {
-					block.style.display = (event.detail.total.discount > 0) ? '' : 'none';
+					block.style.display = (event.detail.total?.discount > 0) ? '' : 'none';
 				});
 		}
 	}
