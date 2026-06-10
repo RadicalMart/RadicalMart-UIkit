@@ -15,8 +15,13 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Form\FormFactoryInterface;
 
-function setUikitFormClasses(Form $form): void
+function setUikitFormClasses(Form|bool|null $form = null): void
 {
+	if (empty($form))
+	{
+		return;
+	}
+
 	/** @var Joomla\CMS\Form\FormFactory $formFactory */
 	$formFactory = Factory::getContainer()->get(FormFactoryInterface::class);
 	foreach ($form->getGroup('') as $field)
@@ -62,7 +67,7 @@ function setUikitFormClasses(Form $form): void
 
 			$form->setFieldAttribute($name, 'formsource', $subform->getXml()->asXML(), $group);
 		}
-		
+
 		$class = $field->getAttribute('class', '');
 		if ($setClass && !str_contains($class, $setClass))
 		{
