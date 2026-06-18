@@ -73,8 +73,7 @@ foreach ($vs as $v)
 
 $decimal_separator   = '.';
 $thousands_separator = ' ';
-$pattern             = '[0-9.' . $decimal_separator . $thousands_separator . ']+?';
-$pattern             = '';
+$pattern             = '[0-9' . $decimal_separator . $thousands_separator . ']+';
 ?>
 
 <div class="radicalmart-fields-range-filter-range">
@@ -84,15 +83,15 @@ $pattern             = '';
 				<?php echo Text::_('PLG_RADICALMART_FIELDS_STANDARD_RANGE_' . $v); ?>
 			</label>
 			<input id="<?php echo $id . '_' . $v; ?>" name="<?php echo $name . '[' . $v . ']'; ?>"
-				   class="uk-input uk-input-medium" type="text" pattern="<?php echo $pattern; ?>"
-				   value="<?php echo $value[$v]; ?>"
-				   placeholder="<?php echo $hints[$v]; ?>"
+			       class="uk-input uk-input-medium" type="text" pattern="<?php echo $pattern; ?>"
+			       value="<?php echo $value[$v]; ?>"
+			       placeholder="<?php echo $hints[$v]; ?>"
 					<?php if (!empty($onchange)) echo 'onChange="' . $onchange . '"'; ?>>
 		</div>
 	<?php endforeach; ?>
 	<div class="uk-text-right">
 		<span href="javascript:void(0);" class="uk-link uk-text-small uk-text-danger uk-text-lowercase"
-			  onclick="this.closest('.radicalmart-fields-range-filter-range').querySelectorAll('input')
+		      onclick="this.closest('.radicalmart-fields-range-filter-range').querySelectorAll('input')
 			  .forEach(function (input) {input.value = ''; input.setAttribute('value', ''); input.dispatchEvent(new Event('change'));});">
 			<?php echo Text::_('COM_RADICALMART_CLEAN'); ?>
 		</span>

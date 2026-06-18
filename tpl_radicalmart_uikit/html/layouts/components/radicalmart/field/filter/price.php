@@ -78,30 +78,30 @@ foreach ($vs as $v)
 	if (empty($hints[$v]))
 	{
 		$hints[$v] = PriceHelper::toString(Text::_('COM_RADICALMART_PRICE_FILTER_' . $v . '_HINT'),
-			$currency['code'], false);
+				$currency['code'], false);
 	}
 }
 
 $decimal_separator   = (isset($currency['decimal_separator'])) ? $currency['decimal_separator'] : '.';
 $thousands_separator = (isset($currency['thousands_separator'])) ? $currency['thousands_separator'] : ' ';
-$pattern             = '[0-9.' . $decimal_separator . $thousands_separator . ']+?';
+$pattern             = '[0-9' . $decimal_separator . $thousands_separator . ']+';
 ?>
 <div class="radicalmart-input-filter-price">
 	<?php foreach ($vs as $v): ?>
 		<div class="uk-inline uk-margin-small-bottom">
-			<label for="<?php echo $id . '_' . $v; ?>"  class="uk-form-icon">
+			<label for="<?php echo $id . '_' . $v; ?>" class="uk-form-icon">
 				<?php echo Text::_('COM_RADICALMART_PRICE_FILTER_' . $v); ?>
 			</label>
 			<input id="<?php echo $id . '_' . $v; ?>" name="<?php echo $name . '[' . $v . ']'; ?>"
-				   class="uk-input uk-input-medium" type="text" pattern="<?php echo $pattern; ?>"
-				   value="<?php echo $value[$v]; ?>"
-				   placeholder="<?php echo $hints[$v]; ?>"
-				<?php if (!empty($onchange)) echo 'onChange="' . $onchange . '"'; ?>>
+			       class="uk-input uk-input-medium" type="text" pattern="<?php echo $pattern; ?>"
+			       value="<?php echo $value[$v]; ?>"
+			       placeholder="<?php echo $hints[$v]; ?>"
+					<?php if (!empty($onchange)) echo 'onChange="' . $onchange . '"'; ?>>
 		</div>
 	<?php endforeach; ?>
 	<div class="uk-text-right">
 		<span class="uk-link uk-text-small uk-text-danger uk-text-lowercase"
-			  onclick="this.closest('.radicalmart-input-filter-price').querySelectorAll('input')
+		      onclick="this.closest('.radicalmart-input-filter-price').querySelectorAll('input')
 			  .forEach(function (input) {input.value = ''; input.setAttribute('value', ''); input.dispatchEvent(new Event('change'));});">
 			<?php echo Text::_('COM_RADICALMART_CLEAN'); ?>
 		</span>
