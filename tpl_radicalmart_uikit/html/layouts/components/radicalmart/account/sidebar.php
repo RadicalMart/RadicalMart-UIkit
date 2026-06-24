@@ -29,7 +29,7 @@ $assets->useScript('com_radicalmart.site.settings');
 <div class="uk-card uk-card-default">
 	<div class="uk-card-header uk-padding-small">
 		<div class="uk-width-small uk-margin-auto uk-visible-toggle uk-position-relative uk-border-circle uk-overflow-hidden uk-light"
-			 radicalmart-settings="avatar">
+		     radicalmart-settings="avatar">
 			<div class="uk-height-small uk-cover-container">
 				<?php echo HTMLHelper::image(($avatar) ?: 'com_radicalmart/no-avatar.svg',
 						htmlspecialchars($user->name), ['class' => 'uk-width-1-1', 'uk-cover' => ''], (!$avatar));
@@ -38,7 +38,7 @@ $assets->useScript('com_radicalmart.site.settings');
 			</div>
 			<label class="uk-link-reset uk-overlay-primary uk-position-cover uk-hidden-hover">
 				<span class="uk-position-center" uk-icon="icon: camera; ratio: 1.25;"></span>
-				<input type="file" accept="image/*" class="uk-hidden">
+				<input type="file" accept="image/jpeg,image/png,image/gif,.jpg,.jpeg,.png,.gif" class="uk-hidden">
 			</label>
 		</div>
 		<div class="uk-margin-top uk-text-center">
