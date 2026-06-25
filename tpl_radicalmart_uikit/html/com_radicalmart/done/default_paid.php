@@ -27,7 +27,7 @@ use Joomla\CMS\Uri\Uri;
 				<?php echo Text::_('COM_RADICALMART_DONE_PAGE_TO_HOME'); ?>
 			</a>
 			<a href="<?php echo $this->order->link; ?>" class="uk-button uk-button-default">
-				<?php echo Text::_('COM_RADICALMART_DONE_PAGE_TO_ODER'); ?>
+				<?php echo Text::_('COM_RADICALMART_DONE_PAGE_TO_ORDER'); ?>
 			</a>
 		</div>
 	</div>
