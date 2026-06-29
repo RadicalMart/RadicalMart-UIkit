@@ -28,18 +28,24 @@ $assets->useScript('com_radicalmart.site.settings');
 ?>
 <div class="uk-card uk-card-default">
 	<div class="uk-card-header uk-padding-small">
-		<div class="uk-width-small uk-margin-auto uk-visible-toggle uk-position-relative uk-border-circle uk-overflow-hidden uk-light"
+		<div class="uk-width-small uk-margin-auto uk-visible-toggle uk-position-relative uk-light"
 		     radicalmart-settings="avatar">
-			<div class="uk-height-small uk-cover-container">
-				<?php echo HTMLHelper::image(($avatar) ?: 'com_radicalmart/no-avatar.svg',
-						htmlspecialchars($user->name), ['class' => 'uk-width-1-1', 'uk-cover' => ''], (!$avatar));
-				HTMLHelper::image('com_radicalmart/no-avatar.svg', htmlspecialchars($user->name),
-						['class' => 'uk-width-1-1', 'uk-cover' => ''], true); ?>
+			<div class="uk-position-relative uk-border-circle uk-overflow-hidden">
+				<div class="uk-height-small uk-cover-container">
+					<?php echo HTMLHelper::image(($avatar) ?: 'com_radicalmart/no-avatar.svg',
+							htmlspecialchars($user->name), ['class' => 'uk-width-1-1', 'uk-cover' => ''], (!$avatar));
+					HTMLHelper::image('com_radicalmart/no-avatar.svg', htmlspecialchars($user->name),
+							['class' => 'uk-width-1-1', 'uk-cover' => ''], true); ?>
+				</div>
+				<label class="uk-link-reset uk-overlay-primary uk-position-cover uk-hidden-hover">
+					<span class="uk-position-center" uk-icon="icon: camera; ratio: 1.25;"></span>
+					<input type="file" accept="image/jpeg,image/png,image/gif,.jpg,.jpeg,.png,.gif" class="uk-hidden">
+				</label>
 			</div>
-			<label class="uk-link-reset uk-overlay-primary uk-position-cover uk-hidden-hover">
-				<span class="uk-position-center" uk-icon="icon: camera; ratio: 1.25;"></span>
-				<input type="file" accept="image/jpeg,image/png,image/gif,.jpg,.jpeg,.png,.gif" class="uk-hidden">
-			</label>
+			<a class="uk-link-reset uk-button-link uk-position-bottom-right uk-hidden-hover uk-position-z-index"
+			   radicalmart-settings="avatar_delete">
+				<span uk-icon="trash" class="uk-text-danger"></span>
+			</a>
 		</div>
 		<div class="uk-margin-top uk-text-center">
 			<div class="uk-h4 uk-margin-remove" radicalmart-settings-display="name">
