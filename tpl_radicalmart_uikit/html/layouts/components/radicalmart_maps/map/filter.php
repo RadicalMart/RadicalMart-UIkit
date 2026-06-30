@@ -35,7 +35,7 @@ if (empty($filter) || empty($filter->getGroup('')))
 }
 ?>
 <form radicalmart_maps-map="filter" style="display: none;" class="uk-padding-small uk-padding-remove-vertical">
-	<ul class="uk-list uk-list-divider" uk-accordion="collapsible: false; multiple: true">
+	<ul class="uk-list uk-list-divider uk-accordion-default" uk-accordion="collapsible: false; multiple: true">
 		<?php $i = 0;
 		foreach ($filter->getGroup('') as $key => $field):
 			$i++;
@@ -51,8 +51,11 @@ if (empty($filter) || empty($filter->getGroup('')))
 			$contentId = $id . '_content';
 			?>
 			<li class="<?php echo $open; ?>">
-				<a class="uk-accordion-title uk-text-small uk-link uk-margin-small">
-					<?php echo Text::_($filter->getFieldAttribute($name, 'label', $name, $group)); ?>
+				<a class="uk-accordion-title">
+					<span class="uk-text-small">
+						<?php echo Text::_($filter->getFieldAttribute($name, 'label', $name, $group)); ?>
+					</span>
+					<span uk-accordion-icon></span>
 				</a>
 				<div class="uk-accordion-content">
 					<?php echo $filter->getInput($name, $group); ?>
