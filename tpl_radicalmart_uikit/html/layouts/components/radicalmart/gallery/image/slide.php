@@ -25,15 +25,14 @@ extract($displayData);
  * @var object  $category Product category object.
  *
  */
-
 ?>
 <div class="uk-height-1-1 uk-width-1-1 uk-position-relative">
 	<div class="uk-position-cover uk-background-cover uk-background-center-center"
-		 style="background-image: url('<?php echo $item->src; ?>');
+	     style="background-image: url('<?php echo $item->src; ?>');
 				 filter: blur(14px) brightness(0.85);
 				 transform: scale(1.1);"></div>
 
-	<a href="<?php echo $item->src; ?>"
+	<a href="<?php echo $item->src; ?>" data-caption="<?php echo $this->escape($product->title); ?>"
 	   class="uk-height-1-1 uk-width-1-1 uk-flex uk-flex-middle uk-flex-center
 						   uk-position-relative uk-position-z-index">
 		<?php echo MediaHelper::renderImage(
