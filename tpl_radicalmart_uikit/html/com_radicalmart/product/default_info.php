@@ -28,7 +28,7 @@ use Joomla\CMS\Language\Text;
 	<?php endif; ?>
 
 	<h1 class="uk-h2 uk-margin-small">
-		<?php echo $this->params->get('seo_product_h1', $this->product->title); ?>
+		<?php echo $this->escape($this->params->get('seo_product_h1', $this->product->title)); ?>
 	</h1>
 
 	<?php echo $this->product->event->afterDisplayTitle; ?>

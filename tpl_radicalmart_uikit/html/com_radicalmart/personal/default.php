@@ -123,8 +123,8 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 		</div>
 		<div>
 			<h1 class="uk-h2 uk-margin uk-margin-remove-top">
-				<?php echo $this->params->get('seo_personal_h1',
-						($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_PERSONAL')); ?>
+				<?php echo $this->escape($this->params->get('seo_personal_h1',
+						($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_PERSONAL'))); ?>
 			</h1>
 			<form action="<?php echo $this->link; ?>" name="personalForm" id="personalForm" method="post"
 			      enctype="multipart/form-data" class="uk-form form-validate">

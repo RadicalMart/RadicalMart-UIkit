@@ -54,8 +54,8 @@ setUikitFormClasses($this->form);
 		</div>
 		<div>
 			<h1 class="uk-h2 uk-margin uk-margin-remove-top">
-				<?php echo $this->params->get('seo_personal_h1',
-						($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_PERSONAL')); ?>
+				<?php echo $this->escape($this->params->get('seo_settings_h1',
+						($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_SETTINGS'))); ?>
 			</h1>
 			<?php foreach ($this->form->getFieldsets() as $key => $fieldset):
 				if (empty($this->form->getFieldset($key)))

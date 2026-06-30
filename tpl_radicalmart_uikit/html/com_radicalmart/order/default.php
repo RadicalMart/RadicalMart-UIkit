@@ -36,7 +36,7 @@ setUikitFormClasses($this->form);
 ?>
 <div id="RadicalMart" class="order">
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top">
-		<?php echo $this->params->get('seo_order_h1', $this->order->title); ?>
+		<?php echo $this->escape($this->params->get('seo_order_h1', $this->order->title)); ?>
 	</h1>
 
 	<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>

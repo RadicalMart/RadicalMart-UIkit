@@ -63,7 +63,7 @@ if (!empty($this->items))
 ?>
 <div id="RadicalMart" class="category-table">
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top" radicalmart-ajax="title">
-		<?php echo $this->params->get('seo_category_h1', $this->category->title); ?>
+		<?php echo $this->escape($this->params->get('seo_category_h1', $this->category->title)); ?>
 	</h1>
 	<?php if (!empty($this->modules['radicalmart-category-before-introtext'])): ?>
 		<div class="uk-margin">

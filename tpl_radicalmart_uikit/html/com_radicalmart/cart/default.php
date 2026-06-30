@@ -53,8 +53,8 @@ if (!empty($this->productsErrors))
 		<div class="uk-text-muted uk-text-center"><?php echo Text::_('COM_RADICALMART_CART_EMPTY_DESC'); ?></div>
 	<?php else: ?>
 		<h1 class="uk-h2 uk-margin uk-margin-remove-top">
-			<?php echo $this->params->get('seo_cart_h1',
-					($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_CART')); ?>
+			<?php echo $this->escape($this->params->get('seo_cart_h1',
+					($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_CART'))); ?>
 		</h1>
 		<div class="uk-child-width-expand@m uk-grid-medium" uk-grid>
 			<div>

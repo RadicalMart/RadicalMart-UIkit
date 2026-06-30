@@ -60,8 +60,8 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 		</div>
 		<div>
 			<h1 class="uk-h2 uk-margin uk-margin-remove-top">
-				<?php echo $this->params->get('seo_bonuses_referrals_h1',
-						($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_BONUSES_REFERRALS')); ?>
+				<?php echo $this->escape($this->params->get('seo_bonuses_referrals_h1',
+						($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_BONUSES_REFERRALS'))); ?>
 			</h1>
 			<div class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
 				<div class="uk-card-header">
@@ -152,8 +152,8 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 													<?php echo $item->link; ?>
 												</a>
 												<button type="button"
-														radicalmart_bonuses-referrals_code-share="<?php echo $item->link; ?>"
-														class="uk-button uk-button-small uk-button-primary uk-hidden@m">
+												        radicalmart_bonuses-referrals_code-share="<?php echo $item->link; ?>"
+												        class="uk-button uk-button-small uk-button-primary uk-hidden@m">
 													<?php echo Text::_('COM_RADICALMART_BONUSES_CODE_SHARE'); ?>
 												</button>
 											<?php endif; ?>
@@ -195,13 +195,13 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 					<div class="uk-card-footer">
 						<div radicalmart_bonuses-referrals_code="container" data-reload="0">
 							<div radicalmart_bonuses-referrals_code="error" class="uk-alert uk-alert-danger"
-								 style="display: none"></div>
+							     style="display: none"></div>
 							<div radicalmart_bonuses-referrals_code="success" class="uk-alert uk-alert-success"
-								 style="display: none"></div>
+							     style="display: none"></div>
 							<div class="uk-position-relative">
 								<div radicalmart_bonuses-referrals_code="loading"
-									 class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-overlay-default"
-									 style="display: none">
+								     class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-overlay-default"
+								     style="display: none">
 									<div uk-spinner="ratio: 3"></div>
 								</div>
 								<div class="uk-margin-bottom uk-grid-small uk-child-width-auto@s" uk-grid="">
@@ -230,7 +230,7 @@ $linkEnabled = ((int) ParamsHelper::getComponentParams()->get('bonuses_codes_coo
 									?>
 								</div>
 								<button type="button" radicalmart_bonuses-referrals_code="create"
-										class="uk-button uk-button-small uk-button-primary">
+								        class="uk-button uk-button-small uk-button-primary">
 									<?php echo Text::_('COM_RADICALMART_BONUSES_REFERRALS_CODES_CREATE_BUTTON'); ?>
 								</button>
 							</div>

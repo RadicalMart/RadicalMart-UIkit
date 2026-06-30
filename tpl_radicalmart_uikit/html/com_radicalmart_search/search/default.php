@@ -18,14 +18,14 @@ use Joomla\CMS\Layout\LayoutHelper;
 ?>
 <div id="RadicalMart" class="search">
 	<h1 class="uk-h2 uk-margin uk-margin-remove-top">
-		<?php echo $this->params->get('seo_search_h1', Text::_('COM_RADICALMART_SEARCH_TITLE')); ?>
+		<?php echo $this->escape($this->params->get('seo_search_h1', Text::_('COM_RADICALMART_SEARCH_TITLE'))); ?>
 	</h1>
 	<div class="uk-margin">
 		<form action="<?php echo $this->link; ?>" class="uk-search uk-search-default">
 			<?php $this->filterForm->setFieldAttribute('keyword', 'class', 'uk-search-input');
 			echo $this->filterForm->getInput('keyword'); ?>
 			<button class="uk-search-icon-flip" uk-search-icon
-					title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>"></button>
+			        title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>"></button>
 		</form>
 	</div>
 	<div class="uk-margin">

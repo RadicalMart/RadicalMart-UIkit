@@ -38,7 +38,8 @@ if ($this->paid)
 	<div class="uk-text-center uk-container uk-container-small">
 		<div uk-icon="icon:check; ratio:5" class="uk-text-success"></div>
 		<h1 class="uk-h2 uk-margin-small-top">
-			<?php echo $this->params->get('seo_done_h1', Text::_('COM_RADICALMART_DONE_PAGE_H1')); ?>
+			<?php echo $this->escape($this->params->get('seo_done_h1',
+					($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_DONE_PAGE_H1'))); ?>
 		</h1>
 		<div>
 			<a href="<?php echo Uri::root(); ?>" class="uk-button uk-button-default">

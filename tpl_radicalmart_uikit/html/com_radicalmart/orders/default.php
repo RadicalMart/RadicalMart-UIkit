@@ -48,8 +48,8 @@ if ($this->params->get('trigger_js', 1))
 		</div>
 		<div>
 			<h1 class="uk-h2 uk-margin uk-margin-remove-top">
-				<?php echo $this->params->get('seo_orders_h1', ($this->menuCurrent)
-						? $this->menu->title : Text::_('COM_RADICALMART_ORDERS')); ?>
+				<?php echo $this->escape($this->params->get('seo_orders_h1',
+						($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_ORDERS'))); ?>
 			</h1>
 			<?php if (empty($this->items)): ?>
 				<div class="uk-card-body">
