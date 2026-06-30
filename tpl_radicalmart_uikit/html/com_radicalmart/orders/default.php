@@ -66,7 +66,7 @@ if ($this->params->get('trigger_js', 1))
 									<span><?php echo $item->title; ?></span>
 									<span class="uk-text-muted uk-text-small">
 										<?php echo Text::sprintf('COM_RADICALMART_DATE_FROM',
-												HTMLHelper::date($item->created, Text::_('DATE_FORMAT_LC4'))); ?>
+												HTMLHelper::date($item->created, Text::_('DATE_FORMAT_LC5'))); ?>
 									</span>
 								</a>
 							</h2>
