@@ -49,21 +49,30 @@ extract($displayData);
  */
 ?>
 
-<div class="uk-button-group">
+<div class="uk-button-group uk-flex-wrap">
 	<?php foreach ($options as $o => $option):
-		if ((int) $option->disable === 1) continue;
+		if ((int) $option->disable === 1)
+		{
+			continue;
+		}
 		$checked    = ($option->value === $value) ? ' selected' : '';
 		$attributes = array(
-			'id'    => $id . '_' . $o,
-			'name'  => $name,
-			'value' => htmlspecialchars($option->value, ENT_COMPAT, 'UTF-8'),
-			'class' => 'uk-hidden'
+				'id'    => $id . '_' . $o,
+				'name'  => $name,
+				'value' => htmlspecialchars($option->value, ENT_COMPAT, 'UTF-8'),
+				'class' => 'uk-hidden'
 		);
-		if (!empty($onchange)) $attributes['onchange'] = $onchange;
-		if ($checked) $attributes['checked'] = '';
+		if (!empty($onchange))
+		{
+			$attributes['onchange'] = $onchange;
+		}
+		if ($checked)
+		{
+			$attributes['checked'] = '';
+		}
 		?>
 		<label for="<?php echo $id . '_' . $o; ?>"
-			   class="uk-button uk-button-<?php echo ($checked) ? 'primary' : 'default'; ?>">
+		       class="uk-button uk-button-<?php echo ($checked) ? 'primary' : 'default'; ?>">
 			<input type="radio" <?php echo ArrayHelper::toString($attributes); ?>>
 			<?php echo Text::_($option->text); ?>
 		</label>
