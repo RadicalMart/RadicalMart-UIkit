@@ -42,7 +42,7 @@ if (!$hidePrice && $product->in_stock)
 	}
 }
 ?>
-<div class="product-block uk-cart uk-card-default uk-card-small"
+<div class="product-block uk-card uk-card-default uk-card-small"
 		<?php if (empty($product->in_stock)) echo 'style="opacity:0.5"'; ?>>
 	<div class="uk-position-relative">
 		<?php echo LayoutHelper::render('components.radicalmart.items.image', $displayData);

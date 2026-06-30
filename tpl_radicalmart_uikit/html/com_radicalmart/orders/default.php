@@ -59,7 +59,7 @@ if ($this->params->get('trigger_js', 1))
 				</div>
 			<?php else: ?>
 				<?php foreach ($this->items as $i => $item): ?>
-					<div class="uk-cart uk-card-default uk-card-small uk-margin">
+					<div class="uk-card uk-card-default uk-card-small uk-margin">
 						<div class="uk-card-header uk-position-relative">
 							<h2 class="uk-h4 uk-margin-remove">
 								<a href="<?php echo $item->link; ?>">
