@@ -9,9 +9,11 @@
  * @link        https://radicalmart.ru/
  */
 
-/** @var \Joomla\Component\RadicalMart\Site\View\Product\HtmlView $this */
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+
+/** @var \Joomla\Component\RadicalMart\Site\View\Product\HtmlView $this */
 
 $hasTabs = false;
 if (!empty($this->product->fieldsets))

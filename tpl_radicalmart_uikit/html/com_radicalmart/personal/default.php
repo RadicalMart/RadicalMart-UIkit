@@ -127,10 +127,10 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 						($this->menuCurrent) ? $this->menu->title : Text::_('COM_RADICALMART_PERSONAL')); ?>
 			</h1>
 			<form action="<?php echo $this->link; ?>" name="personalForm" id="personalForm" method="post"
-				  enctype="multipart/form-data" class="uk-form form-validate">
+			      enctype="multipart/form-data" class="uk-form form-validate">
 				<?php if (!empty($sections['contacts'])): ?>
 					<div id="personal_section_contacts"
-						 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
+					     class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
 						<div class="uk-card-header">
 							<h2 class="uk-margin-remove uk-h4">
 								<?php echo Text::_('COM_RADICALMART_CONTACTS'); ?>
@@ -168,7 +168,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 					?>
 
 					<div id="personal_section_shipping_<?php echo $method->id; ?>"
-						 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
+					     class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small" <?php echo $hide; ?>>
 						<div class="uk-card-header">
 							<h2 class="uk-margin-remove uk-h4">
 								<?php echo Text::sprintf('COM_RADICALMART_PERSONAL_SHIPPING', $method->title); ?>
@@ -180,7 +180,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							<?php else: ?>
 								<?php foreach ($section as $fieldset): ?>
 									<fieldset id="personal_<?php echo $fieldset->name; ?>"
-											  class="uk-fieldset">
+									          class="uk-fieldset">
 										<?php if (!empty($fieldset->label)): ?>
 											<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
 										<?php endif; ?>
@@ -209,9 +209,8 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							'group'     => 'payment.' . $key,
 					]);
 					?>
-
 					<div id="personal_section_payment_<?php echo $method->id; ?>"
-						 class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
+					     class="uk-margin uk-position-relative uk-card uk-card-default uk-card-small" <?php echo $hide; ?>>
 						<div class="uk-card-header">
 							<h2 class="uk-margin-remove uk-h4">
 								<?php echo Text::sprintf('COM_RADICALMART_PERSONAL_PAYMENT', $method->title); ?>
@@ -223,7 +222,7 @@ foreach ($this->form->getFieldsets() as $key => $fieldset)
 							<?php else: ?>
 								<?php foreach ($section as $fieldset): ?>
 									<fieldset id="personal_<?php echo $fieldset->name; ?>"
-											  class="uk-fieldset">
+									          class="uk-fieldset">
 										<?php if (!empty($fieldset->label)): ?>
 											<legend class="uk-h4"><?php echo Text::_($fieldset->label); ?></legend>
 										<?php endif; ?>

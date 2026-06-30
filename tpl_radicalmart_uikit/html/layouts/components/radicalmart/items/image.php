@@ -9,6 +9,8 @@
  * @link        https://radicalmart.ru/
  */
 
+\defined('_JEXEC') or die;
+
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Component\RadicalMart\Site\Helper\MediaHelper;
 

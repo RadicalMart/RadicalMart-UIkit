@@ -49,7 +49,7 @@ $defaultFieldsParams = Zone::$defaultFieldsParams;
 			<div class="uk-width-1-1"><?php echo $form->getInput('country', $group); ?></div>
 		<?php endif; ?>
 		<?php if ($shipping->params->get('field_region', $defaultFieldsParams['region']) !== 'hidden'): ?>
-			<div class="uk-width-1-3@s"><?php echo $form->getInput('region', 'shipping'); ?></div>
+			<div class="uk-width-1-3@s"><?php echo $form->getInput('region', $group); ?></div>
 		<?php endif; ?>
 		<?php if ($shipping->params->get('field_city', $defaultFieldsParams['city']) !== 'hidden'): ?>
 			<div class="uk-width-2-3@s"><?php echo $form->getInput('city', $group); ?></div>
