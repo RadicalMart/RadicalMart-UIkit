@@ -1,6 +1,6 @@
-.idea
-.vscode
-.phing
-.packages
+.*/
+AGENTS.md
 node_modules
 package-lock.json
+build/dev.js
+tpl_radicalmart_uikit/media

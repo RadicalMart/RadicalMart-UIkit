@@ -8,6 +8,8 @@
  * @link        https://radicalmart.ru/
  */
 
+"use strict";
+
 document.addEventListener('DOMContentLoaded', function () {
 	let config = {
 		cart: {

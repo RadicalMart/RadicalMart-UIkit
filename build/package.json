@@ -1,0 +1,34 @@
+{
+	"name": "radicalmart-uikit",
+	"version": "3.0.19-dev",
+	"description": "UIkit overrides for RadicalMart",
+	"private": true,
+	"scripts": {
+		"com_radicalmart": "webpack --progress --config tpl_radicalmart_uikit.js",
+		"development": "webpack --progress --config dev.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/RadicalMart/RadicalMart-UIkit.git"
+	},
+	"keywords": [],
+	"author": "RadicalMart Team",
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"email": "info@radicalmart.ru"
+	},
+	"homepage": "https://radicalmart.ru/",
+	"dependencies": {},
+	"devDependencies": {
+		"css-loader": "^7.1.4",
+		"image-minimizer-webpack-plugin": "^5.0.0",
+		"sharp": "^0.34.5",
+		"svgo": "^4.0.1",
+		"mini-css-extract-plugin": "^2.10.2",
+		"sass": "^1.99.0",
+		"sass-loader": "^16.0.7",
+		"terser-webpack-plugin": "^5.4.0",
+		"webpack": "5.106.2",
+		"webpack-cli": "^7.0.2"
+	}
+}
