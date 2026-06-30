@@ -51,9 +51,9 @@ if (empty($filter) || empty($filter->getGroup('')))
 			$contentId = $id . '_content';
 			?>
 			<li class="<?php echo $open; ?>">
-				<div class="uk-accordion-title uk-text-small uk-link uk-margin-small">
+				<a class="uk-accordion-title uk-text-small uk-link uk-margin-small">
 					<?php echo Text::_($filter->getFieldAttribute($name, 'label', $name, $group)); ?>
-				</div>
+				</a>
 				<div class="uk-accordion-content">
 					<?php echo $filter->getInput($name, $group); ?>
 				</div>
