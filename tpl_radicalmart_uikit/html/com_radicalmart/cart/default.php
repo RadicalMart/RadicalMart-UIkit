@@ -18,7 +18,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 /** @var \Joomla\Component\RadicalMart\Site\View\Cart\HtmlView $this */
 
 // Load assets
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 $assets->useScript('com_radicalmart.site.cart');
 
 if ($this->params->get('radicalmart_js', 1))
@@ -150,6 +150,9 @@ if (!empty($this->productsErrors))
 											      style="width: 1rem"
 											      radicalmart-cart="quantity_minus"></span>
 											<input radicalmart-cart="quantity" type="text" name="quantity"
+											       aria-label="<?php echo $this->escape(
+														   Text::_('COM_RADICALMART_QUANTITY') . ': '
+														   . $product->title); ?>"
 											       data-set="1"
 											       class="uk-input uk-text-center uk-form-width-small"
 											       step="<?php echo $product->quantity['step']; ?>"

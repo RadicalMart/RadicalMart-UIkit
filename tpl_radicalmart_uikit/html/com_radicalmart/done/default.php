@@ -14,9 +14,11 @@
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 
+/** @var \Joomla\Component\RadicalMart\Site\View\Done\HtmlView $this */
+
 // Load assets
 /** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
-$assets = $this->document->getWebAssetManager();
+$assets = $this->getDocument()->getWebAssetManager();
 if ($this->params->get('radicalmart_js', 1))
 {
 	$assets->useScript('com_radicalmart.site');

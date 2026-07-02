@@ -35,7 +35,7 @@ if ($this->params->get('hide_prices', 0) || !empty($this->product->price['hide']
 		</div>
 	<?php endif; ?>
 	<div radicalmart-cart="product" data-id="<?php echo $this->product->id; ?>"
-		 class="uk-margin uk-child-width-auto uk-flex-middle" uk-grid>
+	     class="uk-margin uk-child-width-auto uk-flex-middle" uk-grid>
 		<?php if (!empty($this->product->in_stock)): ?>
 			<div class="price uk-width-expand">
 				<?php if ($this->product->price['discount_enable']): ?>
@@ -64,21 +64,23 @@ if ($this->params->get('hide_prices', 0) || !empty($this->product->price['hide']
 			<?php if ((int) $this->product->state === 1 && $this->mode === 'shop'): ?>
 				<div class="uk-flex uk-flex-middle">
 					<span class="uk-link uk-margin-small-right"
-						  uk-icon="icon: minus"
-						  radicalmart-cart="quantity_minus"></span>
+					      uk-icon="icon: minus"
+					      radicalmart-cart="quantity_minus"></span>
 					<input radicalmart-cart="quantity" type="text" name="quantity"
-						   class="uk-input uk-form-width-small uk-text-center"
-						   step="<?php echo $this->product->quantity['step']; ?>"
-						   min="<?php echo $this->product->quantity['min']; ?>"
+					       aria-label="<?php echo $this->escape(Text::_('COM_RADICALMART_QUANTITY') . ': '
+								   . $this->product->title); ?>"
+					       class="uk-input uk-form-width-small uk-text-center"
+					       step="<?php echo $this->product->quantity['step']; ?>"
+					       min="<?php echo $this->product->quantity['min']; ?>"
 							<?php if (!empty($this->product->quantity['max']))
 							{
 								echo 'max="' . $this->product->quantity['max'] . '"';
 							}
 							?>
-						   value="<?php echo $this->product->quantity['min']; ?>"/>
+                           value="<?php echo $this->product->quantity['min']; ?>"/>
 					<span class="uk-link uk-margin-small-left"
-						  uk-icon="icon: plus"
-						  radicalmart-cart="quantity_plus"></span>
+					      uk-icon="icon: plus"
+					      radicalmart-cart="quantity_plus"></span>
 				</div>
 				<div>
 					<button radicalmart-cart="add" type="button" class="uk-button uk-button-primary">

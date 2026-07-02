@@ -27,7 +27,9 @@ $options = [
 		'ordering_date DESC'   => 'COM_RADICALMART_CATEGORY_ITEMS_ORDERING_DATE_DESC',
 ]
 ?>
-<select class="uk-select uk-form-width-medium" onchange="setProductsOrdering(this.value);">
+<select class="uk-select uk-form-width-medium"
+        aria-label="<?php echo $this->escape(Text::_('COM_RADICALMART_PRODUCTS_LIST_ORDERING')); ?>"
+        onchange="setProductsOrdering(this.value);">
 	<?php foreach ($options as $value => $text): ?>
 		<option value="<?php echo $value; ?>"
 				<?php if (strtolower($value) === strtolower($this->productsListOrdering)) echo 'selected'; ?>>
