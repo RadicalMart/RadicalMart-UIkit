@@ -20,6 +20,7 @@ extract($displayData);
  * Layout variables
  * -----------------
  *
+ * @var  string $context      Render context selector string.
  * @var  object $product      Product object.
  * @var  string $mode         RadicalMart mode.
  * @var  int    $height_px    Int height value in px
@@ -65,6 +66,10 @@ if (!isset($link))
 	$link = $product->link;
 }
 
+if (empty($context))
+{
+	$context = 'com_radicalmart.item.image';
+}
 ?>
 <?php if (!empty($link)) : ?>
 	<a href="<?php echo $link; ?>" class="<?php echo $class; ?>" style="<?php echo $style; ?>">
@@ -72,8 +77,7 @@ if (!isset($link))
 				background-image: url('<?php echo $blur; ?>');
 				filter: blur(14px) brightness(0.85);
 				transform: scale(1.1);"></div>
-		<?php echo MediaHelper::renderImage(
-				'com_radicalmart.metas.variability.grid', $product->image,
+		<?php echo MediaHelper::renderImage($context, $product->image,
 				[
 						'alt'     => $product->title,
 						'loading' => 'lazy',
@@ -92,8 +96,7 @@ if (!isset($link))
 				background-image: url('<?php echo $blur; ?>');
 				filter: blur(14px) brightness(0.85);
 				transform: scale(1.1);"></div>
-		<?php echo MediaHelper::renderImage(
-				'com_radicalmart.metas.variability.grid', $product->image,
+		<?php echo MediaHelper::renderImage($context, $product->image,
 				[
 						'alt'     => $product->title,
 						'loading' => 'lazy',

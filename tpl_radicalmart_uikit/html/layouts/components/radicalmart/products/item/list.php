@@ -41,6 +41,8 @@ if (!$hidePrice && $product->in_stock)
 		$assets->useScript('com_radicalmart.site.trigger');
 	}
 }
+
+$displayData['context'] = 'com_radicalmart.products.list';
 ?>
 <div class="product-block uk-card-body uk-card-small uk-card-default uk-margin"
 		<?php if (!$product->in_stock) echo 'style="opacity:0.5"'; ?>>

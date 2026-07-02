@@ -27,6 +27,8 @@ extract($displayData);
  */
 
 $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empty($product->price['hide']));
+
+$displayData['context'] = 'com_radicalmart.metas.variability.list';
 ?>
 <div class="product-block uk-card-body uk-card-small uk-card-default uk-margin"
 		<?php if (!$product->in_stock) echo 'style="opacity:0.5"'; ?>>

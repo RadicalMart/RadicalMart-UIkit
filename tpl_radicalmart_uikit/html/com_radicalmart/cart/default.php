@@ -92,15 +92,16 @@ if (!empty($this->productsErrors))
 						}
 						?>
 						<div class="uk-card uk-card-small uk-card-default uk-card-body uk-margin"
-							 radicalmart-cart="product"
-							 data-id="<?php echo $product->id; ?>"
-							 data-key="<?php echo $product_key; ?>"
-							 data-cart-product="1">
+						     radicalmart-cart="product"
+						     data-id="<?php echo $product->id; ?>"
+						     data-key="<?php echo $product_key; ?>"
+						     data-cart-product="1">
 							<div class="uk-flex uk-flex-middle uk-grid-small" uk-grid>
 								<div class="uk-width-auto uk-visible@s">
 									<div class="uk-position-relative uk-width-1-1">
 										<?php echo LayoutHelper::render('components.radicalmart.items.image',
 												[
+														'context'   => 'com_radicalmart.products.cart',
 														'product'   => $product,
 														'width_px'  => 64,
 														'height_px' => 64,
@@ -125,8 +126,8 @@ if (!empty($this->productsErrors))
 								<div class="uk-width-small@s uk-text-center@s uk-text-right@m uk-text-left@l">
 									<?php if ($in_stock): ?>
 										<div class="uk-text-small uk-text-muted"
-											 radicalmart-cart="product-discount-block"
-											 data-key="<?php echo $product_key; ?>"
+										     radicalmart-cart="product-discount-block"
+										     data-key="<?php echo $product_key; ?>"
 												<?php if (empty($product->order['discount_enable'])) echo 'style="display:none"'; ?>>
 											<s radicalmart-cart-display="products.<?php echo $product_key; ?>.order.base_string">
 												<?php echo $product->order['base_string']; ?>
@@ -145,31 +146,31 @@ if (!empty($this->productsErrors))
 									<?php if ($in_stock): ?>
 										<div class="uk-flex-center uk-flex-middle">
 											<span class="uk-link uk-margin-small-right uk-text-danger"
-												  uk-icon="icon: minus;"
-												  style="width: 1rem"
-												  radicalmart-cart="quantity_minus"></span>
+											      uk-icon="icon: minus;"
+											      style="width: 1rem"
+											      radicalmart-cart="quantity_minus"></span>
 											<input radicalmart-cart="quantity" type="text" name="quantity"
-												   data-set="1"
-												   class="uk-input uk-text-center uk-form-width-small"
-												   step="<?php echo $product->quantity['step']; ?>"
-												   min="<?php echo $product->quantity['min']; ?>"
+											       data-set="1"
+											       class="uk-input uk-text-center uk-form-width-small"
+											       step="<?php echo $product->quantity['step']; ?>"
+											       min="<?php echo $product->quantity['min']; ?>"
 													<?php if (!empty($product->quantity['max']))
 													{
 														echo 'max="' . $product->quantity['max'] . '"';
 													} ?>
-												   value="<?php echo $product->order['quantity']; ?>"/>
+                                                   value="<?php echo $product->order['quantity']; ?>"/>
 											<span class="uk-link uk-margin-small-left uk-text-success"
-												  uk-icon="icon: plus;"
-												  style="width: 1rem"
-												  radicalmart-cart="quantity_plus"></span>
+											      uk-icon="icon: plus;"
+											      style="width: 1rem"
+											      radicalmart-cart="quantity_plus"></span>
 										</div>
 									<?php endif; ?>
 								</div>
 								<div class="uk-width-expand@s uk-width-small@l uk-text-center@s uk-text-right@l">
 									<?php if ($in_stock): ?>
 										<div class="uk-text-small uk-text-muted uk-text-nowrap"
-											 data-radicalmart-cart="product-discount-block"
-											 data-key="<?php echo $product_key; ?>"
+										     data-radicalmart-cart="product-discount-block"
+										     data-key="<?php echo $product_key; ?>"
 												<?php if (empty($product->order['discount_enable'])) echo 'style="display:none"'; ?>>
 											<s radicalmart-cart-display="products.<?php echo $product_key; ?>.order.sum_base_string">
 												<?php echo $product->order['sum_base_string']; ?>
@@ -180,19 +181,19 @@ if (!empty($this->productsErrors))
 											</span>)
 										</div>
 										<div class="uk-text-nowrap uk-text-bold"
-											 radicalmart-cart-display="products.<?php echo $product_key; ?>.order.sum_final_string">
+										     radicalmart-cart-display="products.<?php echo $product_key; ?>.order.sum_final_string">
 											<?php echo $product->order['sum_final_string']; ?>
 										</div>
 									<?php endif; ?>
 								</div>
 								<div class="uk-width-auto@s uk-visible@s">
 									<span class="uk-link uk-text-danger" radicalmart-cart="remove"
-										  uk-icon="icon:close;" style="width: 1rem"></span>
+									      uk-icon="icon:close;" style="width: 1rem"></span>
 								</div>
 							</div>
 							<div class="uk-hidden@s uk-position-absolute uk-position-top-right uk-position-small">
 								<span class="uk-link uk-text-danger" radicalmart-cart="remove"
-									  uk-icon="icon:close; ratio:1"></span>
+								      uk-icon="icon:close; ratio:1"></span>
 							</div>
 						</div>
 					<?php endforeach; ?>

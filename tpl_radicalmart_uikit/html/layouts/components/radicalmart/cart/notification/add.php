@@ -32,6 +32,7 @@ extract($displayData);
 		uk-link-reset uk-text-decoration-none uk-text-normal">
 			<div class="uk-width-auto">
 				<?php echo LayoutHelper::render('components.radicalmart.items.image', [
+						'context'   => 'com_radicalmart.products.card.notification.add',
 						'product'   => $product,
 						'link'      => false,
 						'height_px' => 64,

@@ -86,8 +86,8 @@ if ($this->params->get('trigger_js', 1))
 									<?php foreach ($item->products as $product): ?>
 										<div>
 											<div class="uk-margin-small-right">
-												<?php echo LayoutHelper::render(
-														'components.radicalmart.items.image', [
+												<?php echo LayoutHelper::render('components.radicalmart.items.image', [
+														'context'   => 'com_radicalmart.products.orders',
 														'product'   => $product,
 														'width_px'  => 64,
 														'height_px' => 64,
@@ -102,7 +102,7 @@ if ($this->params->get('trigger_js', 1))
 										count($item->products)); ?>
 							</div>
 							<div class="uk-child-width-1-3@s uk-child-width-1-2@m uk-child-width-1-3@l uk-grid-small uk-margin"
-								 uk-grid>
+							     uk-grid>
 								<?php if ($item->payment): ?>
 									<div>
 										<span class="uk-text-meta">

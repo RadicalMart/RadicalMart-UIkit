@@ -27,6 +27,8 @@ extract($displayData);
  */
 
 $hidePrice = (ParamsHelper::getComponentParams()->get('hide_prices', 0) || !empty($product->price['hide']));
+
+$displayData['context'] = 'com_radicalmart.metas.variability.table';
 ?>
 <tr <?php if (!$product->in_stock) echo 'style="opacity:0.5"'; ?>>
 	<td>

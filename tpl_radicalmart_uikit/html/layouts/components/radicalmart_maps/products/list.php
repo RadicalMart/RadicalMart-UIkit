@@ -30,8 +30,9 @@ if (empty($items))
 	return;
 }
 $mode = ParamsHelper::getComponentParams()->get('mode', 'shop');
-?>
 
+$displayData['context'] = 'com_radicalmart_maps.products.list';
+?>
 <div>
 	<ul class="uk-list uk-list-divider">
 		<?php foreach ($items as $product) :
@@ -44,8 +45,8 @@ $mode = ParamsHelper::getComponentParams()->get('mode', 'shop');
 						<div class="uk-width-1-4 uk-flex uk-flex-top">
 							<div class="uk-position-relative uk-width-1-1">
 								<?php echo LayoutHelper::render('components.radicalmart.items.image', [
-										'product' => $product,
-										'height_px'  => 100,
+										'product'   => $product,
+										'height_px' => 100,
 								]); ?>
 							</div>
 						</div>

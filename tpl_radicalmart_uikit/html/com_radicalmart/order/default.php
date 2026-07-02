@@ -49,6 +49,7 @@ setUikitFormClasses($this->form);
 								<div class="uk-position-relative uk-width-1-1">
 									<?php echo LayoutHelper::render('components.radicalmart.items.image',
 											[
+													'context'   => 'com_radicalmart.products.order',
 													'product'   => $product,
 													'width_px'  => 64,
 													'height_px' => 64,

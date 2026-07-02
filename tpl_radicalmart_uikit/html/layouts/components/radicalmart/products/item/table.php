@@ -41,6 +41,8 @@ if (!$hidePrice && $product->in_stock)
 		$assets->useScript('com_radicalmart.site.trigger');
 	}
 }
+
+$displayData['context'] = 'com_radicalmart.products.tabel';
 ?>
 <tr <?php if (!$product->in_stock) echo 'style="opacity:0.5"'; ?>>
 	<td>
@@ -108,15 +110,15 @@ if (!$hidePrice && $product->in_stock)
 			<?php if (!$hidePrice && $mode === 'shop' && (int) $product->state === 1): ?>
 				<div radicalmart-cart="product" data-id="<?php echo $product->id; ?>">
 					<input radicalmart-cart="quantity" type="hidden" name="quantity"
-						   class="uk-input uk-form-width-small uk-text-center"
-						   step="<?php echo $product->quantity['step']; ?>"
-						   min="<?php echo $product->quantity['min']; ?>"
+					       class="uk-input uk-form-width-small uk-text-center"
+					       step="<?php echo $product->quantity['step']; ?>"
+					       min="<?php echo $product->quantity['min']; ?>"
 							<?php if (!empty($product->quantity['max']))
 							{
 								echo 'max="' . $product->quantity['max'] . '"';
 							}
 							?>
-						   value="<?php echo $product->quantity['min']; ?>"/>
+                           value="<?php echo $product->quantity['min']; ?>"/>
 					<button radicalmart-cart="add" type="button" class="uk-button uk-button-primary">
 						<?php echo Text::_('COM_RADICALMART_CART_ADD'); ?>
 					</button>
