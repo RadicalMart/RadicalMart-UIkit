@@ -58,12 +58,12 @@ foreach ([$login, $registration] as &$form)
 		<div class="uk-modal-body">
 			<div class="uk-alert uk-alert-danger" radicalmart-login="form_error" style="display: none"></div>
 			<?php if ($registration): ?>
-				<div class="radicalmart-login-toggle-login radicalmart-login-toggle-registration text-center collapse show">
+				<div class="radicalmart-login-toggle-login radicalmart-login-toggle-registration uk-text-center">
 					<span class="uk-button uk-button-large uk-button-primary"
 						  uk-toggle="target: .radicalmart-login-toggle-login">
 						<?php echo Text::_('JYES'); ?>
 					</span>
-					<span class="uk-button uk-button-large uk-button-secondary" data-bs-toggle="collapse"
+					<span class="uk-button uk-button-large uk-button-secondary"
 						  uk-toggle="target: .radicalmart-login-toggle-registration">
 						<?php echo Text::_('JNO'); ?>
 					</span>
@@ -107,7 +107,7 @@ foreach ([$login, $registration] as &$form)
 					} ?>
 					<?php echo HTMLHelper::_('form.token'); ?>
 					<div>
-						<span class="btn btn-primary"
+						<span class="uk-button uk-button-primary"
 							  onclick="window.RadicalMartLogin().registration()">
 							<?php echo Text::_('COM_RADICALMART_LOGIN_FORM_SUBMIT_REGISTRATION'); ?>
 						</span>

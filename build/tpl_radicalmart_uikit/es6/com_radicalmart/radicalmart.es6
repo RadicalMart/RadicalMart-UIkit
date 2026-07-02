@@ -339,7 +339,7 @@ document.addEventListener('onRadicalMartCheckoutBeforeCreateOrder', function (ev
 			'[data-radicalmart-checkout="submit-button"]')
 			.forEach(function (button) {
 				button.setAttribute('disabled', '');
-				button.classList.add('disabled');
+				button.classList.add('uk-disabled');
 			});
 	}
 
