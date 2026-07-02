@@ -56,7 +56,7 @@ if ($params->get('ajax', 0))
 				$form->setFieldAttribute($name, 'id', $id, $group);
 				?>
 				<li class="<?php echo $open; ?>">
-					<a class="uk-accordion-title">
+					<a class="uk-accordion-title" href>
 						<span class="uk-text-small">
 							<?php echo Text::_($form->getFieldAttribute($name, 'label', $name, $group)); ?>
 						</span>

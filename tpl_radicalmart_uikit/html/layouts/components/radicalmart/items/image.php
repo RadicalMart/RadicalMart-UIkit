@@ -70,6 +70,8 @@ if (empty($context))
 {
 	$context = 'com_radicalmart.item.image';
 }
+
+$item_key = (str_contains($context, '.meta')) ? 'meta_id' : 'product_id';
 ?>
 <?php if (!empty($link)) : ?>
 	<a href="<?php echo $link; ?>" class="<?php echo $class; ?>" style="<?php echo $style; ?>">
@@ -85,7 +87,7 @@ if (empty($context))
 						'class'   => 'uk-position-relative uk-position-z-index',
 				],
 				[
-						'meta_id'  => $product->id,
+						$item_key   => $product->id,
 						'no_image' => true,
 						'thumb'    => true,
 				]); ?>

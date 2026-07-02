@@ -42,7 +42,7 @@ if (empty($filter) || empty($filter->getGroup('')))
 			$name  = $field->__get('fieldname');
 			$group = $field->__get('group');
 
-			$open = ($i < 6 || $filter->getValue($name, $group)) ? 'show' : '';
+			$open = ($i < 6 || $filter->getValue($name, $group)) ? 'uk-open' : '';
 			$id   = $jsOptionsKey . '_' . $field->__get('id');
 
 			$filter->setFieldAttribute($name, 'id', $id, $group);
@@ -51,7 +51,7 @@ if (empty($filter) || empty($filter->getGroup('')))
 			$contentId = $id . '_content';
 			?>
 			<li class="<?php echo $open; ?>">
-				<a class="uk-accordion-title">
+				<a class="uk-accordion-title" href>
 					<span class="uk-text-small">
 						<?php echo Text::_($filter->getFieldAttribute($name, 'label', $name, $group)); ?>
 					</span>
