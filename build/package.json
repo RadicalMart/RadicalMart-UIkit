@@ -1,10 +1,10 @@
 {
 	"name": "radicalmart-uikit",
-	"version": "3.0.24",
+	"version": "3.0.25-dev",
 	"description": "UIkit overrides for RadicalMart",
 	"private": true,
 	"scripts": {
-		"com_radicalmart": "webpack --progress --config tpl_radicalmart_uikit.js",
+		"tpl_radicalmart_uikit": "webpack --progress --config tpl_radicalmart_uikit.js",
 		"development": "webpack --progress --config dev.js"
 	},
 	"repository": {
