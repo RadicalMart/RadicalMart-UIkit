@@ -54,7 +54,7 @@ if (!empty($parentclass))
 	<?php else : ?>
 		<div class="uk-form-label"><?php echo $label; ?></div>
 	<?php endif; ?>
-	<div class="uk-form-controls">
+	<div class="uk-form-controls <?php if ($hideLabel) echo 'uk-margin-remove-left'; ?>">
 		<?php echo $input; ?>
 		<?php if (!$hideDescription && !empty($description)) : ?>
 			<div id="<?php echo $id; ?>" class="<?php echo $descClass ?>">
