@@ -62,6 +62,11 @@ setUikitFormClasses($this->form);
 				{
 					continue;
 				}
+				$update_button = true;
+				if (!empty($fieldset->update_button) && $fieldset->update_button === 'false')
+				{
+					$update_button = false;
+				}
 				?>
 				<form id="settings_<?php echo $key; ?>" radicalmart-settings="container" onsubmit="return;"
 					  class="uk-form uk-margin uk-position-relative uk-card uk-card-default uk-card-small">
@@ -78,12 +83,14 @@ setUikitFormClasses($this->form);
 						<?php echo str_replace('readonly', 'disabled readonly',
 								$this->form->renderFieldset($key, ['class' => 'uk-margin'])); ?>
 					</div>
-					<div class="uk-card-footer">
-						<a onclick="RadicalMartSettingsUpdate_<?php echo $key; ?>(this)"
-						   class="uk-button uk-button-primary">
-							<?php echo Text::_('COM_RADICALMART_UPDATE'); ?>
-						</a>
-					</div>
+					<?php if ($update_button): ?>
+						<div class="uk-card-footer">
+							<a onclick="RadicalMartSettingsUpdate_<?php echo $key; ?>(this)"
+							   class="uk-button uk-button-primary">
+								<?php echo Text::_('COM_RADICALMART_UPDATE'); ?>
+							</a>
+						</div>
+					<?php endif; ?>
 				</form>
 			<?php endforeach; ?>
 		</div>

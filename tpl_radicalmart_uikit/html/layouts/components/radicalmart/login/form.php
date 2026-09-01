@@ -75,7 +75,7 @@ foreach ([$login, $registration] as &$form)
 				  class="radicalmart-login-toggle-login" <?php if ($registration) echo 'hidden'; ?>>
 				<?php foreach ($login->getFieldsets() as $fieldset)
 				{
-					echo $login->renderFieldset($fieldset->name);
+					echo $login->renderFieldset($fieldset->name, ['class' => 'uk-margin']);
 				} ?>
 				<?php echo HTMLHelper::_('form.token'); ?>
 				<input type="hidden" name="task" value="checkout.login"/>
@@ -103,7 +103,7 @@ foreach ([$login, $registration] as &$form)
 					  class="radicalmart-login-toggle-registration" hidden>
 					<?php foreach ($registration->getFieldsets() as $fieldset)
 					{
-						echo $registration->renderFieldset($fieldset->name);
+						echo $registration->renderFieldset($fieldset->name, ['class' => 'uk-margin']);
 					} ?>
 					<?php echo HTMLHelper::_('form.token'); ?>
 					<div>
