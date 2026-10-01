@@ -70,6 +70,20 @@ setUikitFormClasses($this->form);
 										<?php echo $product->title; ?>
 									</a>
 								</div>
+								<?php if (!empty($product->extra_display)): ?>
+									<div class="uk-flex uk-flex-wrap">
+										<?php foreach ($product->extra_display as $extra):
+											if (empty($extra) || empty($extra['html']))
+											{
+												continue;
+											}
+											?>
+											<div class="uk-margin-small-right uk-margin-small-bottom">
+												<?php echo $extra['html']; ?>
+											</div>
+										<?php endforeach; ?>
+									</div>
+								<?php endif; ?>
 							</div>
 							<div class="uk-width-1-1 uk-hidden@l"></div>
 							<div class="uk-width-1-2 uk-width-small@s uk-text-left">
