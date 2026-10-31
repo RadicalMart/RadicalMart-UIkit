@@ -66,15 +66,17 @@ $displayData['context'] = 'com_radicalmart.products.list';
 				<a href="<?php echo $product->link; ?>"
 				   class="uk-link-reset"><?php echo $product->title; ?></a>
 			</div>
-			<?php if (!empty($product->fields)): ?>
-				<?php foreach ($product->fields as $field):
-					if (empty($field->value)) continue; ?>
-					<div class="uk-form-horizontal uk-margin-remove uk-clearfix">
-						<div class="uk-form-label"><?php echo $field->title; ?></div>
-						<div class="uk-form-controls uk-form-controls-text">
-							<?php echo $field->value; ?>
+			<?php if (!empty($product->fieldsets)): ?>
+				<?php foreach ($product->fieldsets as $fieldset): ?>
+					<?php foreach ($fieldset->fields as $field):
+						if (empty($field->value)) continue; ?>
+						<div class="uk-form-horizontal uk-margin-remove uk-clearfix">
+							<div class="uk-form-label"><?php echo $field->title; ?></div>
+							<div class="uk-form-controls uk-form-controls-text">
+								<?php echo $field->value; ?>
+							</div>
 						</div>
-					</div>
+					<?php endforeach; ?>
 				<?php endforeach; ?>
 			<?php endif; ?>
 			<?php echo LayoutHelper::render('components.radicalmart.items.manufacturers', $displayData); ?>
