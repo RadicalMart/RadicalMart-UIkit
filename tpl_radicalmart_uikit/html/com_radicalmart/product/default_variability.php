@@ -20,6 +20,7 @@ if (!$this->variability || !$this->variabilityForm)
 
 $jsSelector = 'radicalmart_variability_' . $this->product->id;
 $jsData     = [
+		'context'         => 'com_radicalmart.product',
 		'products'        => [],
 		'fields'          => array_keys($this->variability->fields),
 		'current_product' => $this->product->id
@@ -27,10 +28,11 @@ $jsData     = [
 foreach ($this->variability->products as $p => $product)
 {
 	$jsData['products'][$p] = [
-			'id'     => $product->id,
-			'title'  => $product->title,
-			'link'   => $product->link,
-			'fields' => $product->fieldsVariability
+			'id'       => $product->id,
+			'title'    => $product->title,
+			'link'     => $product->link,
+			'in_stock' => (bool) $product->in_stock,
+			'fields'   => $product->fieldsVariability
 	];
 }
 
@@ -39,6 +41,11 @@ $this->getDocument()->getWebAssetManager()
 		->useScript('com_radicalmart.site.variability');
 ?>
 <div radicalmart-variability="<?php echo $jsSelector; ?>">
+	<div id="<?php echo $jsSelector . '_loading'; ?>"
+		 class="uk-position-fixed uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-overlay-default"
+		 style="display: none; z-index: 9999">
+		<div uk-spinner="ratio: 3"></div>
+	</div>
 	<?php foreach ($this->variabilityForm->getGroup('') as $field):
 		$group = $field->__get('group');
 		$name = $field->__get('fieldname'); ?>

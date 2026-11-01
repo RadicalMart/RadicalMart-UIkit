@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			buttonsLock: true,
 			fromShow: true,
 			errorsShow: true,
+		},
+		variability: {
+			productRedirect: true,
 		}
 	};
 
@@ -202,7 +205,7 @@ document.addEventListener('onRadicalMartCartRenderLayout', function (event) {
 	}
 });
 
-document.addEventListener('onRadicalMartCartBeforeDisplayModule', function (event) {
+document.addEventListener('onRadicalMartCartBeforeDisplayModule', function () {
 	if (window.RadicalMartDisplay.cart.displayModuleButtonsLock) {
 		document.querySelectorAll('[radicalmart-cart="display_module"], [data-radicalmart-cart="display_module"]')
 			.forEach(function (button) {
@@ -212,7 +215,7 @@ document.addEventListener('onRadicalMartCartBeforeDisplayModule', function (even
 	}
 });
 
-document.addEventListener('onRadicalMartCartDisplayModule', (event) => {
+document.addEventListener('onRadicalMartCartDisplayModule', () => {
 	if (window.RadicalMartDisplay.cart.displayModuleButtonsLock) {
 		document.querySelectorAll('[radicalmart-cart="display_module"], [data-radicalmart-cart="display_module"]')
 			.forEach(function (button) {
@@ -246,7 +249,7 @@ document.addEventListener('onRadicalMartCartError', function (event) {
 });
 
 
-document.addEventListener('onRadicalMartCheckoutBeforeUpdateDisplayData', function (event) {
+document.addEventListener('onRadicalMartCheckoutBeforeUpdateDisplayData', function () {
 	if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
 		document.querySelectorAll('[radicalmart-checkout="submit-button"],' +
 			'[data-radicalmart-checkout="submit-button"]')
@@ -333,7 +336,7 @@ document.addEventListener('onRadicalMartCheckoutBeforeReloadForm', function (eve
 	}
 });
 
-document.addEventListener('onRadicalMartCheckoutBeforeCreateOrder', function (event) {
+document.addEventListener('onRadicalMartCheckoutBeforeCreateOrder', function () {
 	if (window.RadicalMartDisplay.checkout.submitButtonsLock) {
 		document.querySelectorAll('[radicalmart-checkout="submit-button"],' +
 			'[data-radicalmart-checkout="submit-button"]')
@@ -394,7 +397,7 @@ document.addEventListener('onRadicalMartCheckoutError', function (event) {
 	}
 });
 
-document.addEventListener('onRadicalMartLoginBeforeDisplayForm', function (event) {
+document.addEventListener('onRadicalMartLoginBeforeDisplayForm', function () {
 	if (window.RadicalMartDisplay.login.buttonsLock) {
 		document.querySelectorAll('[radicalmart-login="display_form"], [data-radicalmart-login="display_form"]')
 			.forEach(function (button) {
@@ -404,7 +407,7 @@ document.addEventListener('onRadicalMartLoginBeforeDisplayForm', function (event
 	}
 });
 
-document.addEventListener('onRadicalMartLoginAfterDisplayForm', function (event) {
+document.addEventListener('onRadicalMartLoginAfterDisplayForm', function () {
 	if (window.RadicalMartDisplay.login.buttonsLock) {
 		document.querySelectorAll('[radicalmart-login="display_form"], [data-radicalmart-login="display_form"]')
 			.forEach((button) => {
@@ -441,3 +444,22 @@ document.addEventListener('onRadicalMartLoginError', (event) => {
 			});
 	}
 });
+
+document.addEventListener('onRadicalMartVariabilitySelect', (event) => {
+	if (!window.RadicalMartDisplay.variability.productRedirect || event.detail.context !== 'com_radicalmart.product') {
+		return;
+	}
+	let result = event.detail.result,
+		product = (result.exact || result.closest);
+	if (!product) {
+		event.detail.instance.setValues();
+	}
+
+	if (product['link']) {
+		let loading = document.querySelector('#' + event.detail.selector + '_loading');
+		if (loading) {
+			loading.style.display = '';
+		}
+		window.location.href = product['link'];
+	}
+})
