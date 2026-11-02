@@ -144,7 +144,7 @@ setUikitFormClasses($this->form);
 								continue;
 							}
 							?>
-							<div class="uk-margin-small">
+							<div class="uk-margin-small uk-clearfix">
 								<?php if (!empty($label)): ?>
 									<div class="uk-form-label">
 										<?php echo Text::_($label); ?>
