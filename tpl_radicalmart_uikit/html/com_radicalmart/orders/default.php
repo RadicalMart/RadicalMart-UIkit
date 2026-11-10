@@ -103,24 +103,24 @@ if ($this->params->get('trigger_js', 1))
 							</div>
 							<div class="uk-child-width-1-3@s uk-child-width-1-2@m uk-child-width-1-3@l uk-grid-small uk-margin"
 							     uk-grid>
-								<?php if ($item->payment): ?>
+								<?php if (!empty($item->payment->get('title'))): ?>
 									<div>
 										<span class="uk-text-meta">
 											<?php echo Text::_('COM_RADICALMART_PAYMENT') . ': '; ?>
 										</span>
 										<span>
-											<?php echo $item->payment->get('title'); ?>
+											<?php echo Text::_($item->payment->get('title')); ?>
 										</span>
 									</div>
 								<?php endif; ?>
 
-								<?php if ($item->shipping): ?>
+								<?php if (!empty($item->shipping->get('title'))): ?>
 									<div>
 										<span class="uk-text-meta">
 											<?php echo Text::_('COM_RADICALMART_SHIPPING') . ': '; ?>
 										</span>
 										<span>
-											<?php echo $item->shipping->get('title'); ?>
+											<?php echo Text::_($item->shipping->get('title')); ?>
 										</span>
 									</div>
 								<?php endif; ?>

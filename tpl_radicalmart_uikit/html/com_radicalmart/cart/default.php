@@ -159,10 +159,10 @@ if (!empty($this->productsErrors))
 								<div class="uk-width-auto">
 									<?php if ($in_stock): ?>
 										<div class="uk-flex-center uk-flex-middle">
-											<span class="uk-link uk-margin-small-right uk-text-danger"
+											<a class="uk-link uk-margin-small-right uk-text-danger"
 												  uk-icon="icon: minus;"
 												  style="width: 1rem"
-												  radicalmart-cart="quantity_minus"></span>
+												  radicalmart-cart="quantity_minus"></a>
 											<input radicalmart-cart="quantity" type="text" name="quantity"
 												   aria-label="<?php echo $this->escape(
 														   Text::_('COM_RADICALMART_QUANTITY') . ': '
@@ -176,10 +176,10 @@ if (!empty($this->productsErrors))
 														echo 'max="' . $product->quantity['max'] . '"';
 													} ?>
 												   value="<?php echo $product->order['quantity']; ?>"/>
-											<span class="uk-link uk-margin-small-left uk-text-success"
+											<a class="uk-link uk-margin-small-left uk-text-success"
 												  uk-icon="icon: plus;"
 												  style="width: 1rem"
-												  radicalmart-cart="quantity_plus"></span>
+												  radicalmart-cart="quantity_plus"></a>
 										</div>
 									<?php endif; ?>
 								</div>
