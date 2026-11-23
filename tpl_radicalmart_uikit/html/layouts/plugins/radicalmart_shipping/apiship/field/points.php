@@ -68,27 +68,41 @@ if (!empty($map_key))
 	/** @var \Joomla\CMS\WebAsset\WebAssetManager $assets */
 	$assets = $document->getWebAssetManager();
 	$assets->getRegistry()
-		->addExtensionRegistryFile('plg_radicalmart_shipping_apiship');
+			->addExtensionRegistryFile('plg_radicalmart_shipping_apiship');
 
 	$assets->registerAndUseScript('plg_radicalmart_shipping_apiship.map',
-		'//api-maps.yandex.ru/2.1/?lang=ru-RU&apikey=' . $map_key)
-		->useScript('plg_radicalmart_shipping_apiship.fields.points')
-		->addInlineStyle('
-			#' . $id . '_map {
+			'https://api-maps.yandex.ru/v3/?lang=ru_RU&apikey=' . rawurlencode($map_key))
+			->useScript('plg_radicalmart_shipping_apiship.fields.points')
+			->addInlineStyle('
+		#' . $id . '_map {
+			position: relative;
+			z-index: 0;
 			width: 100%;
 			height: 400px;
 			background: #e5e5e5;
 		}
-		#' . $id . ' [class*="gotoymaps"],
-		#' . $id . ' [class*="gototech"] {
-			display: none !important;
+		#' . $id . ' .apiship-map-marker img {
+			display: block;
+			max-width: none;
 		}
-		#' . $id . ' ymaps[class*="-image"] {
-			background-repeat: no-repeat !important;
+		#' . $id . ' .apiship-map-marker,
+		#' . $id . ' .apiship-map-cluster,
+		#' . $id . ' [radicalmart-shipping-apiship-field-points="select"] {
+			cursor: pointer;
 		}
-		#' . $id . ' ymaps[class*="-float-button"] {
-			max-width: inherit !important;
-		}		
+		#' . $id . ' .apiship-map-cluster {
+			display: grid;
+			place-items: center;
+			background-size: 100% 100%;
+			color: #ffffff;
+			font-weight: 700;
+		}
+		#' . $id . ' [radicalmart-shipping-apiship-field-points="panel"] {
+			position: absolute;
+			inset: 0;
+			z-index: 2;
+			overflow: auto;
+		}
 	');
 
 	$clusterIcons = [];
@@ -96,28 +110,27 @@ if (!empty($map_key))
 	{
 		$offset         = ($size / 2) * -1;
 		$clusterIcons[] = [
-			'size'   => [$size, $size],
-			'offset' => [$offset, $offset],
+				'size'   => [$size, $size],
+				'offset' => [$offset, $offset],
 		];
 	}
 
 	$document->addScriptOptions($id, [
-		'id'            => $id,
-		'name'          => $name,
-		'value'         => $value,
-		'shipping'      => $shipping,
-		'context'       => (!empty($context)) ? $context : 'com_radicalmart.order',
-		'order_id'      => (!empty($order_id)) ? $order_id : 0,
-		'providers'     => $shippingParams->get('providers', []),
-		'markers'       => ApiShip::getMapMarkers(),
-		'markerPreset'  => [
-			'size'   => [32, 42],
-			'offset' => [-16, -42],
-		],
-		'clusterPreset' => [
-			'preset' => 'islands#invertedNightClusterIcons',
-			'icons'  => $clusterIcons
-		],
+			'id'            => $id,
+			'name'          => $name,
+			'value'         => $value,
+			'shipping'      => $shipping,
+			'context'       => (!empty($context)) ? $context : 'com_radicalmart.order',
+			'order_id'      => (!empty($order_id)) ? $order_id : 0,
+			'providers'     => $shippingParams->get('providers', []),
+			'markers'       => ApiShip::getMapMarkers(),
+			'markerPreset'  => [
+					'size'   => [32, 42],
+					'offset' => [-16, -42],
+			],
+			'clusterPreset' => [
+					'icons' => $clusterIcons
+			],
 	]);
 }
 ?>
@@ -137,20 +150,32 @@ if (!empty($map_key))
 					<div uk-spinner="ratio: 3"></div>
 				</div>
 				<div id="<?php echo $id . '_map'; ?>" radicalmart-shipping-apiship-field-points="map"></div>
+
+				<div radicalmart-shipping-apiship-field-points="panel"
+					 class="uk-background-default uk-padding-small"
+					 style="display: none">
+					<div class="uk-text-right uk-margin-small-bottom">
+						<button type="button" class="uk-button uk-button-default uk-button-small"
+								radicalmart-shipping-apiship-field-points="panel_close">
+							<?php echo Text::_('JCLOSE'); ?>
+						</button>
+					</div>
+					<div radicalmart-shipping-apiship-field-points="panel_items"></div>
+				</div>
 			</div>
 
 			<div class="uk-margin-small-bottom">
 				<?php
 				$attributes = [
-					'id'          => $id . '_display',
-					'name'        => $name . '[display]',
-					'type'        => 'text',
-					'value'       => (!empty($value['display'])) ? $value['display'] : '',
-					'readonly'    => 'true',
-					'class'       => 'form-control uk-input uk-disabled',
-					'placeholder' => (!empty($hint)) ? $hint : '',
+						'id'          => $id . '_display',
+						'name'        => $name . '[display]',
+						'type'        => 'text',
+						'value'       => (!empty($value['display'])) ? $value['display'] : '',
+						'readonly'    => 'true',
+						'class'       => 'form-control uk-input uk-disabled',
+						'placeholder' => (!empty($hint)) ? $hint : '',
 
-					'radicalmart-shipping-apiship-field-points' => 'input_display',
+						'radicalmart-shipping-apiship-field-points' => 'input_display',
 				];
 				?>
 				<div class="uk-inline uk-display-block">
@@ -160,13 +185,13 @@ if (!empty($map_key))
 				<?php foreach (['id', 'title', 'address', 'latitude', 'longitude', 'countryCode', 'providerKey'] as $key)
 				{
 					$attributes = [
-						'id'       => $id . '_' . $key,
-						'name'     => $name . '[' . $key . ']',
-						'type'     => 'hidden',
-						'value'    => (!empty($value[$key])) ? $value[$key] : '',
-						'readonly' => 'true',
+							'id'       => $id . '_' . $key,
+							'name'     => $name . '[' . $key . ']',
+							'type'     => 'hidden',
+							'value'    => (!empty($value[$key])) ? $value[$key] : '',
+							'readonly' => 'true',
 
-						'radicalmart-shipping-apiship-field-points' => 'input_' . $key,
+							'radicalmart-shipping-apiship-field-points' => 'input_' . $key,
 					];
 
 					if ($key === 'address')
